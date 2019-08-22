@@ -1,0 +1,90 @@
+.daka {
+  margin-top: 50rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.head {
+  margin-bottom: 10rpx;
+  font-size: 22px;
+  font-weight: 700;
+  color: #6c6c6c;
+}
+.daka textarea {
+  border: 2rpx solid #e7e7e7;
+  border-radius: 5rpx;
+  padding: 20rpx;
+  font-size: 16px;
+}
+.daka button {
+  margin: 20rpx auto;
+  width: 50%;
+  background-color: #ff6e37;
+  color: #fff;
+}
+
+.posts {
+  margin: 50rpx 60rpx 0;
+  color: #666;
+  font-size: 16px;
+}
+.post {
+  box-shadow: 0rpx 6rpx 10rpx 5rpx #e9e8e8;
+  padding: 20rpx 30rpx;
+  margin-bottom:  10rpx;
+}
+.head-container {
+  display: flex;
+  justify-content: space-between;
+}
+.author-date-container {
+  display: flex;
+  flex-direction: row;
+}
+.author-date-container image {
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+  vertical-align: middle;
+  border: 1rpx solid #999;
+}
+.auto-date {
+  display: flex;
+  flex-direction: column;
+  margin-left: 20rpx;
+  font-size: 16px;
+}
+.auto-date .date {
+  font-size: 13px;
+}
+.comment-content {
+  font-size: 14px;
+  margin: 10rpx;
+}
+.count text {
+  font-size: 14px;
+}
+.comment-like {
+  margin-left: 395rpx;
+}
+.comment-like image {
+  width: 45rpx;
+  height: 45rpx;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+.comment-like text {
+  font-size: 14px;
+  vertical-align: middle;
+  margin-right: 20rpx;
+  margin-top: 20rpx;
+}
+checkbox .wx-checkbox-input{
+    width: 18px;
+    height: 16px;
+    border: 0;
+    background: none;
+}
+checkbox .wx-checkbox-input:before{
+      display: none;
+}

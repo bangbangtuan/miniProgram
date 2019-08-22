@@ -1,0 +1,34 @@
+<view class='container'>
+  <view class='daka'>
+    <view class='head'>打卡</view>
+    <form bindsubmit="bindFormSubmit">
+      <textarea name="textarea" value="{{daka}}"/>
+      <button form-type="submit"> 打卡 </button>
+    </form>
+  </view>
+  <view class='posts' wx:if='{{postList}}'>
+    <!-- <navigator class='post' wx:for="{{postList}}" wx:key="id" url='/pages/article/article?cat={{JOSN.stringfy(item)}}'> -->
+    <view class='post' wx:for="{{postList}}" wx:key="id" bindtap='handleTap' data-type='{{item}}'>
+      <view class='head-container'>
+        <view class='author-date-container'>
+          <image src='{{item.headPortrait}}'></image>
+          <view class='auto-date'>
+            <text>{{item.name}}</text>
+            <text class='date'>{{item.createTime}}</text>
+          </view>
+        </view>
+        <view class='count'>
+          <text>坚持 {{item.day}} 天</text>
+        </view>
+      </view>
+      <text class='comment-content'>{{item.content}}</text>
+      <view class='comment-like'>
+          <image src='/images/icon/chat.png'></image>
+          <text>{{item.commentNumber}}</text>
+          <image wx:if='{{liked}}' src='/images/icon/like-act.png'></image>
+          <image wx:else src='/images/icon/like.png'></image>
+          <text>{{item.praiseNumber}}</text>
+      </view>
+    </view>
+  </view>
+</view>

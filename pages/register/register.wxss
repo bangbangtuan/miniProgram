@@ -1,0 +1,94 @@
+.box {
+  display: flex;
+  flex-direction: column;
+  margin: 50rpx;
+}
+.header {
+  font-size: 25px;
+  font-weight: 500;
+  color: #666;
+  margin: 10rpx;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50rpx;
+}
+.pass, .input, .yanzhengma {
+  border: 2rpx solid #ff6e37;
+  border-radius: 10rpx;
+  width: 500rpx;
+  height: 80rpx;
+  margin: 40rpx auto;
+  font-size: 16px;
+  padding-left: 20rpx;
+  display: flex;
+  flex-direction: row;
+}
+.pass image {
+  height: 42rpx;
+  width: 42rpx;
+  align-self: center;
+  margin-right: 20rpx;
+}
+.pass input {
+  flex: 1;
+  font-size: 16px;
+  margin: auto;
+}
+.radio-container {
+  display: flex;
+  flex-direction: row;
+  font-size: 16px;
+  color: #666;
+}
+.radio-container view {
+  margin-right: 50rpx;
+}
+.radio-group {
+  display: flex;
+  flex-direction: row;
+}
+.radio {
+  margin-right: 80rpx;
+}
+.radio image {
+  width: 52rpx;
+  height: 52rpx;
+  vertical-align: middle;
+}
+radio {
+  transform:scale(0.7);
+}
+form button {
+  background-color: #ff6e37;
+  width: 60%;
+  height: 100rpx;
+  line-height: 100rpx;
+  color: #f1f1f1;
+  font-size: 18px;
+  margin: 80rpx auto 10rpx;
+}
+
+.yanzhengma {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  line-height: 80rpx;
+  align-items: center;
+}
+.yanzhengma input {
+  width:60%;
+}
+.yanzhengma .code {
+  font-style: italic;
+  font-weight: bold;
+  border: 0;
+  font-size: 14px;
+  background-color: #ff6e37;
+  color: #fff;
+  height: 80rpx;
+  /* width: 200rpx; */
+  padding: 0 20rpx;
+}

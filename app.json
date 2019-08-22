@@ -1,0 +1,52 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/team/team",
+    "pages/project/project",
+    "pages/profile/profile",
+    "pages/article/article",
+    "pages/login/login",
+    "pages/register/register",
+    "pages/message/message",
+    "pages/user_daka/user_daka",
+    "pages/userInfo/userInfo"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#feefe8",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#999",
+    "selectedColor": "#666",
+    "backgroundColor": "#feefe8",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "打卡",
+        "iconPath": "images/tab/daka.png",
+        "selectedIconPath": "images/tab/daka-act.png"
+      },
+      {
+        "pagePath": "pages/team/team",
+        "text": "组队",
+        "iconPath": "images/tab/team.png",
+        "selectedIconPath": "images/tab/team-act.png"
+      },
+      {
+        "pagePath": "pages/project/project",
+        "text": "项目",
+        "iconPath": "images/tab/project.png",
+        "selectedIconPath": "images/tab/project-act.png"
+      },
+      {
+        "pagePath": "pages/profile/profile",
+        "text": "我",
+        "iconPath": "images/tab/me.png",
+        "selectedIconPath": "images/tab/me-act.png"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json"
+}

@@ -1,0 +1,61 @@
+<view class='container'>
+  <view class="userImg {{userInfo.headPortrait ? '' : 'upload'}}" bindtap='uploadImg'>
+    <image wx:if="{{userInfo.headPortrait}}" src='{{userInfo.headPortrait}}'></image>
+    <image wx:else src='/images/icon/upload.png'></image>
+  </view>
+  <form bindsubmit="bindFormSubmit">
+    <view class="weui-cells__title">用户信息</view>
+    <view class="weui-cells weui-cells_after-title userInfo">
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">昵称</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" value="{{userInfo.name ? userInfo.name : ''}}" name='name' />
+        </view>
+      </view>
+      <view class="weui-cell weui-cell_input weui-cell_vcode">
+        <view class="weui-cell__hd">
+          <view class="weui-label">性别</view>
+        </view>
+        <view class="weui-cell__bd">
+          <radio-group class="radio-group" bindchange="radioChange" name="sex">
+            <label class="radio">
+              <radio value="male" checked="" />
+              <image src='/images/icon/male.png'></image>
+            </label>
+            <label class="radio">
+              <radio value="female" checked="" />
+              <image src='/images/icon/female.png'></image>
+            </label>
+          </radio-group>
+        </view>
+      </view>
+      <view class="weui-cell weui-cell_input weui-cell_vcode">
+        <view class="weui-cell__hd">
+          <view class="weui-label">手机号</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" placeholder="请输入手机号" value="{{userInfo.phone ? userInfo.phone : ''}}" name='phone' />
+        </view>
+      </view>
+      <view class="weui-cell weui-cell_input weui-cell_vcode">
+        <view class="weui-cell__hd">
+          <view class="weui-label">微信号</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" placeholder="请输入微信号" value="{{userInfo.weixin ? userInfo.weixin : ''}}" name='weixin' />
+        </view>
+      </view>
+      <view class="weui-cell weui-cell_input weui-cell_vcode">
+        <view class="weui-cell__hd">
+          <view class="weui-label">个人介绍</view>
+        </view>
+        <view class="weui-cell__bd">
+          <textarea class="weui-textarea textarea" placeholder-class="ph" placeholder="请输入个人介绍" value="{{userInfo.description ? userInfo.description : ''}}" name='description' />
+        </view>
+      </view>
+    </view>
+    <button form-type="submit"> 保存 </button>
+  </form>
+</view>

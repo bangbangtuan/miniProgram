@@ -1,0 +1,9 @@
+/* pages/project/project.wxss */
+text {
+  margin-left: 40rpx;
+  margin-top: 40rpx;
+  font-size: 20px;
+  color: #333;
+  font-weight: 700;
+  display: block;
+}

@@ -1,0 +1,187 @@
+.container {
+  margin-top: 40rpx;
+  font-size: 16px;
+  width: 100%;
+  height: 100%;
+}
+
+.main {
+  margin-bottom: 120rpx;
+}
+
+.head-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.head-container image {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
+}
+
+.author {
+  font-weight: 500;
+}
+
+.count {
+  margin: 20rpx auto;
+  color: #666;
+}
+
+.count text {
+  color: #ff6e37;
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.date-like {
+  margin-bottom: 20rpx;
+  font-size: 14px;
+  color: #666;
+}
+
+.date-like .date {
+  margin-left: 20rpx;
+}
+
+.like {
+  margin-right: 20rpx;
+}
+
+.date-like span {
+  margin: 0 10rpx;
+  color: #ff6e37;
+}
+
+.divider {
+  height: 1rpx;
+  width: 100%;
+  border-top: 1rpx solid #ff6e37;
+  margin-top: 40rpx;
+}
+
+.content {
+  margin: 20rpx 40rpx;
+  color: #333;
+}
+
+.comments {
+  margin: 40rpx auto;
+  color: #666;
+}
+
+.comments .head {
+  font-size: 20px;
+  margin: 0 70rpx 0;
+}
+
+.border {
+  width: 18%;
+  height: 1px;
+  border-bottom: 10rpx solid #ff6e37;
+  margin-left: 80rpx;
+}
+
+.comment-item {
+  margin: 40rpx 0;
+  padding: 0 40rpx 40rpx;
+  border-bottom: 1rpx solid #ff6e37;
+  font-size: 14px;
+}
+
+.info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.user image {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  vertical-align: middle;
+}
+
+.user text {
+  vertical-align: middle;
+  margin-left: 20rpx;
+}
+
+.info .date {
+  margin-top: 20rpx;
+  vertical-align: middle;
+}
+
+.comment {
+  margin: 30rpx 40rpx 0;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 750rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: #feefe8;
+  padding-bottom: 20rpx;
+}
+
+.comment {
+  width: 100%;
+}
+
+.comment input {
+  float: left;
+  width: 75%;
+  border: 1px solid #666;
+  border-radius: 10rpx;
+  padding: 10rpx;
+  background-color: #fff;
+  vertical-align: middle;
+}
+
+.comment button {
+  float: right;
+  height: 78rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #feefe8;
+  padding: 0 10rpx;
+}
+
+.comment button::after {
+  border: 0;
+}
+
+.footer image {
+  width: 60rpx;
+  height: 60rpx;
+}
+
+.circle-image {
+  float: right;
+  margin-right: 40rpx;
+  display: flex;
+}
+
+.circle-image image {
+  width: 90rpx;
+  height: 90rpx;
+}
+
+.share-img {
+  margin-left: 20rpx;
+}
+
+.share-btn {
+  background-color: #fff;
+}
+
+.share-btn::after {
+  border: 0;
+}

@@ -1,0 +1,67 @@
+<view class="container">
+  <view class='main'>
+    <view class='head-container'>
+      <image src='{{postItem.headPortrait}}'></image>
+      <view class='author'>{{postItem.name}}</view>
+      <view class='count'>
+        <view>坚持
+          <text>{{postItem.day}}</text> 天</view>
+      </view>
+      <view class='date-like'>
+        <text>{{postItem.createTime}}</text>
+        <text class='date'>{{postItem.date}}</text>
+        <span> | </span>
+        <text class='like'>点赞数  {{postItem.praiseNumber}}</text>
+        <text>评论数  {{postItem.commentNumber}}</text>
+      </view>
+    </view>
+    <view class='circle-image'>
+      <view>
+        <image wx:if='{{liked}}' catchtap="onLikeTap" src='/images/icon/liked-act.png'></image>
+        <image wx:else catchtap="onLikeTap" src='/images/icon/liked.png'></image>
+      </view>
+      <view>
+        <image catchtap='openActionSheet' class='share-img' src='/images/icon/share.png'></image>
+      </view>
+
+    </view>
+    <action-sheet hidden="{{actionSheetHidden}}" bindchange="listenerActionSheet">
+      <action-sheet-item open-type="share" catchtap='closeAction'>
+        <button open-type="share" class="share-btn">分享给好友</button>
+      </action-sheet-item>
+      <action-sheet-item>
+        <poster id="poster" hide-loading="{{false}}" preload="{{false}}" config="{{posterConfig}}" bind:success="onPosterSuccess" bind:fail="onPosterFail">
+          <button class="share-btn" bindtap="onCreatePoster">生成海报</button>
+        </poster>
+
+      </action-sheet-item>
+      <action-sheet-cancel>取消</action-sheet-cancel>
+    </action-sheet>
+    <view class='divider'></view>
+    <view class='content'>
+      <text>{{postItem.content}}</text>
+    </view>
+    <view class='comments' id="chat">
+      <view class='head'>评论列表</view>
+      <view class='border'></view>
+      <view class='comment-item' wx:for="{{comments}}" wx:key="id">
+        <view class='info'>
+          <view class='user'>
+            <image src='{{item.headPortrait}}'></image>
+            <text>{{item.name}}</text>
+          </view>
+          <text class='date'>{{item.createTime}}</text>
+        </view>
+        <view class='comment'>{{item.content}}</view>
+      </view>
+    </view>
+  </view>
+  <view class='footer'>
+    <form class="comment" bindsubmit="onSubmit">
+      <input placeholder='写一个评论...' bindconfirm='onBindChange' name='comment' value="{{inputTxt}}" />
+      <button form-type='submit'>
+        <image src='/images/icon/send.png'></image>
+      </button>
+    </form>
+  </view>
+</view>
