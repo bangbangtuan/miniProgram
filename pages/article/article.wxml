@@ -17,7 +17,7 @@
     </view>
     <view class='circle-image'>
       <view>
-        <image wx:if='{{liked}}' catchtap="onLikeTap" src='/images/icon/liked-act.png'></image>
+        <image wx:if='{{liked}}' catchtap="onLikeTap" src='/images/icon/likedact.png'></image>
         <image wx:else catchtap="onLikeTap" src='/images/icon/liked.png'></image>
       </view>
       <view>

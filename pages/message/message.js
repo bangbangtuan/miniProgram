@@ -1,4 +1,3 @@
-var messages = require('../../data/message.js');
 Page({
 
   /**

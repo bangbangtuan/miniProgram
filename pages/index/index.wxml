@@ -2,7 +2,7 @@
   <view class='daka'>
     <view class='head'>打卡</view>
     <form bindsubmit="bindFormSubmit">
-      <textarea name="textarea" value="{{daka}}"/>
+      <textarea name="textarea" value="{{daka}}" />
       <button form-type="submit"> 打卡 </button>
     </form>
   </view>
@@ -22,11 +22,11 @@
       </view>
       <text class='comment-content'>{{item.content}}</text>
       <view class='comment-like'>
-          <image src='/images/icon/chat.png'></image>
-          <text>{{item.commentNumber}}</text>
-          <image wx:if='{{liked}}' src='/images/icon/like-act.png'></image>
-          <image wx:else src='/images/icon/like.png'></image>
-          <text>{{item.praiseNumber}}</text>
+        <image src='/images/icon/chat.png'></image>
+        <text>{{item.commentNumber}}</text>
+        <image wx:if='{{liked}}' src='/images/icon/like-act.png'></image>
+        <image wx:else src='/images/icon/like.png'></image>
+        <text>{{item.praiseNumber}}</text>
       </view>
     </view>
   </view>

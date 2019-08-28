@@ -7,13 +7,14 @@ Page({
     postList: [],
     daka: '',
     pageNum: 1,
-    isEmpty: true
+    isEmpty: true,
+    actionSheetHidden: true
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
 
   },
 
@@ -26,7 +27,7 @@ Page({
     })
   },
 
-  bindFormSubmit: function (e) {
+  bindFormSubmit: function(e) {
     var that = this;
     console.log(e.detail.value.textarea);
     that.setData({
@@ -34,7 +35,7 @@ Page({
     });
     var token = wx.getStorageSync('token');
     if (token) {
-      if(that.data.daka) {
+      if (that.data.daka) {
         wx.request({
           url: 'https://api.bangneedu.com/punchTheClock',
           method: 'POST',
@@ -45,19 +46,25 @@ Page({
             "content-type": "application/json",
             "Authorization": "Bearer " + wx.getStorageSync('token')
           },
-          success: function (res) {
+          success: function(res) {
             console.log(res.data);
-            if (res.data.status == 200) {
+            if (res.data.status == 200 && res.data.data) {
+              that.setData({
+                daka: '',
+              })
+              var testObj = res.data.data;
+              if (testObj.headPortrait) {
+                testObj.headPortrait = encodeURIComponent(testObj.headPortrait);
+              }
               wx.showToast({
                 title: '打卡成功',
                 icon: 'success',
                 duration: 1000
               })
-              that.setData({
-                daka: ''
+              wx.navigateTo({
+                url: '/pages/postModal/postModal?cat=' + JSON.stringify(testObj)
               })
-              that.onShow();
-            } else if (res.data.status == 500){
+            } else if (res.data.status == 500 || (res.data.status == 200 && !res.data.data)) {
               wx.showModal({
                 title: '发生错误啦',
                 content: res.data.msg ? res.data.msg : '不知名错误，请联系阳叔',
@@ -75,7 +82,7 @@ Page({
                 icon: 'none',
                 duration: 1000
               });
-              setTimeout(function () {
+              setTimeout(function() {
                 wx.navigateTo({
                   url: '/pages/login/login',
                 })
@@ -83,17 +90,33 @@ Page({
 
             }
           },
-          fail: function (err) {
+          fail: function(err) {
             console.log(err);
           }
         })
       }
-      
+      // var testObj = {
+      //   commentNumber: "0",
+      //   content: "Js中dom学习",
+      //   createTime: "2019-08-23 23:16:13",
+      //   day: "1",
+      //   praiseNumber: "0",
+      //   id: "1164919276688117761",
+      //   name: "嘻嘻嘻",
+      //   praiseNumber: "0",
+      //   userId: "1150054988370677761"
+      // }
+      // if(testObj.headPortrait) {
+      //   testObj.headPortrait = encodeURIComponent(testObj.headPortrait);
+      // }
+      // wx.navigateTo({
+      //   url: '/pages/postModal/postModal?cat=' + JSON.stringify(testObj),
+      // })
     } else {
       wx.redirectTo({
         url: '/pages/login/login',
       })
-    }  
+    }
   },
 
   getDakaList: function(url) {
@@ -104,7 +127,7 @@ Page({
       header: {
         "Content-Type": "application/json"
       },
-      success: function (res) {
+      success: function(res) {
         console.log(res.data.data.records);
         var totalPosts = [];
         if (!that.data.isEmpty) {
@@ -119,7 +142,7 @@ Page({
         })
         wx.hideNavigationBarLoading();
       },
-      fail: function (err) {
+      fail: function(err) {
         console.log(err);
       }
     });
@@ -128,43 +151,43 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
-    
+  onReady: function() {
+
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
-    var url = 'https://api.bangneedu.com/punchTheClock?current=1&size=20';   
+  onShow: function() {
+    var url = 'https://api.bangneedu.com/punchTheClock?current=1&size=20';
     this.getDakaList(url);
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
-    
+  onHide: function() {
+
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
-    
+  onUnload: function() {
+
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
-    
+  onPullDownRefresh: function() {
+
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
     var nextUrl = 'https://api.bangneedu.com/punchTheClock?current=' + this.data.pageNum + "&size=20";
     wx.showNavigationBarLoading();
     this.getDakaList(nextUrl);
@@ -173,7 +196,7 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
-    
+  onShareAppMessage: function() {
+
   }
 })

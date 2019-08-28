@@ -47,12 +47,12 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 1,
+			"current": 0,
 			"list": [
 				{
 					"id": 0,
-					"name": "pages/user_daka/user_daka",
-					"pathName": "pages/user_daka/user_daka",
+					"name": "pages/postModal/postModal",
+					"pathName": "pages/postModal/postModal",
 					"query": "",
 					"scene": null
 				},

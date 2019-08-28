@@ -8,6 +8,7 @@ Page({
   data: {
     inputTxt: '',
     actionSheetHidden: true,
+    liked: ""
   },
 
   onPosterSuccess(e) {
@@ -26,9 +27,9 @@ Page({
   onCreatePoster() {
     var date = new Date();
     var month = (date.getMonth() + 1).toString();
-    var day = date.getDate();
-    var hour = date.getHours();
-    var minute = date.getMinutes();
+    var day = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+    var hour = date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
+    var minute = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
     var posterConfig = {
       width: 750,
       height: 1220,
@@ -41,28 +42,24 @@ Page({
         width: 100,
         height: 50,
         backgroundColor: '#ffffff'
-      }],
-      lines: [{
-        startX: 370,
-        startY: 280,
-        endX: 371,
-        endY: 360,
-        borderWidth: 1,
-        color: '#444444',
-        }, {
-        startX: 200,
-        startY: 500,
-        endX: 300,
-        endY: 501,
-        borderWidth: 1,
-        color: '#ffffff',
-        }, {
-        startX: 440,
-        startY: 500,
-        endX: 540,
-        endY: 501,
-        borderWidth: 1,
-        color: '#ffffff',
+      }, {
+        x: 370,
+        y: 280,
+        width: 2,
+        height: 80,
+        backgroundColor: '#444444',
+      }, {
+        x: 200,
+        y: 500,
+        width: 100,
+        height: 2,
+        backgroundColor: '#ffffff',
+      }, {
+        x: 440,
+        y: 500,
+        width: 100,
+        height: 2,
+        backgroundColor: '#ffffff',
       }],
       texts: [{
           x: 190,
@@ -153,55 +150,8 @@ Page({
           baseLine: 'middle',
           text: this.data.postItem.content,
           fontSize: 40,
-          color: '#000000', 
+          color: '#000000',
           textAlign: 'center'
-        },
-        {
-          x: 50,
-          y: 680,
-          baseLine: 'top',
-          text: [{
-              text: '生活',
-              fontSize: 75,
-              color: '#000000',
-            },
-            {
-              text: '像一个个习惯的缩影',
-              marginLeft: -100,
-              fontSize: 36,
-              color: '#000000',
-            }
-          ]
-        }, {
-          x: 220,
-          y: 760,
-          text: '每一处都结出果实般的故事',
-          fontSize: 32,
-          color: '#000000',
-          baseLine: 'bottom'
-        }, {
-          x: 50,
-          y: 810,
-          baseLine: 'top',
-          text: [{
-              text: '盛开',
-              fontSize: 75,
-              color: '#000000',
-            },
-            {
-              text: '像花儿一样的喜怒哀乐',
-              marginLeft: -100,
-              fontSize: 36,
-              color: '#000000',
-            }
-          ]
-        }, {
-          x: 220,
-          y: 890,
-          text: '每一刻都充满朝气焕发神采',
-          fontSize: 32,
-          color: '#000000',
-          baseLine: 'bottom'
         }
       ],
       images: [{
@@ -210,7 +160,7 @@ Page({
           x: 60,
           y: 60,
           borderRadius: 100,
-          url: this.data.postItem.headPortrait,
+          url: this.data.postItem.headPortrait == undefined ? "http://bbt-oss.oss-cn-beijing.aliyuncs.com/bbt-oss/2019-08-28/f3983927d1a34fb2a7056d4bd2142314-file?Expires=4720619017&OSSAccessKeyId=LTAICSpdWLfNbeYk&Signature=9UqtxjkI7wV%2B6x%2FisCOKR6btv%2FM%3D" : this.data.postItem.headPortrait,
         },
         {
           width: 710,
@@ -218,8 +168,24 @@ Page({
           x: 20,
           y: 0,
           // url: '../../images/bac.png',
-          url: 'http://bbt-oss.oss-cn-beijing.aliyuncs.com/bbt-oss/2019-08-22/d5ac90832cc44ccc874f7d5e95a18231-file?Expires=4720081042&OSSAccessKeyId=LTAICSpdWLfNbeYk&Signature=WoYO35pB%2F%2BTYK%2Bo%2BOoKDGWzaTxg%3D',
+          url: "http://bbt-oss.oss-cn-beijing.aliyuncs.com/bbt-oss/2019-08-27/4e6becba0940464c80561f41030bc1ee-file?Expires=4720515358&OSSAccessKeyId=LTAICSpdWLfNbeYk&Signature=7%2B1t69UAQg4eg5G%2B8LpTQ15GrsY%3D",
           zIndex: -1
+        },
+        {
+          width: 650,
+          height: 79,
+          x: 50,
+          y: 700,
+          // url: 'https://i.imgur.com/mc1XXPz.png',
+          url: "https://bbt-oss.oss-cn-beijing.aliyuncs.com/bbt-oss/2019-08-26/9567e503d6204ab991c1fe96f37fd558-file?Expires=4720450770&OSSAccessKeyId=LTAICSpdWLfNbeYk&Signature=LMLefGCndryaVV9u7orX%2Bq38b%2Fs%3D",
+        },
+        {
+          width: 270,
+          height: 105,
+          x: 240,
+          y: 820,
+          // url: 'https://i.imgur.com/D4coSSS.png',
+          url: 'https://bbt-oss.oss-cn-beijing.aliyuncs.com/bbt-oss/2019-08-26/e92c26c20e7848cfa1aa68a69d25474a-file?Expires=4720450640&OSSAccessKeyId=LTAICSpdWLfNbeYk&Signature=3Tmp1A6Divce%2BuSVdKPQ7ExsqDU%3D',
         },
         {
           width: 200,
@@ -227,7 +193,7 @@ Page({
           x: 280,
           y: 990,
           // url: '../../images/scan.jpg',
-          url: 'http://bbt-oss.oss-cn-beijing.aliyuncs.com/bbt-oss/2019-08-22/8a807c6b81374b7289b4954b6db8b548-file?Expires=4720081412&OSSAccessKeyId=LTAICSpdWLfNbeYk&Signature=TcpZ5fyTk7ZHDnBvzXX0rwc%2FrBA%3D'
+          url: "https://bbt-oss.oss-cn-beijing.aliyuncs.com/bbt-oss/2019-08-27/39d97b8fb54a4470aa7ec3a7f83827b5-file?Expires=4720513649&OSSAccessKeyId=LTAICSpdWLfNbeYk&Signature=L%2F7dQo0%2BlBs4BxRR7iD29EX9HYU%3D"
         }
       ]
 
@@ -236,7 +202,7 @@ Page({
       posterConfig: posterConfig
     }, () => {
       // Poster.create();
-      Poster.create(true); 
+      Poster.create(true);
     });
   },
 
