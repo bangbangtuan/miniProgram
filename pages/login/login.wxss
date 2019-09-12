@@ -88,3 +88,10 @@ form button::after {
   height: 50rpx;
   margin-right: 20rpx;
 }
+.forget-pwd {
+  float: right;
+  font-size: 13px;
+  color: #999;
+  border-bottom: 1px dashed #999;
+  margin-right: 30rpx;
+}

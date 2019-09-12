@@ -148,6 +148,16 @@ Page({
           text: this.data.postObj.content,
           fontSize: 40,
           color: '#000000',
+          textAlign: 'center',
+          // lineNum: 3
+        },
+        {
+          x: 370,
+          y: 1190,
+          baseLine: 'middle',
+          text: "请长按图片保存后，分享到朋友圈",
+          fontSize: 30,
+          color: '#000000',
           textAlign: 'center'
         }
       ],
@@ -172,7 +182,7 @@ Page({
           width: 650,
           height: 79,
           x: 50,
-          y: 700,
+          y: 710,
           // url: 'https://i.imgur.com/mc1XXPz.png',
           url: "https://bbt-oss.oss-cn-beijing.aliyuncs.com/bbt-oss/2019-08-26/9567e503d6204ab991c1fe96f37fd558-file?Expires=4720450770&OSSAccessKeyId=LTAICSpdWLfNbeYk&Signature=LMLefGCndryaVV9u7orX%2Bq38b%2Fs%3D",
         },
@@ -188,7 +198,7 @@ Page({
           width: 200,
           height: 200,
           x: 280,
-          y: 990,
+          y: 970,
           // url: 'https://i.imgur.com/8L5LJNp.jpg',
           url: "https://bbt-oss.oss-cn-beijing.aliyuncs.com/bbt-oss/2019-08-27/39d97b8fb54a4470aa7ec3a7f83827b5-file?Expires=4720513649&OSSAccessKeyId=LTAICSpdWLfNbeYk&Signature=L%2F7dQo0%2BlBs4BxRR7iD29EX9HYU%3D"
         }

@@ -41,60 +41,72 @@ Page({
   bindFormSubmit: function(e) {
     console.log(this.data.radioCheckVal);
     var tech = this.data.radioCheckVal;
-    wx.request({
-      url: 'https://api.bangneedu.com/cpMatching/technology',
-      data: {
-        "technology": tech
-      },
-      method: 'PUT',
-      header: {
-        "content-type": "application/json",
-        "Authorization": "Bearer " + wx.getStorageSync('token')
-      },
-      success: function(res) {
-        console.log("更新技术栈: " + res);
-        wx.request({
-          url: 'https://api.bangneedu.com/cpMatching',
-          data: {
-            "technology": tech
-          },
-          method: 'POST',
-          header: {
-            "content-type": "application/json",
-            "Authorization": "Bearer " + wx.getStorageSync('token')
-          },
-          success: function(res) {
-            console.log(res);
-            if (res.statusCode == 200) {
-              wx.showToast({
-                title: '提交成功',
-                icon: 'success',
-                duration: 1000
-              })
-            } else if (res.statusCode == 500) {
-              wx.showModal({
-                title: '发生错误啦',
-                content: res.data.msg ? res.data.msg : '不知名错误，请联系阳叔',
-                success(res) {
-                  if (res.confirm) {
-                    console.log('用户点击确定')
-                  } else if (res.cancel) {
-                    console.log('用户点击取消')
+    if (wx.getStorageSync('token')) {
+      wx.request({
+        url: 'https://api.bangneedu.com/cpMatching/technology',
+        data: {
+          "technology": tech
+        },
+        method: 'PUT',
+        header: {
+          "content-type": "application/json",
+          "Authorization": "Bearer " + wx.getStorageSync('token')
+        },
+        success: function (res) {
+          console.log("更新技术栈: " + res);
+          wx.request({
+            url: 'https://api.bangneedu.com/cpMatching',
+            data: {
+              "technology": tech
+            },
+            method: 'POST',
+            header: {
+              "content-type": "application/json",
+              "Authorization": "Bearer " + wx.getStorageSync('token')
+            },
+            success: function (res) {
+              console.log(res);
+              if (res.statusCode == 200) {
+                wx.showToast({
+                  title: '提交成功',
+                  icon: 'success',
+                  duration: 1000
+                })
+              } else if (res.statusCode == 500) {
+                wx.showModal({
+                  title: '发生错误啦',
+                  content: res.data.msg ? res.data.msg : '不知名错误，请联系阳叔',
+                  success(res) {
+                    if (res.confirm) {
+                      console.log('用户点击确定')
+                    } else if (res.cancel) {
+                      console.log('用户点击取消')
+                    }
                   }
-                }
-              })
+                })
+              }
+            },
+            fail: function (err) {
+              console.log(err);
             }
-          },
-          fail: function(err) {
-            console.log(err);
-          }
+          })
+        },
+        fail: function (err) {
+          console.log(err);
+        }
+      })
+    } else {
+      wx.showToast({
+        title: '请登录后提交组队信息',
+        icon: 'none',
+        duration: 1000
+      });
+      setTimeout(function () {
+        wx.navigateTo({
+          url: '/pages/login/login',
         })
-      },
-      fail: function(err) {
-        console.log(err);
-      }
-    })
-
+      }, 1000)
+    }
   },
 
   radioChange: function(e) {
@@ -129,12 +141,6 @@ Page({
               icon: 'none',
               duration: 1000
             });
-            setTimeout(function () {
-              wx.navigateTo({
-                url: '/pages/login/login',
-              })
-            }, 1000)
-
           }
           console.log(res.data.data[0].childList);
           that.setData({
@@ -153,12 +159,6 @@ Page({
         logedin: logedin
       })
     }
-
-    if (!this.data.logedin) {
-      wx.redirectTo({
-        url: '/pages/login/login',
-      })
-    }    
   },
 
   /**

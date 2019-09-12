@@ -6,6 +6,7 @@
     "pages/profile/profile",
     "pages/article/article",
     "pages/login/login",
+    "pages/resetPassword/resetPassword",
     "pages/register/register",
     "pages/message/message",
     "pages/user_daka/user_daka",
@@ -50,7 +51,7 @@
     ]
   },
   "networkTimeout": {
-    "request": 50000
+    "request": 5000000
   },
   "sitemapLocation": "sitemap.json"
 }

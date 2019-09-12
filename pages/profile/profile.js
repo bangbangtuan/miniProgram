@@ -49,12 +49,6 @@ Page({
               icon: 'none',
               duration: 1000
             });
-            setTimeout(function () {
-              wx.navigateTo({
-                url: '/pages/login/login',
-              })
-            }, 1000)
-
           }
         },
         fail: function (err) {
@@ -68,12 +62,6 @@ Page({
         logedin: logedin
       })
     }
-
-    if (!this.data.logedin) {
-      wx.redirectTo({
-        url: '/pages/login/login',
-      })
-    }
   },
 
   navigate: function () {
@@ -84,6 +72,11 @@ Page({
     })
   },
 
+  login: function () {
+    wx.navigateTo({
+      url: '/pages/login/login',
+    })
+  },
   /**
    * 生命周期函数--监听页面隐藏
    */

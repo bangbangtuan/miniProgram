@@ -46,7 +46,7 @@
   height: 100rpx;
   border-radius: 50%;
   vertical-align: middle;
-  border: 1rpx solid #999;
+  border: 1rpx solid #e1e1e1;
 }
 .auto-date {
   display: flex;

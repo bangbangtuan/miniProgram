@@ -1,21 +1,27 @@
 <view class="container">
   <view class='info'>
     <view class='header'>我</view>
-    <view class='user'>
-      <view class="{{userInfo.headPortrait ? '' : 'upload'}}" bindtap='navigate'>
-        <image wx:if="{{userInfo.headPortrait}}" src='{{userInfo.headPortrait}}'></image>
-        <image wx:else src='/images/icon/upload.png'></image>
+    <view wx:if="{{userInfo}}">
+      <view class='user'>
+        <view class="{{userInfo.headPortrait ? '' : 'upload'}}" bindtap='navigate'>
+          <image src='{{userInfo.headPortrait}}'></image>
+        </view>
+        <text>{{userInfo.username}}</text>
       </view>
-      <text>{{userInfo.username}}</text>
+      <view class='self'>
+        <view>微信号 </view>
+        <text>{{userInfo.weixin}}</text>
+      </view>
+      <view class='self'>
+        <view>个人描述</view>
+        <text class='intro'>{{userInfo.description}}</text>
+      </view>
     </view>
-    <view class='self'>
-      <view>微信号    </view>
-      <text>{{userInfo.weixin}}</text>
-    </view>
-    <view class='self'>
-      <view>个人描述</view>
-      <text wx:if='{{userInfo.description}}' class='intro'>{{userInfo.description}}</text>
-      <text wx:else class='intro'>什么都没有</text>
+    <view wx:else class="no-user">
+      <view class="upload">
+        <image src='/images/icon/no-author.png'></image>
+      </view>
+      <view bindtap="login" class="tap-login">登录/注册</view>
     </view>
   </view>
   <view class='divider'></view>

@@ -10,6 +10,9 @@
         <input name="code" placeholder='请输入验证码'></input>
         <view class='code' bindtap='changeAnother'>{{code}}</view>
       </view>
+      <view class="forget-pwd">
+        <navigator url="/pages/resetPassword/resetPassword">忘记密码</navigator>
+      </view>
       <button form-type="submit"> 登陆 </button>
     </form>
     <!-- <button class='wechat' open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo"><image src='/images/wechat.png'></image>微信号登陆</button> -->

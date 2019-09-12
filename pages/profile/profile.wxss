@@ -16,24 +16,14 @@
   flex-direction: column;
   align-items: center;
 }
-.user view {
+.user image {
   width: 180rpx;
   height: 180rpx;
   border-radius: 50%;
 }
-.user image {
+.upload image {
   width: 180rpx;
   height: 180rpx;
-  border: 1rpx solid #999;
-}
-.user .upload {
-  border: 1rpx solid #999;
-  background-color: #dbdada;
-}
-.upload image {
-  width: 100rpx;
-  height: 100rpx;
-  margin: 40rpx;
   border-radius: 50%;
 }
 .user text {
@@ -61,6 +51,19 @@
 .self .intro {
   border: 1rpx dashed #666;
   padding: 15rpx;
+}
+.no-user {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.no-user .tap-login {
+  margin: 20rpx 10rpx;
+  color: #666;
+  font-weight: 500;
+  cursor: pointer;
+  border: 1px dashed #666;
+  padding: 10rpx 30rpx;
 }
 .divider {
   height: 2rpx;
