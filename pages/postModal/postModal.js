@@ -35,7 +35,7 @@ Page({
       pixelRatio: 2,
       blocks: [{
         x: 320,
-        y: 475,
+        y: 425,
         width: 100,
         height: 50,
         backgroundColor: '#ffffff'
@@ -47,13 +47,13 @@ Page({
         backgroundColor: '#444444',
       }, {
         x: 200,
-        y: 500,
+        y: 450,
         width: 100,
         height: 2,
         backgroundColor: '#ffffff',
       }, {
         x: 440,
-        y: 500,
+        y: 450,
         width: 100,
         height: 2,
         backgroundColor: '#ffffff',
@@ -97,7 +97,7 @@ Page({
           baseLine: 'middle',
           textAlign: 'center',
           text: [{
-              text: '起床时间',
+              text: '打卡时间',
               fontSize: 34,
               color: '#444444',
             },
@@ -133,7 +133,7 @@ Page({
         },
         {
           x: 370,
-          y: 500,
+          y: 450,
           baseLine: 'middle',
           text: '打卡',
           fontSize: 36,
@@ -142,14 +142,15 @@ Page({
           textAlign: 'center'
         },
         {
-          x: 250,
-          y: 580,
+          x: 100,
+          y: 520,
           baseLine: 'middle',
           text: this.data.postObj.content,
           fontSize: 40,
           color: '#000000',
-          textAlign: 'center',
-          // lineNum: 3
+          lineNum: 3,
+          width: 1000,
+          lineHeight: 40
         },
         {
           x: 370,
@@ -182,7 +183,7 @@ Page({
           width: 650,
           height: 79,
           x: 50,
-          y: 710,
+          y: 750,
           // url: 'https://i.imgur.com/mc1XXPz.png',
           url: "https://bbt-oss.oss-cn-beijing.aliyuncs.com/bbt-oss/2019-08-26/9567e503d6204ab991c1fe96f37fd558-file?Expires=4720450770&OSSAccessKeyId=LTAICSpdWLfNbeYk&Signature=LMLefGCndryaVV9u7orX%2Bq38b%2Fs%3D",
         },
@@ -190,7 +191,7 @@ Page({
           width: 270,
           height: 105,
           x: 240,
-          y: 820,
+          y: 830,
           // url: 'https://i.imgur.com/D4coSSS.png',
           url: 'https://bbt-oss.oss-cn-beijing.aliyuncs.com/bbt-oss/2019-08-26/e92c26c20e7848cfa1aa68a69d25474a-file?Expires=4720450640&OSSAccessKeyId=LTAICSpdWLfNbeYk&Signature=3Tmp1A6Divce%2BuSVdKPQ7ExsqDU%3D',
         },
@@ -216,6 +217,7 @@ Page({
    */
   onLoad: function(options) {
     var postObj = JSON.parse(options.cat);
+    console.log(postObj)
     if (postObj.headPortrait) {
       postObj.headPortrait = decodeURIComponent(postObj.headPortrait);
     }

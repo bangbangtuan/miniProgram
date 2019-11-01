@@ -9,12 +9,22 @@
   border-left: 5rpx solid #ff6e37;
   padding-left: 10rpx;
 }
-.relative-box {
-  position: relative;
+.project-pannel {
+  box-shadow: 0px 6px 5px #e9e8e8;
+  padding: 30rpx;
 }
-.relative-box .weui-media-box__hd_in-appmsg {
-  width: 150rpx;
-  height: 150rpx;
+.project-pannel .project-detail {
+  color: #333;
+  font-size: 14px;
+  margin: 20rpx 0;
+}
+.tasks-pannel {
+  margin: 20rpx 0 10rpx;
+  box-shadow: 0px 6px 5px #e9e8e8;
+  padding: 30rpx;
+  position: relative;
+  font-size: 15px;
+  color: #333;
 }
 .btn-detail {
   background-color: #48ce24;
@@ -26,5 +36,5 @@
   font-size: 14px;
   position: absolute;
   right: 0;
-  bottom: 15rpx;
+  bottom: 30rpx;
 }

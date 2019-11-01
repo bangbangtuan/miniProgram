@@ -64,7 +64,7 @@
 }
 
 .content {
-  margin: 20rpx 40rpx;
+  margin: 80rpx 40rpx;
   color: #333;
 }
 

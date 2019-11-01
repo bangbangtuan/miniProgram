@@ -47,20 +47,20 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 0,
+			"current": 1,
 			"list": [
 				{
 					"id": 0,
-					"name": "pages/profile/profile",
-					"pathName": "pages/profile/profile",
-					"query": "",
+					"name": "pages/project/taskDetails/taskDetails",
+					"pathName": "pages/project/taskDetails/taskDetails",
+					"query": "id=1159122739324260354",
 					"scene": null
 				},
 				{
 					"id": 1,
-					"name": "pages/article/article",
-					"pathName": "pages/article/article",
-					"query": "cat=%7B%22id%22%3A%221157031875168964610%22%2C%22commentNumber%22%3A%220%22%2C%22content%22%3A%22dd%22%2C%22praiseNumber%22%3A%221%22%2C%22userId%22%3A%221152000558962315266%22%2C%22day%22%3A%221%22%2C%22createTime%22%3A%222019-08-02%2004%3A54%3A30%22%2C%22updateTime%22%3A%222019-08-22%2002%3A10%3A56%22%2C%22name%22%3A%22doonnoop%22%2C%22headPortrait%22%3A%22http%253A%252F%252Fbbt-oss.oss-cn-beijing.aliyuncs.com%252Fbbt-oss%252F2019-07-22%252Fe8b11b6a67e24ba2aae9e4fb2c01f998-file%253FExpires%253D4717426229%2526OSSAccessKeyId%253DLTAICSpdWLfNbeYk%2526Signature%253DlTS5mA7Xp94PQOG%25252FOGoR%25252BMh2W%25252FQ%25253D%22%7D",
+					"name": "pages/team/team",
+					"pathName": "pages/team/team",
+					"query": "",
 					"scene": null
 				}
 			]

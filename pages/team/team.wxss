@@ -3,17 +3,20 @@ checkbox {
   height: 0;
   width: 0;
 }
+
 .box {
   display: flex;
   flex-direction: column;
   margin: 50rpx;
 }
+
 .header {
   font-size: 25px;
   font-weight: 500;
   color: #666;
   margin: 10rpx;
 }
+
 .li {
   display: flex;
   font-size: 18px;
@@ -24,11 +27,13 @@ checkbox {
   border-bottom: 1rpx solid #ff6e37;
   position: relative;
 }
+
 .active {
   font-weight: 500;
-  border: none; 
+  border: none;
 }
-.active:before{
+
+.active:before {
   content: '';
   height: 10rpx;
   width: 10rpx;
@@ -39,15 +44,18 @@ checkbox {
   left: 0;
   color: black;
 }
+
 .stack-container {
   display: flex;
   flex-direction: row;
   font-size: 16px;
   color: #666;
 }
+
 .stack-container view {
   /* margin: auto 20rpx; */
 }
+
 .head {
   font-size: 18px;
   font-weight: 700;
@@ -56,23 +64,28 @@ checkbox {
   width: 100rpx;
   text-align: center;
 }
-radio .wx-radio-input{
+
+radio .wx-radio-input {
   display: none;
 }
+
 .radio-group .radioActive {
   border: 1rpx solid #ff6e37;
   background-color: rgb(218, 214, 214);
   border-radius: 10rpx;
 }
+
 .radio-group .radio {
   padding: 0 10rpx;
 }
+
 .info {
   margin: 0 10rpx 0;
   font-size: 16px;
   color: #ff6e37;
   font-weight: 500;
 }
+
 .info textarea {
   border: 2rpx solid #ff6e37;
   border-radius: 10rpx;
@@ -81,6 +94,7 @@ radio .wx-radio-input{
   width: 95%;
   height: 200rpx;
 }
+
 .info input {
   border: 2rpx solid #ff6e37;
   border-radius: 10rpx;
@@ -88,6 +102,7 @@ radio .wx-radio-input{
   padding: 20rpx;
   width: 95%;
 }
+
 .note {
   display: flex;
   flex-direction: column;
@@ -95,20 +110,63 @@ radio .wx-radio-input{
   font-size: 16px;
   color: #666;
 }
+
 .note-item {
   display: flex;
   flex-direction: row;
 }
+
 .number {
   color: #ff6e37;
   margin-right: 30rpx;
 }
-button {
+
+.submit {
   width: 20%;
   background-color: #ff6e37;
   border: none;
   color: #fff;
   position: fixed;
-  bottom: 50rpx;
+  bottom: 100rpx;
   left: 300rpx;
+  z-index: 2;
+}
+
+page {
+  overflow: hidden;
+}
+
+.tab {
+  width: 100%;
+  height: 100rpx;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-around;
+  border-bottom: 2rpx solid rgba(153, 153, 153, 0.377);
+}
+
+.true {
+  width: 40%;
+  height: 100rpx;
+  line-height: 100rpx;
+  text-align: center;
+  color: #ff6e37;
+  border-bottom: 5rpx solid #ff6e37;
+  font-size: 35rpx;
+}
+
+.false {
+  width: 40%;
+  height: 100rpx;
+  line-height: 100rpx;
+  text-align: center;
+  font-size: 33rpx;
+}
+
+.swiper-box {
+  display: block;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  margin-top: 10rpx;
 }

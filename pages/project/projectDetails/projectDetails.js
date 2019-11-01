@@ -1,17 +1,29 @@
-// pages/project/project.js
+// pages/project/projectDetails/projectDetails.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    current: 1
+
   },
 
-  getProjects: function () {
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+    console.log(options.id)
+    this.setData({
+      id: options.id
+    })
+    this.getProject();
+    this.getProjectTask();
+  },
+
+  getProject: function () {
     var that = this;
     wx.request({
-      url: 'https://api.bangneedu.com/project?current' + this.data.current + '&size=10',
+      url: 'https://api.bangneedu.com/project/' + this.data.id,
       method: 'GET',
       header: {
         "content-type": "application/json"
@@ -19,8 +31,7 @@ Page({
       success: function (res) {
         console.log(res.data.data);
         that.setData({
-          projects: res.data.data.records.reverse(),
-          pages: parseInt(res.data.data.pages)
+          project: res.data.data
         })
       },
       fail: function (err) {
@@ -29,18 +40,31 @@ Page({
     })
   },
 
-  navigateToDetails: function(e) {
-    // console.log(e.currentTarget.dataset['id']);
-    wx.navigateTo({
-      url: '/pages/project/projectDetails/projectDetails?id=' + e.currentTarget.dataset['id'],
+  getProjectTask: function() {
+    var that = this;
+    wx.request({
+      url: 'https://api.bangneedu.com/projectTask/' + this.data.id,
+      method: 'GET',
+      header: {
+        "content-type": "application/json"
+      },
+      success: function (res) {
+        console.log(res.data.data);
+        that.setData({
+          tasks: res.data.data,
+        })
+      },
+      fail: function (err) {
+        console.log(err);
+      }
     })
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-    this.getProjects();
+  navigateToDetails: function (e) {
+    // console.log(e.currentTarget.dataset['id']);
+    wx.navigateTo({
+      url: '/pages/project/taskDetails/taskDetails?id=' + e.currentTarget.dataset['id'],
+    })
   },
 
   /**
