@@ -1,1 +1,10 @@
-/* pages/msg/msg_success.wxss */
+.modal-con {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.modal-img {
+  width: 200rpx;
+  height: 200rpx;
+  margin-top: 20rpx;
+}

@@ -48,7 +48,8 @@ Page({
         path: "/pages/team/team",
         content: "分享给好友既可开始匹配",
         title: "点击免费匹配你的专属学习伙伴",
-        image: "/images/Picture1.png"
+        image: "/images/Picture1.png",
+        alert: "既可获得学习伙伴微信号"
       }
       body.image = encodeURIComponent(body.image);
       wx.navigateTo({
