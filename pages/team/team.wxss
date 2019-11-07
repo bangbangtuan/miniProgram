@@ -170,3 +170,32 @@ page {
   overflow: hidden;
   margin-top: 10rpx;
 }
+.study{
+  display: flex;
+  align-items:center;
+  background:#ddd;
+  height:80rpx;
+  margin:20rpx;
+  padding:10rpx;
+}
+.study .img{
+  width: 40px; 
+  height: 100%;
+}
+.study .btn{
+  /* height:60rpx; */
+  /* margin:10rpx;  */
+   vertical-align: middle;
+  background:#179bd4;
+  color:#fff;
+  line-height:2;
+}
+.study .title{
+  /* height:80rpx;
+  line-height:80rpx; */
+  vertical-align: middle;
+  flex: 1;
+  padding-left:30rpx;
+  font-size:28rpx;
+}
+

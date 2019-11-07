@@ -20,6 +20,27 @@ Page({
         note: "未匹配成功之前请勿重复提交匹配信息。"
       }
     ],
+    study: [{
+      id: "001",
+      img: "/images/icon/pinglun.png",
+      title: "前端零基础自学团"
+    }, {
+      id: "002",
+      img: "/images/icon/pinglun.png",
+      title: "前端零VUE自学团"
+    }, {
+      id: "003",
+      img: "/images/icon/pinglun.png",
+      title: "前端零VUE自学团"
+    }, {
+      id: "004",
+      img: "/images/icon/pinglun.png",
+      title: "前端零React自学团"
+    }, {
+      id: "005",
+      img: "/images/icon/pinglun.png",
+      title: "前端零React自学团"
+    }],
     stack: [],
     radioCheckVal: '',
     tabs: ["学习伙伴", "自学团"],
@@ -39,7 +60,32 @@ Page({
       selectedFlag: this.data.selectedFlag
     })
   },
-
+  clickIn(e) {
+    console.log(e.currentTarget.dataset.index)
+    if (wx.getStorageSync('token')) {
+      var body = {
+        path: "/pages/team/team",
+        content: "邀请好友加入自学团，分享完成即可加入",
+        title: "邀请你一起加入神秘的IT自学团队",
+        image: "/images/Picture2.png"
+      }
+      body.image = encodeURIComponent(body.image);
+      wx.navigateTo({
+        url: "/pages/msg/msg_success?body=" + JSON.stringify(body),
+      })
+    } else {
+      wx.showToast({
+        title: '请登录后点击加入',
+        icon: 'none',
+        duration: 1000
+      });
+      setTimeout(function () {
+        wx.navigateTo({
+          url: '/pages/login/login',
+        })
+      }, 1000)
+    }
+  },
   bindFormSubmit: function(e) {
     console.log(this.data.radioCheckVal);
     var tech = this.data.radioCheckVal;
