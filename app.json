@@ -5,6 +5,7 @@
     "pages/project/project",
     "pages/project/projectDetails/projectDetails",
     "pages/project/taskDetails/taskDetails",
+    "pages/project/joinTeam/joinTeam",
     "pages/profile/profile",
     "pages/article/article",
     "pages/login/login",

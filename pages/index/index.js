@@ -41,6 +41,27 @@ Page({
     })
   },
 
+  getClassify: function() {
+    var that = this;
+    var url = 'https://api.bangneedu.com/classify';
+    wx.request({
+      url: url,
+      method: 'GET',
+      header: {
+        "Content-Type": "application/json"
+      },
+      success: function(res) {
+        console.log(res.data.data);
+        that.setData({
+          classifies: res.data.data
+        })
+      },
+      fail: function(err) {
+        console.log(err);
+      }
+    });
+  },
+
   bindFormSubmit: function(e) {
     var that = this;
     console.log(e.detail.value.textarea);
@@ -54,68 +75,90 @@ Page({
           daka: '',
           isClickable: false
         });
-        wx.request({
-          url: 'https://api.bangneedu.com/punchTheClock',
-          method: 'POST',
-          data: {
-            "content": e.detail.value.textarea
-          },
-          header: {
-            "content-type": "application/json",
-            "Authorization": "Bearer " + wx.getStorageSync('token')
-          },
-          success: function(res) {
-            console.log(res.data);
-            if (res.data.status == 200 && res.data.data) {
-              var testObj = res.data.data;
-              that.setData({
-                isClickable: true,
-                isEmpty: true,
-                postItem: testObj,
-                t_length: 0
-              })
-              var url = 'https://api.bangneedu.com/punchTheClock?current=1&size=20';
-              that.getDakaList(url);
-              wx.showToast({
-                title: '打卡成功',
-                icon: 'success',
-                duration: 1000
-              })
-              that.onCreatePoster();
-              // wx.navigateTo({
-              //   url: '/pages/postModal/postModal?cat=' + JSON.stringify(testObj)
-              // })
-            } else if (res.data.status == 500 || (res.data.status == 200 && !res.data.data)) {
-              that.setData({
-                isClickable: true
-              })
-              wx.showModal({
-                title: '发生错误啦',
-                content: res.data.msg ? res.data.msg : '不知名错误，请联系阳叔',
-                success(res) {
-                  if (res.confirm) {
-                    console.log('用户点击确定')
-                  } else if (res.cancel) {
-                    console.log('用户点击取消')
-                  }
-                }
-              })
-            } else if (res.data.status == 401) {
-              wx.showToast({
-                title: '登陆过期，请重新登陆',
-                icon: 'none',
-                duration: 1000
-              });
-              setTimeout(function() {
-                wx.navigateTo({
-                  url: '/pages/login/login',
-                })
-              }, 1000)
+        wx.cloud.init()
+        wx.cloud.callFunction({
+          name: 'securityMsg',
+          data: ({
+            text: e.detail.value.textarea
+          })
 
-            }
-          },
-          fail: function(err) {
-            console.log(err);
+        }).then(res => {
+          console.log(res.result);
+          if (res.result.errCode === 87014) {
+            wx.showToast({
+              title: '输入的内容包含敏感词语，请检查后再发',
+              icon: 'none',
+            })
+            that.setData({
+              isClickable: true,
+              isEmpty: true,
+              t_length: 0
+            })
+          } else {
+            wx.request({
+              url: 'https://api.bangneedu.com/punchTheClock',
+              method: 'POST',
+              data: {
+                "content": e.detail.value.textarea
+              },
+              header: {
+                "content-type": "application/json",
+                "Authorization": "Bearer " + wx.getStorageSync('token')
+              },
+              success: function (res) {
+                console.log(res.data);
+                if (res.data.status == 200 && res.data.data) {
+                  var testObj = res.data.data;
+                  that.setData({
+                    isClickable: true,
+                    isEmpty: true,
+                    postItem: testObj,
+                    t_length: 0
+                  })
+                  var url = 'https://api.bangneedu.com/punchTheClock?current=1&size=20';
+                  that.getDakaList(url);
+                  wx.showToast({
+                    title: '打卡成功',
+                    icon: 'success',
+                    duration: 1000
+                  })
+                  that.onCreatePoster();
+                  // wx.navigateTo({
+                  //   url: '/pages/postModal/postModal?cat=' + JSON.stringify(testObj)
+                  // })
+                } else if (res.data.status == 500 || (res.data.status == 200 && !res.data.data)) {
+                  that.setData({
+                    isClickable: true
+                  })
+                  wx.showModal({
+                    title: '发生错误啦',
+                    content: res.data.msg ? res.data.msg : '不知名错误，请联系阳叔',
+                    success(res) {
+                      if (res.confirm) {
+                        console.log('用户点击确定')
+                      } else if (res.cancel) {
+                        console.log('用户点击取消')
+                      }
+                    }
+                  })
+                } else if (res.data.status == 401) {
+                  wx.showToast({
+                    title: '登陆过期，请重新登陆',
+                    icon: 'none',
+                    duration: 1000
+                  });
+                  setTimeout(function () {
+                    wx.navigateTo({
+                      url: '/pages/login/login',
+                    })
+                  }, 1000)
+
+                }
+              },
+              fail: function (err) {
+                console.log(err);
+              }
+            })
           }
         })
       } else {
@@ -125,23 +168,6 @@ Page({
           duration: 1000
         })
       }
-      // var testObj = {
-      //   commentNumber: "0",
-      //   content: "Js中dom学习",
-      //   createTime: "2019-08-23 23:16:13",
-      //   day: "1",
-      //   praiseNumber: "0",
-      //   id: "1164919276688117761",
-      //   name: "嘻嘻嘻",
-      //   praiseNumber: "0",
-      //   userId: "1150054988370677761"
-      // }
-      // if(testObj.headPortrait) {
-      //   testObj.headPortrait = encodeURIComponent(testObj.headPortrait);
-      // }
-      // wx.navigateTo({
-      //   url: '/pages/postModal/postModal?cat=' + JSON.stringify(testObj),
-      // })
     } else {
       wx.redirectTo({
         url: '/pages/login/login',
@@ -395,6 +421,7 @@ Page({
   onShow: function() {
     var url = 'https://api.bangneedu.com/punchTheClock?current=1&size=20';
     this.getDakaList(url);
+    this.getClassify();
   },
 
   /**

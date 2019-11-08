@@ -1,11 +1,11 @@
-// pages/project/project.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    current: 1
+    current: 1,
+    flag: false
   },
 
   getProjects: function () {
@@ -18,10 +18,29 @@ Page({
       },
       success: function (res) {
         console.log(res.data.data);
-        that.setData({
-          projects: res.data.data.records.reverse(),
-          pages: parseInt(res.data.data.pages)
-        })
+        for (let i = 0; i < res.data.data.records.length; i++) {
+          wx.request({
+            url: 'https://api.bangneedu.com/projectTeam/' + res.data.data.records[i].id,
+            method: 'GET',
+            header: {
+              "content-type": "application/json"
+            },
+            success: function (result) {
+              console.log(result.data.data);
+              res.data.data.records[i].teamMembers = result.data.data.slice(0,3)
+              that.setData({
+                flag: true,
+                projects: res.data.data.records,
+                pages: parseInt(res.data.data.pages)
+              })
+              
+            },
+            fail: function (err) {
+              console.log(err);
+            }
+          })
+        }
+        console.log(that.data.projects)
       },
       fail: function (err) {
         console.log(err);
@@ -36,11 +55,17 @@ Page({
     })
   },
 
+  joinTeam: function(e) {
+    wx.navigateTo({
+      url: '/pages/project/joinTeam/joinTeam?id=' + e.currentTarget.dataset['id'],
+    })
+  },
+  
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.getProjects();
+    
   },
 
   /**
@@ -54,7 +79,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.getProjects();
   },
 
   /**

@@ -3,7 +3,9 @@
     <view class='head'>打卡</view>
     <form bindsubmit="bindFormSubmit">
       <view class="daka-area">
-        <textarea name="textarea" value="{{daka}}" placeholder="最多255个汉字" maxlength='255' bindinput="bindText" />
+        <textarea name="textarea" value="{{daka}}" maxlength='255' bindinput="bindText">
+        <!-- <view>ppp</view> -->
+        </textarea>
         <text class="text-count">{{t_length}}/255</text>
       </view>
       <poster id="poster" hide-loading="{{false}}" preload="{{false}}" config="{{posterConfig}}" bind:success="onPosterSuccess" bind:fail="onPosterFail" class="poster">

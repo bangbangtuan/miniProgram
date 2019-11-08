@@ -29,6 +29,7 @@
 	"isGameTourist": false,
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},
+	"cloudfunctionRoot": "functions/",
 	"condition": {
 		"search": {
 			"current": -1,
@@ -55,16 +56,16 @@
 			"list": [
 				{
 					"id": 0,
-					"name": "pages/project/taskDetails/taskDetails",
-					"pathName": "pages/project/taskDetails/taskDetails",
-					"query": "id=1159122739324260354",
+					"name": "pages/postModal/postModal",
+					"pathName": "pages/postModal/postModal",
+					"query": "",
 					"scene": null
 				},
 				{
 					"id": 1,
-					"name": "pages/team/team",
-					"pathName": "pages/team/team",
-					"query": "",
+					"name": "pages/project/joinTeam/joinTeam",
+					"pathName": "pages/project/joinTeam/joinTeam",
+					"query": "id=1181749346442416130",
 					"scene": null
 				}
 			]

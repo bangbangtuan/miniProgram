@@ -3,16 +3,22 @@
   <view class="page__bd">
     <view class="weui-panel weui-panel_access">
       <view class="weui-panel__bd">
-        <view class="weui-media-box weui-media-box_appmsg relative-box" hover-class="weui-cell_active" wx:for="{{projects}}" wx:key="id">
-          <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
-            <image class="weui-media-box__thumb" src="{{item.image}}" />
+        <view class="weui-media-box weui-media-box_appmsg relative-box" hover-class="weui-cell_active">
+          <view wx:for="{{projects}}" wx:key="id" class="project-cont-box">
+            <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+              <image class="weui-media-box__thumb" src="{{item.image}}" />
+            </view>
+            <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+              <view class="weui-media-box__title">{{item.name}}</view>
+              <view class="weui-media-box__desc">技术栈：{{item.technology}}</view>
+              <view class="weui-media-box__desc">项目介绍：{{item.details}}</view>
+              <view class='team-members'>
+                <image wx:for="{{item.teamMembers}}" wx:key="{{index}}" wx:for-item="members" src="{{members.headPortrait}}" alt="{{members.name}}" />
+                <image src="../../images/icon/plus.png" bindtap="joinTeam" data-id='{{item.id}}' ></image>
+              </view>
+            </view>
+            <view class="btn-detail" bindtap="navigateToDetails" data-id='{{item.id}}'>查看详情</view>
           </view>
-          <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
-            <view class="weui-media-box__title">{{item.name}}</view>
-            <view class="weui-media-box__desc">技术栈：{{item.technology}}</view>
-            <view class="weui-media-box__desc">项目介绍：{{item.details}}</view>
-          </view>
-          <view class="btn-detail" bindtap="navigateToDetails" data-id='{{item.id}}'>查看详情</view>
         </view>
       </view>
     </view>

@@ -44,17 +44,6 @@ Page({
     console.log(this.data.radioCheckVal);
     var tech = this.data.radioCheckVal;
     if (wx.getStorageSync('token')) {
-      var body = {
-        path: "/pages/team/team",
-        content: "分享给好友既可开始匹配",
-        title: "点击免费匹配你的专属学习伙伴",
-        image: "/images/Picture1.png",
-        alert: "既可获得学习伙伴微信号"
-      }
-      body.image = encodeURIComponent(body.image);
-      wx.navigateTo({
-        url: "/pages/msg/msg_success?body=" + JSON.stringify(body),
-      })
       if(!tech) {
         wx.showToast({
           title: '请选择技术栈',
@@ -90,6 +79,17 @@ Page({
                     title: '提交成功',
                     icon: 'success',
                     duration: 1000
+                  })
+                  var body = {
+                    path: "/pages/team/team",
+                    content: "分享给好友既可开始匹配",
+                    title: "点击免费匹配你的专属学习伙伴",
+                    image: "/images/Picture1.png",
+                    alert: "既可获得学习伙伴微信号"
+                  }
+                  body.image = encodeURIComponent(body.image);
+                  wx.navigateTo({
+                    url: "/pages/msg/msg_success?body=" + JSON.stringify(body),
                   })
                 } else if (res.statusCode == 500) {
                   wx.showModal({
