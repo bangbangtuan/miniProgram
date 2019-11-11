@@ -20,27 +20,6 @@ Page({
         note: "未匹配成功之前请勿重复提交匹配信息。"
       }
     ],
-    // study: [{
-    //   id: "001",
-    //   img: "/images/icon/pinglun.png",
-    //   title: "前端零基础自学团"
-    // }, {
-    //   id: "002",
-    //   img: "/images/icon/pinglun.png",
-    //   title: "前端零VUE自学团"
-    // }, {
-    //   id: "003",
-    //   img: "/images/icon/pinglun.png",
-    //   title: "前端零VUE自学团"
-    // }, {
-    //   id: "004",
-    //   img: "/images/icon/pinglun.png",
-    //   title: "前端零React自学团"
-    // }, {
-    //   id: "005",
-    //   img: "/images/icon/pinglun.png",
-    //   title: "前端零React自学团"
-    // }],
     stack: [],
     radioCheckVal: '',
     tabs: ["学习伙伴", "自学团"],
