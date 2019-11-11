@@ -57,7 +57,7 @@
   <swiper-item>
     <scroll-view style='height:100%;' scroll-y='true'>
       <view class="study" wx:for="{{study}}" wx:key="{{item.id}}" >
-       <image src="{{item.img}}" class="img" ></image>
+       <image src="{{item.image}}" class="img" ></image>
        <text  class="title">{{item.title}}</text>
        <button size="mini" class="btn" data-index="{{item.id}}" bindtap="clickIn">点击加入</button>
       </view>

@@ -195,7 +195,7 @@ page {
   line-height:80rpx; */
   vertical-align: middle;
   flex: 1;
-  padding-left:30rpx;
-  font-size:28rpx;
+  padding:0 30rpx;
+  font-size:24rpx;
 }
 

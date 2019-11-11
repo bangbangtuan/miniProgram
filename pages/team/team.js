@@ -20,27 +20,27 @@ Page({
         note: "未匹配成功之前请勿重复提交匹配信息。"
       }
     ],
-    study: [{
-      id: "001",
-      img: "/images/icon/pinglun.png",
-      title: "前端零基础自学团"
-    }, {
-      id: "002",
-      img: "/images/icon/pinglun.png",
-      title: "前端零VUE自学团"
-    }, {
-      id: "003",
-      img: "/images/icon/pinglun.png",
-      title: "前端零VUE自学团"
-    }, {
-      id: "004",
-      img: "/images/icon/pinglun.png",
-      title: "前端零React自学团"
-    }, {
-      id: "005",
-      img: "/images/icon/pinglun.png",
-      title: "前端零React自学团"
-    }],
+    // study: [{
+    //   id: "001",
+    //   img: "/images/icon/pinglun.png",
+    //   title: "前端零基础自学团"
+    // }, {
+    //   id: "002",
+    //   img: "/images/icon/pinglun.png",
+    //   title: "前端零VUE自学团"
+    // }, {
+    //   id: "003",
+    //   img: "/images/icon/pinglun.png",
+    //   title: "前端零VUE自学团"
+    // }, {
+    //   id: "004",
+    //   img: "/images/icon/pinglun.png",
+    //   title: "前端零React自学团"
+    // }, {
+    //   id: "005",
+    //   img: "/images/icon/pinglun.png",
+    //   title: "前端零React自学团"
+    // }],
     stack: [],
     radioCheckVal: '',
     tabs: ["学习伙伴", "自学团"],
@@ -61,7 +61,7 @@ Page({
     })
   },
   clickIn(e) {
-    console.log(e.currentTarget.dataset.index)
+    let teamId=e.currentTarget.dataset.index;
     if (wx.getStorageSync('token')) {
       var body = {
         path: "/pages/team/team",
@@ -72,6 +72,42 @@ Page({
       body.image = encodeURIComponent(body.image);
       wx.navigateTo({
         url: "/pages/msg/msg_success?body=" + JSON.stringify(body),
+      })
+      wx.request({
+        url: 'https://api.bangneedu.com/learningPathTeam/people',
+        method: 'POST',
+        header: {
+          "content-type": "application/json",
+          "Authorization": "Bearer " + wx.getStorageSync('token')
+        },
+        data: {
+          learningPathTeamId: teamId
+        },
+        success: function (res) {
+          console.log(res);
+          if (res.statusCode == 200) {
+            wx.showToast({
+              title: '加入自学团',
+              icon: 'success',
+              duration: 1000
+            })
+          } else if (res.statusCode == 500) {
+            wx.showModal({
+              title: '发生错误啦',
+              content: res.data.msg ? res.data.msg : '不知名错误，请联系阳叔',
+              success(res) {
+                if (res.confirm) {
+                  console.log('用户点击确定')
+                } else if (res.cancel) {
+                  console.log('用户点击取消')
+                }
+              }
+            })
+          }
+        },
+        fail: function (err) {
+          console.log(err);
+        }
       })
     } else {
       wx.showToast({
@@ -212,6 +248,30 @@ Page({
           that.setData({
             frontend: res.data.data[0].childList[1].childList,
             backend: res.data.data[0].childList[0].childList
+          })
+        },
+        fail: function (err) {
+          console.log(err);
+        }
+      }),
+      wx.request({
+        url: 'https://api.bangneedu.com/learningPathTeam',
+        method: 'GET',
+        header: {
+          "content-type": "application/json",
+          "Authorization": "Bearer " + wx.getStorageSync('token')
+        },
+        success: function (res) {
+          console.log(res.data);
+          if (res.data.status == 401) {
+            wx.showToast({
+              title: '登陆过期，请重新登陆',
+              icon: 'none',
+              duration: 1000
+            });
+          }
+          that.setData({
+            study:res.data.data.records
           })
         },
         fail: function (err) {
