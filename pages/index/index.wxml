@@ -8,7 +8,7 @@
       </view>
       <view class="classify-box">
         <view>点击选择打卡类别</view>
-        <radio-group class="classify" bindchange="radioChange">
+        <radio-group class="classify" bindchange="radioChange" name="type">
           <radio class="{{type=='前端' ? 'radioActive':''}}" value="前端">#前端#</radio>
           <radio class="{{type=='Java' ? 'radioActive':''}}" value="Java">#Java#</radio>
           <radio class="{{type=='产品经理' ? 'radioActive':''}}" value="产品经理">#产品经理#</radio>
@@ -35,7 +35,10 @@
           <text>坚持 {{item.day}} 天</text>
         </view>
       </view>
-      <view class='comment-content'>{{item.content}}</view>
+      <view class='comment-content'>
+        <text wx:if='{{item.type}}'>#{{item.type}}#</text>
+        <text>  {{item.content}}</text>
+      </view>
       <view class='comment-like'>
         <image src='/images/icon/chat.png'></image>
         <text>{{item.commentNumber}}</text>

@@ -72,9 +72,10 @@ Page({
 
   bindFormSubmit: function(e) {
     var that = this;
+    console.log(e.detail.value);
     that.setData({
       daka: e.detail.value.textarea,
-      type: that.data.type
+      type: e.detail.value.type
     })
     var token = wx.getStorageSync('token');
     if (token) {
