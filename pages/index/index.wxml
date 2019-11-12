@@ -3,10 +3,17 @@
     <view class='head'>打卡</view>
     <form bindsubmit="bindFormSubmit">
       <view class="daka-area">
-        <textarea name="textarea" value="{{daka}}" maxlength='255' bindinput="bindText">
-        <!-- <view>ppp</view> -->
-        </textarea>
+        <textarea name="textarea" value="{{daka}}" maxlength='255' bindinput="bindText" />
         <text class="text-count">{{t_length}}/255</text>
+      </view>
+      <view class="classify-box">
+        <view>点击选择打卡类别</view>
+        <radio-group class="classify" bindchange="radioChange">
+          <radio class="{{type=='前端' ? 'radioActive':''}}" value="前端">#前端#</radio>
+          <radio class="{{type=='Java' ? 'radioActive':''}}" value="Java">#Java#</radio>
+          <radio class="{{type=='产品经理' ? 'radioActive':''}}" value="产品经理">#产品经理#</radio>
+          <radio class="{{type=='Python' ? 'radioActive':''}}" value="Python">#Python#</radio>
+        </radio-group>
       </view>
       <poster id="poster" hide-loading="{{false}}" preload="{{false}}" config="{{posterConfig}}" bind:success="onPosterSuccess" bind:fail="onPosterFail" class="poster">
         <button form-type="submit" wx:if="{{isClickable}}"> 打卡 </button>

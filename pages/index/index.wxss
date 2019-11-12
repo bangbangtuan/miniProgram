@@ -116,3 +116,32 @@ checkbox .wx-checkbox-input:before {
   color: #999;
   font-size: 14px;
 }
+.classify-box {
+  /* display: flex; */
+  font-size: 14px;
+  margin: 20rpx 0;
+  color: #666;
+  width: 100%;
+}
+.classify{
+  display: flex;
+  flex-wrap: wrap;
+  float: right;
+  margin-bottom: 20rpx;
+}
+radio{
+  margin-right: 15rpx;
+}
+radio .wx-radio-input {
+  display: none;
+}
+
+.classify .radioActive {
+  border: 1rpx solid #ff6e37;
+  background-color: rgb(218, 214, 214);
+  border-radius: 10rpx;
+}
+
+.radio-group .radio {
+  padding: 0 10rpx;
+}

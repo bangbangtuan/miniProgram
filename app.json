@@ -14,7 +14,6 @@
     "pages/message/message",
     "pages/user_daka/user_daka",
     "pages/userInfo/userInfo",
-    "pages/postModal/postModal",
     "pages/msg/msg_success"
   ],
   "window": {

@@ -12,6 +12,7 @@ Page({
     actionSheetHidden: true,
     isClickable: true,
     t_length: 0,
+    type: '',
   },
 
   /**
@@ -41,6 +42,13 @@ Page({
     })
   },
 
+  radioChange: function (e) {
+    console.log('radio携带value值为：', e.detail.value);
+    this.setData({
+      type: e.detail.value
+    });
+  },
+
   getClassify: function() {
     var that = this;
     var url = 'https://api.bangneedu.com/classify';
@@ -64,15 +72,22 @@ Page({
 
   bindFormSubmit: function(e) {
     var that = this;
-    console.log(e.detail.value.textarea);
     that.setData({
       daka: e.detail.value.textarea,
+      type: that.data.type
     })
     var token = wx.getStorageSync('token');
     if (token) {
-      if (that.data.daka) {
+      if (!that.data.daka || !that.data.type) {
+        wx.showToast({
+          title: '请输入打卡内容或选择打卡类别',
+          icon: 'none',
+          duration: 1000
+        })
+      } else {
         that.setData({
           daka: '',
+          type: '',
           isClickable: false
         });
         wx.cloud.init()
@@ -99,7 +114,8 @@ Page({
               url: 'https://api.bangneedu.com/punchTheClock',
               method: 'POST',
               data: {
-                "content": e.detail.value.textarea
+                "content": e.detail.value.textarea,
+                "type": e.detail.value.type
               },
               header: {
                 "content-type": "application/json",
@@ -160,12 +176,6 @@ Page({
               }
             })
           }
-        })
-      } else {
-        wx.showToast({
-          title: '请输入打卡内容',
-          icon: 'none',
-          duration: 1000
         })
       }
     } else {
