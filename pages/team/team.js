@@ -241,14 +241,6 @@ Page({
           "Authorization": "Bearer " + wx.getStorageSync('token')
         },
         success: function (res) {
-          console.log(res.data);
-          if (res.data.status == 401) {
-            wx.showToast({
-              title: '登陆过期，请重新登陆',
-              icon: 'none',
-              duration: 1000
-            });
-          }
           that.setData({
             study:res.data.data.records
           })
