@@ -39,7 +39,68 @@ Page({
       selectedFlag: this.data.selectedFlag
     })
   },
-
+  clickIn(e) {
+    let teamId=e.currentTarget.dataset.index;
+    if (wx.getStorageSync('token')) {
+      var body = {
+        path: "/pages/team/team",
+        content: "邀请好友加入自学团，分享完成即可加入",
+        title: "邀请你一起加入神秘的IT自学团队",
+        image: "/images/Picture2.png"
+      }
+      body.image = encodeURIComponent(body.image);
+      wx.navigateTo({
+        url: "/pages/msg/msg_success?body=" + JSON.stringify(body),
+      })
+      wx.request({
+        url: 'https://api.bangneedu.com/learningPathTeam/people',
+        method: 'POST',
+        header: {
+          "content-type": "application/json",
+          "Authorization": "Bearer " + wx.getStorageSync('token')
+        },
+        data: {
+          learningPathTeamId: teamId
+        },
+        success: function (res) {
+          console.log(res);
+          if (res.statusCode == 200) {
+            wx.showToast({
+              title: '加入自学团',
+              icon: 'success',
+              duration: 1000
+            })
+          } else if (res.statusCode == 500) {
+            wx.showModal({
+              title: '发生错误啦',
+              content: res.data.msg ? res.data.msg : '不知名错误，请联系阳叔',
+              success(res) {
+                if (res.confirm) {
+                  console.log('用户点击确定')
+                } else if (res.cancel) {
+                  console.log('用户点击取消')
+                }
+              }
+            })
+          }
+        },
+        fail: function (err) {
+          console.log(err);
+        }
+      })
+    } else {
+      wx.showToast({
+        title: '请登录后点击加入',
+        icon: 'none',
+        duration: 1000
+      });
+      setTimeout(function () {
+        wx.navigateTo({
+          url: '/pages/login/login',
+        })
+      }, 1000)
+    }
+  },
   bindFormSubmit: function(e) {
     console.log(this.data.radioCheckVal);
     var tech = this.data.radioCheckVal;
@@ -167,6 +228,22 @@ Page({
           that.setData({
             frontend: res.data.data[0].childList[1].childList,
             backend: res.data.data[0].childList[0].childList
+          })
+        },
+        fail: function (err) {
+          console.log(err);
+        }
+      }),
+      wx.request({
+        url: 'https://api.bangneedu.com/learningPathTeam',
+        method: 'GET',
+        header: {
+          "content-type": "application/json",
+          "Authorization": "Bearer " + wx.getStorageSync('token')
+        },
+        success: function (res) {
+          that.setData({
+            study:res.data.data.records
           })
         },
         fail: function (err) {
