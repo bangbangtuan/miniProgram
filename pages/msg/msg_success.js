@@ -72,6 +72,7 @@ Page({
     this.setData({
       modalHidden: false
     })
+    
     return {
       title: this.data.body.title,
       path: this.data.body.path,

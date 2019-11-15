@@ -81,7 +81,7 @@ Page({
     if (token) {
       if (!that.data.daka || !that.data.type) {
         wx.showToast({
-          title: '请输入打卡内容或选择打卡类别',
+          title: '请输入打卡内容并选择打卡类别',
           icon: 'none',
           duration: 1000
         })

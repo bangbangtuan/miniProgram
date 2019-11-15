@@ -5,7 +5,7 @@
     </view>
     <view class="weui-msg__text-area">
       <view class="weui-msg__title">操作成功</view>
-      <view class="weui-msg__desc">{{body.content}}</view>
+      <view class="weui-msg__desc content">{{body.content}}</view>
     </view>
     <view class="weui-msg__opr-area">
       <view class="weui-btn-area">

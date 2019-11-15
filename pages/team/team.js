@@ -46,7 +46,8 @@ Page({
         path: "/pages/team/team",
         content: "邀请好友加入自学团，分享完成即可加入",
         title: "邀请你一起加入神秘的IT自学团队",
-        image: "/images/Picture2.png"
+        image: "/images/Picture2.png",
+        alert: "既可加入自学团"
       }
       body.image = encodeURIComponent(body.image);
       wx.navigateTo({

@@ -99,17 +99,24 @@ Page({
         },
         success: function (res) {
           console.log(res);
-          var body = {
-            path: "/pages/project/project",
-            content: "邀请好友一起组队做项目，分享完成既可加入项目微信群",
-            title: "我正在组队练手，邀请你一起做项目",
-            image: "/images/Picture3.png",
-            alert: "既可加入项目微信群"
+          if (res.data.msg == "请不要重复组队") {
+            wx.showToast({
+              title: res.data.msg,
+              icon: "none"
+            })
+          } else {
+            var body = {
+              path: "/pages/project/project",
+              content: "邀请好友一起组队做项目，分享完成既可加入项目微信群",
+              title: "我正在组队练手，邀请你一起做项目",
+              image: "/images/Picture3.png",
+              alert: "既可加入项目微信群"
+            }
+            body.image = encodeURIComponent(body.image);
+            wx.navigateTo({
+              url: "/pages/msg/msg_success?body=" + JSON.stringify(body),
+            })
           }
-          body.image = encodeURIComponent(body.image);
-          wx.navigateTo({
-            url: "/pages/msg/msg_success?body=" + JSON.stringify(body),
-          })
         },
         fail: function (err) {
           console.log(err);

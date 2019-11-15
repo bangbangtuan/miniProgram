@@ -70,7 +70,7 @@ Component({
             })
             .catch((err) => {
                 !this.data.hideLoading && wx.hideLoading();
-                wx.showToast({ icon: 'none', title: err.errMsg || '' });
+                // wx.showToast({ icon: 'none', title: err.errMsg || '' });
                 console.error(err);
                 this.triggerEvent('fail', err);
             })

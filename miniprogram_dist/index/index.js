@@ -512,7 +512,7 @@ Component({
                     });
                 })
                 .catch((err) => {
-                    wx.showToast({ icon: 'none', title: err.errMsg || '' });
+                    // wx.showToast({ icon: 'none', title: err.errMsg || '' });
                     console.error(err);
                 });
         },

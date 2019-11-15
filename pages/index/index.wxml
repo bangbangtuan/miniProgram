@@ -16,9 +16,9 @@
         </radio-group>
       </view>
       <poster id="poster" hide-loading="{{false}}" preload="{{false}}" config="{{posterConfig}}" bind:success="onPosterSuccess" bind:fail="onPosterFail" class="poster">
-        <button form-type="submit" wx:if="{{isClickable}}"> 打卡 </button>
-        <button form-type="submit" wx:else> 正在处理中... </button>
       </poster>
+      <button form-type="submit" wx:if="{{isClickable}}"> 打卡 </button>
+      <button form-type="submit" wx:else> 正在处理中... </button>
     </form>
   </view>
   <view class='posts' wx:if="{{postList}}">
