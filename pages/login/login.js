@@ -4,7 +4,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    username: '',
+    password: '',
+    user_code: ''
   },
 
   /**
@@ -95,20 +97,31 @@ Page({
             that.setData({
               token: res.data.data
             })
-            wx.showToast({
-              title: that.data.token ? '登陆成功' : '登陆失败',
-              icon: 'success',
-              duration: 1000,
-              success: function() {
-                if (that.data.token) {
-                  wx.setStorageSync('token', that.data.token);
-
-                  wx.switchTab({
-                    url: '/pages/profile/profile',
-                  })
+            if (res.data.status === 200 && that.data.token ) {
+              wx.showToast({
+                title: '登陆成功',
+                icon: 'success',
+                duration: 1000,
+                success: function () {
+                  if (that.data.token) {
+                    wx.setStorageSync('token', that.data.token);
+                    wx.switchTab({
+                      url: '/pages/profile/profile',
+                    })
+                  }
                 }
-              }
-            })
+              })
+            } else {
+              that.setData({
+                user_code: ''
+              })
+              that.changeAnother();
+              wx.showToast({
+                title: res.data.msg,
+                icon: 'none',
+                duration: 1000
+              })
+            }
           },
           fail: function (err) {
             console.log(err);
@@ -117,15 +130,19 @@ Page({
       } else {
         wx.showToast({
           title: '验证码错误',
-          icon: 'loading',
-          duration: 1000
+          icon: 'none',
+          duration: 2000
+        });
+        that.setData({
+          user_code: ''
         })
+        that.changeAnother();
       }
     } else {
       wx.showToast({
         title: '请填写必填项',
-        icon: 'loading',
-        duration: 1000
+        icon: 'none',
+        duration: 2000
       })
     }
   },

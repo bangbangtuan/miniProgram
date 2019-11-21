@@ -417,6 +417,8 @@ Page({
         console.log(err);
       }
     });
+    wx.hideNavigationBarLoading();
+    wx.stopPullDownRefresh();
   },
 
   /**
@@ -455,6 +457,12 @@ Page({
   onPullDownRefresh: function() {
     var url = 'https://api.bangneedu.com/punchTheClock?current=1&size=20';
     this.getDakaList(url);
+    this.setData({
+      daka: '',
+      pageNum: 1,
+      isEmpty: true,
+    })
+    wx.showNavigationBarLoading();
   },
 
   /**
