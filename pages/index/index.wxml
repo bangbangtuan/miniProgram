@@ -22,7 +22,7 @@
     </form>
   </view>
   <view class='posts' wx:if="{{postList}}">
-    <view class='post' wx:for="{{postList}}" wx:key="id" bindtap='handleTap' data-type='{{item}}'>
+    <view class='post' wx:for="{{postList}}" wx:key="index" >
       <view class='head-container'>
         <view class='author-date-container'>
           <image src='{{item.headPortrait}}'></image>
@@ -40,12 +40,24 @@
         <text>  {{item.content}}</text>
       </view>
       <view class='comment-like'>
-        <image src='/images/icon/chat.png'></image>
-        <text>{{item.commentNumber}}</text>
-        <image wx:if='{{liked}}' src='/images/icon/like-act.png'></image>
-        <image wx:else src='/images/icon/like.png'></image>
-        <text>{{item.praiseNumber}}</text>
+        <view class="likeItem" catchtap="likeTap" data-id="{{item.id}}" data-index="{{index}}" data-liked="{{item.liked}}">
+          <image wx:if='{{item.liked}}' src='/images/icon/like-act.png'></image>
+          <image wx:else src='/images/icon/like.png'></image>
+          <text>{{item.praiseNumber}}</text>
+        </view>
+         <view class="likeItem" bindtap='handleTap' data-index='{{index}}' data-type='{{item}}'>
+          <image src='/images/icon/chat.png'></image>
+          <text>{{item.commentNumber}}</text>
+        </view>
+       <button class="share" open-type="share" data-value="{{item}}">
+        <image src='/images/icon/share1.png'></image>
+       </button>
       </view>
+      <block wx-if="{{item.commentNumber>0}}">
+        <view class="divider"></view>
+        <view class="comment-desc">{{item.comm_name}}{{item.comment}}</view>
+      </block>
+      <view class="more" bindtap='handleTap' data-index='{{index}}' data-type='{{item}}'><text class="more_txt">点击查看更多</text>>></view>
     </view>
   </view>
 </view>
