@@ -24,7 +24,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.getAllLike();
+   
+    // var url = 'https://api.bangneedu.com/punchTheClock?current=1&size=20';
+    // this.getDakaList(url);
     console.log('onload----')
   },
 
@@ -100,13 +102,18 @@ Page({
         "Authorization": "Bearer " + wx.getStorageSync('token')
       },
       success: function (res) {
-        console.log(res.data.data);
-        that.data.myFavor = res.data.data;
-        var likeCollection = {};
-        res.data.data.forEach(item => {
-          likeCollection[item.punchTheClockId] = true;
-        })
-        wx.setStorageSync('like_collection1', likeCollection)
+        if(res.data.status == 200){
+          // console.log(res.data.data);
+          // that.data.myFavor = res.data.data;
+          var likeCollection = {};
+          res.data.data.forEach(item => {
+            likeCollection[item.punchTheClockId] = true;
+          })
+          wx.setStorageSync('like_collection1', likeCollection);
+          var url = 'https://api.bangneedu.com/punchTheClock?current=1&size=20';
+          that.getDakaList(url);
+        }
+        
       },
       fail: function (err) {
         console.log(err);
@@ -600,47 +607,58 @@ Page({
    */
   onShow: function () {
     var that = this;
-    if (this.data.isDetail) {
-      console.log('从详情返回');
-      this.data.isDetail = false;
-      wx.request({
-        url: 'https://api.bangneedu.com/punchTheClock/' + that.data.saveId.id,
-        method: 'GET',
-        header: {
-          "content-type": "application/json",
-          "Authorization": "Bearer " + wx.getStorageSync('token')
-        },
-        success: function (res) {
-          var str = 'postList[' + that.data.saveId.index + '].commentNumber'
-          that.setData({
-            [str]: res.data.data.commentNumber
-          });
-          that.getcommentByid(that.data.saveId.id).then(res => {
-            var str_name = 'postList[' + that.data.saveId.index + '].comm_name';
-            var str_comm = 'postList[' + that.data.saveId.index + '].comment';
-            if (res.length > 0) {
-              that.setData({
-                [str_name]: res[0].name + ': ',
-                [str_comm]: res[0].content
-              })
-            }
+    var token = wx.getStorageSync('token');
+    if(token){
+      if (this.data.isDetail) {
+        console.log('从详情返回');
+        this.data.isDetail = false;
+        wx.request({
+          url: 'https://api.bangneedu.com/punchTheClock/' + that.data.saveId.id,
+          method: 'GET',
+          header: {
+            "content-type": "application/json",
+            "Authorization": "Bearer " + wx.getStorageSync('token')
+          },
+          success: function (res) {
+            var str = 'postList[' + that.data.saveId.index + '].commentNumber'
+            that.setData({
+              [str]: res.data.data.commentNumber
+            });
+            that.getcommentByid(that.data.saveId.id).then(res => {
+              var str_name = 'postList[' + that.data.saveId.index + '].comm_name';
+              var str_comm = 'postList[' + that.data.saveId.index + '].comment';
+              if (res.length > 0) {
+                that.setData({
+                  [str_name]: res[0].name + ': ',
+                  [str_comm]: res[0].content
+                })
+              }
 
-          })
-        },
-        fail: function (err) {
-          console.log(err);
-        }
-      })
-
-    } else if (this.data.isEmpty) {
-      var url = 'https://api.bangneedu.com/punchTheClock?current=1&size=20';
-      this.getDakaList(url);
+            })
+          },
+          fail: function (err) {
+            console.log(err);
+          }
+        })
+      } else if (this.data.isEmpty) {
+        this.getAllLike();
+        // var url = 'https://api.bangneedu.com/punchTheClock?current=1&size=20';
+        // this.getDakaList(url);
+      }
+      this.getClassify();
+    }else{
+      wx.showToast({
+        title: '登陆过期，请重新登陆',
+        icon: 'none',
+        duration: 1000
+      });
+      setTimeout(function () {
+        wx.navigateTo({
+          url: '/pages/login/login',
+        })
+      }, 3000)
     }
-
-
-
-    this.getClassify();
-
+   
   },
 
   /**
