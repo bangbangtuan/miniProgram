@@ -93,32 +93,40 @@ Page({
   },
   getAllLike() {
     var that = this;
-    var url = 'https://api.bangneedu.com/punchTheClock/allLike';
-    wx.request({
-      url: url,
-      method: 'GET',
-      header: {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer " + wx.getStorageSync('token')
-      },
-      success: function (res) {
-        if(res.data.status == 200){
-          // console.log(res.data.data);
-          // that.data.myFavor = res.data.data;
-          var likeCollection = {};
-          res.data.data.forEach(item => {
-            likeCollection[item.punchTheClockId] = true;
-          })
-          wx.setStorageSync('like_collection1', likeCollection);
-          var url = 'https://api.bangneedu.com/punchTheClock?current=1&size=20';
-          that.getDakaList(url);
+    var token=wx.getStorageSync('token');
+    if(token){
+      var url = 'https://api.bangneedu.com/punchTheClock/allLike';
+      wx.request({
+        url: url,
+        method: 'GET',
+        header: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer " + wx.getStorageSync('token')
+        },
+        success: function (res) {
+          if (res.data.status == 200) {
+            // console.log(res.data.data);
+            // that.data.myFavor = res.data.data;
+            var likeCollection = {};
+            res.data.data.forEach(item => {
+              likeCollection[item.punchTheClockId] = true;
+            })
+            wx.setStorageSync('like_collection1', likeCollection);
+            var url = 'https://api.bangneedu.com/punchTheClock?current=1&size=20';
+            that.getDakaList(url);
+          }
+        },
+        fail: function (err) {
+          console.log(err);
         }
-        
-      },
-      fail: function (err) {
-        console.log(err);
-      }
-    });
+      });
+    }else{
+      wx.showToast({
+        title: '登陆过期，请重新登陆',
+        icon: 'none',
+        duration: 1000
+      });
+    }
   },
   handleTap: function (e) {
     console.log('999')
@@ -223,8 +231,12 @@ Page({
                     postItem: testObj,
                     t_length: 0
                   })
+                  that.setData({
+                    pageNum: 1
+                  })
                   var url = 'https://api.bangneedu.com/punchTheClock?current=1&size=20';
                   that.getDakaList(url);
+                  
                   wx.showToast({
                     title: '打卡成功',
                     icon: 'success',
@@ -607,8 +619,6 @@ Page({
    */
   onShow: function () {
     var that = this;
-    var token = wx.getStorageSync('token');
-    if(token){
       if (this.data.isDetail) {
         console.log('从详情返回');
         this.data.isDetail = false;
@@ -642,22 +652,8 @@ Page({
         })
       } else if (this.data.isEmpty) {
         this.getAllLike();
-        // var url = 'https://api.bangneedu.com/punchTheClock?current=1&size=20';
-        // this.getDakaList(url);
       }
       this.getClassify();
-    }else{
-      wx.showToast({
-        title: '登陆过期，请重新登陆',
-        icon: 'none',
-        duration: 1000
-      });
-      setTimeout(function () {
-        wx.navigateTo({
-          url: '/pages/login/login',
-        })
-      }, 3000)
-    }
    
   },
 
