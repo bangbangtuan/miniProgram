@@ -6,7 +6,7 @@ Page({
   data: {
     username: '',
     password: '',
-    user_code: ''
+    user_code: '',
   },
 
   /**
@@ -80,13 +80,14 @@ Page({
     var that = this;
     console.log(e.detail.value);
     console.log(this.data.code);
-    if (e.detail.value.username && e.detail.value.password && e.detail.value.code) {
+    if (e.detail.value.username && e.detail.value.password && e.detail.value.code && e.detail.value.type) {
       if (e.detail.value.code.toUpperCase() == this.data.code) {
         wx.request({
           url: 'https://api.bangneedu.com/login',
           data: {
             "username": e.detail.value.username,
             "password": e.detail.value.password,
+            "type": e.detail.value.type
           },
           method: 'POST',
           header: {
@@ -117,7 +118,7 @@ Page({
               })
               that.changeAnother();
               wx.showToast({
-                title: res.data.msg,
+                title: "登录失败，请输入正确的账号密码，或选择正确的登录方式",
                 icon: 'none',
                 duration: 1000
               })
@@ -140,7 +141,7 @@ Page({
       }
     } else {
       wx.showToast({
-        title: '请填写必填项',
+        title: '请填写必填项并选择登陆方式',
         icon: 'none',
         duration: 2000
       })
