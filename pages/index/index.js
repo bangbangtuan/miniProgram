@@ -643,7 +643,6 @@ Page({
                   [str_comm]: res[0].content
                 })
               }
-
             })
           },
           fail: function (err) {
@@ -654,7 +653,6 @@ Page({
         this.getAllLike();
       }
       this.getClassify();
-   
   },
 
   /**
