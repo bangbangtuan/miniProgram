@@ -1,13 +1,16 @@
 <view class='box'>
   <view class='header'>登陆</view>
   <view class='form'>
-    <!-- <view class='logo'>少年团LOGO</view> -->
     <image class='logo' src='/images/logo.png' />
     <form bindsubmit="bindFormSubmit">
-      <input class='input' name="username" placeholder='请输入用户名'></input>
-      <input class='input' type='password' name="password" placeholder='请输入密码'></input>
+      <input class='input' name="username" placeholder='请输入用户名' value='{{username}}'></input>
+      <radio-group class="type" bindchange="radioChange" name="type">
+        <radio value="1">账号登陆</radio>
+        <radio value="2">手机号登陆</radio>
+      </radio-group>
+      <input class='input' type='password' name="password" placeholder='请输入密码' value='{{password}}'></input>
       <view class='yanzhengma'>
-        <input name="code" placeholder='请输入验证码'></input>
+        <input name="code" placeholder='请输入验证码' value='{{user_code}}'></input>
         <view class='code' bindtap='changeAnother'>{{code}}</view>
       </view>
       <view class="forget-pwd">
@@ -16,6 +19,8 @@
       <button form-type="submit"> 登陆 </button>
     </form>
     <!-- <button class='wechat' open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo"><image src='/images/wechat.png'></image>微信号登陆</button> -->
-    <view class='register'>没有账号？<navigator url='/pages/register/register'>立即注册</navigator></view>
+    <view class='register'>没有账号？
+      <navigator url='/pages/register/register'>立即注册</navigator>
+    </view>
   </view>
 </view>

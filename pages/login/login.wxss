@@ -95,3 +95,12 @@ form button::after {
   border-bottom: 1px dashed #999;
   margin-right: 30rpx;
 }
+.type{
+  font-size: 16px;
+}
+radio{
+  margin-right: 20rpx;
+}
+radio .wx-radio-input {
+  transform:scale(0.8);
+}

@@ -4,7 +4,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    username: '',
+    password: '',
+    user_code: '',
   },
 
   /**
@@ -78,13 +80,14 @@ Page({
     var that = this;
     console.log(e.detail.value);
     console.log(this.data.code);
-    if (e.detail.value.username && e.detail.value.password && e.detail.value.code) {
+    if (e.detail.value.username && e.detail.value.password && e.detail.value.code && e.detail.value.type) {
       if (e.detail.value.code.toUpperCase() == this.data.code) {
         wx.request({
           url: 'https://api.bangneedu.com/login',
           data: {
             "username": e.detail.value.username,
             "password": e.detail.value.password,
+            "type": e.detail.value.type
           },
           method: 'POST',
           header: {
@@ -95,20 +98,31 @@ Page({
             that.setData({
               token: res.data.data
             })
-            wx.showToast({
-              title: that.data.token ? '登陆成功' : '登陆失败',
-              icon: 'success',
-              duration: 1000,
-              success: function() {
-                if (that.data.token) {
-                  wx.setStorageSync('token', that.data.token);
-
-                  wx.switchTab({
-                    url: '/pages/profile/profile',
-                  })
+            if (res.data.status === 200 && that.data.token ) {
+              wx.showToast({
+                title: '登陆成功',
+                icon: 'success',
+                duration: 1000,
+                success: function () {
+                  if (that.data.token) {
+                    wx.setStorageSync('token', that.data.token);
+                    wx.switchTab({
+                      url: '/pages/profile/profile',
+                    })
+                  }
                 }
-              }
-            })
+              })
+            } else {
+              that.setData({
+                user_code: ''
+              })
+              that.changeAnother();
+              wx.showToast({
+                title: "登录失败，请输入正确的账号密码，或选择正确的登录方式",
+                icon: 'none',
+                duration: 1000
+              })
+            }
           },
           fail: function (err) {
             console.log(err);
@@ -117,15 +131,19 @@ Page({
       } else {
         wx.showToast({
           title: '验证码错误',
-          icon: 'loading',
-          duration: 1000
+          icon: 'none',
+          duration: 2000
+        });
+        that.setData({
+          user_code: ''
         })
+        that.changeAnother();
       }
     } else {
       wx.showToast({
-        title: '请填写必填项',
-        icon: 'loading',
-        duration: 1000
+        title: '请填写必填项并选择登陆方式',
+        icon: 'none',
+        duration: 2000
       })
     }
   },

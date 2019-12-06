@@ -497,9 +497,11 @@ Page({
    */
   onShareAppMessage: function(options) {
     var that = this;
+    that.data.postItem.headPortrait = encodeURIComponent(that.data.postItem.headPortrait);
+    console.log(that.data.postItem);
     var shareObj = {
       // title: "棒棒团",
-      path: '/pages/index/index', // 默认是当前页面，必须是以‘/’开头的完整路径
+      path: '/pages/article/article?cat=' + JSON.stringify(that.data.postItem), // 默认是当前页面，必须是以‘/’开头的完整路径
       // imgUrl: '', //自定义图片路径，可以是本地文件路径、代码包文件路径或者网络图片路径，支持PNG及JPG，不传入 imageUrl 则使用默认截图。显示图片长宽比是 5:4
       success: function(res) {　
         wx.showToast({
