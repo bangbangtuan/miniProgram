@@ -223,7 +223,11 @@ Page({
                     postItem: testObj,
                     t_length: 0
                   })
+                
                   var url = 'https://api.bangneedu.com/punchTheClock?current=1&size=20';
+                  that.setData({
+                    pageNum: 1
+                  })
                   that.getDakaList(url);
                   wx.showToast({
                     title: '打卡成功',
