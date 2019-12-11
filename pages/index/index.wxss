@@ -46,6 +46,7 @@
 .author-date-container {
   display: flex;
   flex-direction: row;
+  align-items: center;
 }
 
 .author-date-container image {
@@ -129,9 +130,10 @@ checkbox .wx-checkbox-input:before {
   width: 100%;
 }
 .classify{
+  width: 600rpx;
   display: flex;
   flex-wrap: wrap;
-  float: right;
+  margin-left: 20rpx;
   margin-bottom: 20rpx;
 }
 radio{
@@ -149,9 +151,10 @@ radio .wx-radio-input {
 
 .radio-group .radio {
   padding: 0 10rpx;
+  display:block;
 }
  .divider{
-    height: 1rpx;
+  height: 1rpx;
   width: 96%;
   border-top: 4rpx solid #999;
   margin: 20rpx 0;
@@ -173,4 +176,7 @@ radio .wx-radio-input {
  }
  .share::after{
    border:none;
+ }
+ .tag {
+   color: #ff6e37;
  }

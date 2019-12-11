@@ -25,9 +25,6 @@ Page({
    */
   onLoad: function (options) {
    
-    // var url = 'https://api.bangneedu.com/punchTheClock?current=1&size=20';
-    // this.getDakaList(url);
-    console.log('onload----')
   },
 
   bindText: function (e) {
@@ -93,32 +90,55 @@ Page({
   },
   getAllLike() {
     var that = this;
-    var url = 'https://api.bangneedu.com/punchTheClock/allLike';
     wx.request({
-      url: url,
+      url: 'https://api.bangneedu.com/user',
       method: 'GET',
       header: {
-        "Content-Type": "application/json",
+        "content-type": "application/json",
         "Authorization": "Bearer " + wx.getStorageSync('token')
       },
       success: function (res) {
-        if(res.data.status == 200){
-          // console.log(res.data.data);
-          // that.data.myFavor = res.data.data;
-          var likeCollection = {};
-          res.data.data.forEach(item => {
-            likeCollection[item.punchTheClockId] = true;
-          })
-          wx.setStorageSync('like_collection1', likeCollection);
+        console.log(res.data.data);
+        if (res.data.status == 401) {
+          wx.showToast({
+            title: '请登陆后进行打卡',
+            icon: 'none',
+            duration: 1000
+          });
           var url = 'https://api.bangneedu.com/punchTheClock?current=1&size=20';
           that.getDakaList(url);
+        } else if (res.data.status == 200 && res.data.data) {
+          wx.request({
+            url: 'https://api.bangneedu.com/punchTheClock/allLike',
+            method: 'GET',
+            header: {
+              "Content-Type": "application/json",
+              "Authorization": "Bearer " + wx.getStorageSync('token')
+            },
+            success: function (res) {
+              if (res.data.status == 200) {
+                // console.log(res.data.data);
+                // that.data.myFavor = res.data.data;
+                var likeCollection = {};
+                res.data.data.forEach(item => {
+                  likeCollection[item.punchTheClockId] = true;
+                })
+                wx.setStorageSync('like_collection1', likeCollection);
+                var url = 'https://api.bangneedu.com/punchTheClock?current=1&size=20';
+                that.getDakaList(url);
+              }
+
+            },
+            fail: function (err) {
+              console.log(err);
+            }
+          });
         }
-        
       },
       fail: function (err) {
         console.log(err);
       }
-    });
+    })    
   },
   handleTap: function (e) {
     console.log('999')
@@ -140,9 +160,9 @@ Page({
     });
   },
 
-  getClassify: function () {
+  getTags: function () {
     var that = this;
-    var url = 'https://api.bangneedu.com/classify';
+    var url = 'https://api.bangneedu.com/tag';
     wx.request({
       url: url,
       method: 'GET',
@@ -152,7 +172,7 @@ Page({
       success: function (res) {
         console.log(res.data.data);
         that.setData({
-          classifies: res.data.data
+          tags: res.data.data.records
         })
       },
       fail: function (err) {
@@ -224,6 +244,9 @@ Page({
                     t_length: 0
                   })
                   var url = 'https://api.bangneedu.com/punchTheClock?current=1&size=20';
+                  that.setData({
+                    pageNum: 1
+                  })
                   that.getDakaList(url);
                   wx.showToast({
                     title: '打卡成功',
@@ -255,6 +278,11 @@ Page({
                     icon: 'none',
                     duration: 1000
                   });
+                  that.setData({
+                    isClickable: true,
+                    isEmpty: true,
+                    t_length: 0
+                  })
                   setTimeout(function () {
                     wx.navigateTo({
                       url: '/pages/login/login',
@@ -493,12 +521,11 @@ Page({
         console.log(that.data.isEmpty)
         if (!that.data.isEmpty) {
           console.log('1111')
-          totalPosts = that.data.postList.concat(res.data.data.records);
+          // totalPosts = that.data.postList.concat(res.data.data.records);
         } else {
           totalPosts = res.data.data.records;
           that.data.isEmpty = false;
         }
-        console.log(totalPosts)
         var likeCollection = wx.getStorageSync('like_collection1');
         if (likeCollection) {
           console.log(totalPosts.length - 1)
@@ -516,19 +543,16 @@ Page({
               method: 'GET',
               header: {
                 "content-type": "application/json",
-                "Authorization": "Bearer " + wx.getStorageSync('token')
+                // "Authorization": "Bearer " + wx.getStorageSync('token')
               },
               success: function (res) {
-                // console.log(res.data.data[0]);
+                console.log(res.data);
                 if (res.data.data[0]) {
                   console.log('存在')
                   console.log(res.data.data)
                   item.comm_name = res.data.data[0].name + ": ";
                   item.comment = res.data.data[0].content;
                 }
-                that.setData({
-                  postList: totalPosts,
-                })
                 wx.hideNavigationBarLoading();
                 wx.stopPullDownRefresh();
                 if (res.data.status == 401) {
@@ -537,12 +561,6 @@ Page({
                     icon: 'none',
                     duration: 1000
                   });
-                  setTimeout(function () {
-                    wx.navigateTo({
-                      url: '/pages/login/login',
-                    })
-                  }, 1000)
-
                 }
               },
               fail: function (err) {
@@ -551,8 +569,10 @@ Page({
             })
           })
         }
+        console.log(totalPosts)
         that.setData({
-          pageNum: that.data.pageNum + 1
+          pageNum: that.data.pageNum + 1,
+          postList: totalPosts,
         })
       },
       fail: function (err) {
@@ -580,12 +600,6 @@ Page({
               icon: 'none',
               duration: 1000
             });
-            setTimeout(function () {
-              wx.navigateTo({
-                url: '/pages/login/login',
-              })
-            }, 1000)
-
           }
         },
         fail: function (err) {
@@ -601,13 +615,14 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    console.log('onready----')
+
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    this.getTags();
     var that = this;
     var token = wx.getStorageSync('token');
     if(token){
@@ -644,21 +659,15 @@ Page({
         })
       } else if (this.data.isEmpty) {
         this.getAllLike();
-        // var url = 'https://api.bangneedu.com/punchTheClock?current=1&size=20';
-        // this.getDakaList(url);
       }
-      this.getClassify();
     }else{
       wx.showToast({
-        title: '登陆过期，请重新登陆',
+        title: '未登陆状态登陆',
         icon: 'none',
         duration: 1000
       });
-      setTimeout(function () {
-        wx.navigateTo({
-          url: '/pages/login/login',
-        })
-      }, 3000)
+      var url = 'https://api.bangneedu.com/punchTheClock?current=1&size=20';
+      this.getDakaList(url);
     }
    
   },
@@ -704,14 +713,12 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function (res) {
-    console.log(res)
     var postItem = res.target.dataset.value;
+    console.log(postItem)
     postItem.headPortrait = encodeURIComponent(postItem.headPortrait);
     var that = this;
     var shareObj = {
-      // title: "棒棒团",
-      path: '/pages/article/article?cat=' + JSON.stringify(postItem), // 默认是当前页面，必须是以‘/’开头的完整路径
-      // imgUrl: '', //自定义图片路径，可以是本地文件路径、代码包文件路径或者网络图片路径，支持PNG及JPG，不传入 imageUrl 则使用默认截图。显示图片长宽比是 5:4
+      path: '/pages/article/article?cat=' + JSON.stringify(postItem),
       success: function (res) {
         wx.showToast({
           title: '分享成功',

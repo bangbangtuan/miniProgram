@@ -57,8 +57,8 @@
 			"list": [
 				{
 					"id": 0,
-					"name": "pages/login/login",
-					"pathName": "pages/login/login",
+					"name": "pages/profile/profile",
+					"pathName": "pages/profile/profile",
 					"query": "",
 					"scene": null
 				},

@@ -266,12 +266,6 @@ Page({
             icon: 'none',
             duration: 1000
           });
-          setTimeout(function() {
-            wx.navigateTo({
-              url: '/pages/login/login',
-            })
-          }, 1000)
-
         }
       },
       fail: function(err) {

@@ -49,6 +49,7 @@ Page({
                 "Authorization": "Bearer " + wx.getStorageSync('token')
               },
               data: {
+                "id": that.data.userInfo.id,
                 "headPortrait": img
               },
               success: function (res) {

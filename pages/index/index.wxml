@@ -9,10 +9,7 @@
       <view class="classify-box">
         <view>点击选择打卡类别</view>
         <radio-group class="classify" bindchange="radioChange" name="type">
-          <radio class="{{type=='前端' ? 'radioActive':''}}" value="前端">#前端#</radio>
-          <radio class="{{type=='Java' ? 'radioActive':''}}" value="Java">#Java#</radio>
-          <radio class="{{type=='产品经理' ? 'radioActive':''}}" value="产品经理">#产品经理#</radio>
-          <radio class="{{type=='Python' ? 'radioActive':''}}" value="Python">#Python#</radio>
+          <radio class="radio {{type==item.tag ? 'radioActive':''}}" value="{{item.tag}}" wx:for="{{tags}}" wx:key='id'>#{{item.tag}}#</radio>
         </radio-group>
       </view>
       <poster id="poster" hide-loading="{{false}}" preload="{{false}}" config="{{posterConfig}}" bind:success="onPosterSuccess" bind:fail="onPosterFail" class="poster">
@@ -22,7 +19,7 @@
     </form>
   </view>
   <view class='posts' wx:if="{{postList}}">
-    <view class='post' wx:for="{{postList}}" wx:key="index" >
+    <view class='post' wx:for="{{postList}}" wx:key="index">
       <view class='head-container'>
         <view class='author-date-container'>
           <image src='{{item.headPortrait}}'></image>
@@ -36,7 +33,7 @@
         </view>
       </view>
       <view class='comment-content'>
-        <text wx:if='{{item.type}}'>#{{item.type}}#</text>
+        <text wx:if='{{item.type}}' class="tag">#{{item.type}}#</text>
         <text>  {{item.content}}</text>
       </view>
       <view class='comment-like'>
@@ -45,19 +42,20 @@
           <image wx:else src='/images/icon/like.png'></image>
           <text>{{item.praiseNumber}}</text>
         </view>
-         <view class="likeItem" bindtap='handleTap' data-index='{{index}}' data-type='{{item}}'>
+        <view class="likeItem" bindtap='handleTap' data-index='{{index}}' data-type='{{item}}'>
           <image src='/images/icon/chat.png'></image>
           <text>{{item.commentNumber}}</text>
         </view>
-       <button class="share" open-type="share" data-value="{{item}}">
-        <image src='/images/icon/share1.png'></image>
-       </button>
+        <button class="share" open-type="share" data-value="{{item}}">
+          <image src='/images/icon/share1.png'></image>
+        </button>
       </view>
       <block wx-if="{{item.commentNumber>0}}">
         <view class="divider"></view>
         <view class="comment-desc">{{item.comm_name}}{{item.comment}}</view>
       </block>
-      <view class="more" bindtap='handleTap' data-index='{{index}}' data-type='{{item}}'><text class="more_txt">点击查看更多</text>>></view>
+      <view class="more" bindtap='handleTap' data-index='{{index}}' data-type='{{item}}'>
+        <text class="more_txt">点击查看更多</text>>></view>
     </view>
   </view>
 </view>
