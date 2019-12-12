@@ -16,10 +16,10 @@
       </view>
     </view>
     <view class='circle-image'>
-      <!-- <view>
+      <view>
         <image wx:if='{{liked}}' catchtap="onLikeTap" src='/images/icon/likedact.png'></image>
         <image wx:else catchtap="onLikeTap" src='/images/icon/liked.png'></image>
-      </view> -->
+      </view>
       <view>
         <image catchtap='openActionSheet' class='share-img' src='/images/icon/share.png'></image>
       </view>
