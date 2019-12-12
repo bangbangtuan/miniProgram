@@ -53,7 +53,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 1,
+			"current": -1,
 			"list": [
 				{
 					"id": 0,
@@ -67,6 +67,13 @@
 					"name": "pages/project/joinTeam/joinTeam",
 					"pathName": "pages/project/joinTeam/joinTeam",
 					"query": "id=1181749346442416130",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/index/index",
+					"pathName": "pages/index/index",
+					"query": "",
 					"scene": null
 				}
 			]

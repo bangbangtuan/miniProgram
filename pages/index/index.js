@@ -521,7 +521,7 @@ Page({
         console.log(that.data.isEmpty)
         if (!that.data.isEmpty) {
           console.log('1111')
-          // totalPosts = that.data.postList.concat(res.data.data.records);
+          totalPosts = that.data.postList.concat(res.data.data.records);
         } else {
           totalPosts = res.data.data.records;
           that.data.isEmpty = false;
@@ -622,6 +622,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    this.setData({
+      isEmpty: true
+    })
     this.getTags();
     var that = this;
     var token = wx.getStorageSync('token');
