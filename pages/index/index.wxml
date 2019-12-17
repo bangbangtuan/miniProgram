@@ -4,7 +4,29 @@
     <form bindsubmit="bindFormSubmit">
       <view class="daka-area">
         <textarea name="textarea" value="{{daka}}" maxlength='255' bindinput="bindText" />
-        <text class="text-count">{{t_length}}/255</text>
+        <view class="uploader">
+          <view class="upload__bd">
+            <text class="text-count">{{t_length}}/255</text>
+            <view class="upload_files" id="uploaderFiles">
+                <view class="uploader_file" bindtap="previewImage" id="{{image[0]}}" wx:if="{{image[0]}}">
+                  <image class="uploader_img" src="{{image[0]}}" mode="aspectFill" />
+                  <!-- <view class="delete"> -->
+                    <image src="/images/icon/del_orange.png" mode="aspectFill" class="del_img" catchtap="deleteImg"></image>
+                  <!-- </view> -->
+                  
+                </view>
+                <view class="upload_input" bindtap="chooseImage" wx:else>
+                  <image src="/images/icon/uploader.png" mode="aspectFill"></image>
+                </view>
+            </view>
+            </view>
+            <!-- <view class="uploader_box">
+                <view class="upload_input" bindtap="chooseImage">
+                  <image src="/images/icon/uploader.png" mode="aspectFill"></image>
+                </view>
+            </view> -->
+          </view>
+        <!-- </view> -->
       </view>
       <view class="classify-box">
         <view>点击选择打卡类别</view>
@@ -26,6 +48,7 @@
           <view class='auto-date'>
             <text>{{item.name}}</text>
             <text class='date'>{{item.createTime}}</text>
+            
           </view>
         </view>
         <view class='count'>
@@ -35,6 +58,9 @@
       <view class='comment-content'>
         <text wx:if='{{item.type}}' class="tag">#{{item.type}}#</text>
         <text>  {{item.content}}</text>
+        <view wx:if='{{item.image}}' class="daka_img" bindtap='handleTap' data-index='{{index}}' data-type='{{item}}'>
+         <image src='{{item.image}}' mode="aspectFill" ></image> 
+        </view>
       </view>
       <view class='comment-like'>
         <view class="likeItem" catchtap="likeTap" data-id="{{item.id}}" data-index="{{index}}" data-liked="{{item.liked}}">

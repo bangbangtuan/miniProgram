@@ -1,8 +1,9 @@
 .daka {
-  margin-top: 50rpx;
+  margin: 50rpx 60rpx 0;
   display: flex;
   flex-direction: column;
   align-items: center;
+ 
 }
 
 .head {
@@ -13,8 +14,7 @@
 }
 
 .daka textarea {
-  border: 2rpx solid #e7e7e7;
-  border-radius: 5rpx;
+  
   padding: 20rpx;
   font-size: 16px;
 }
@@ -76,7 +76,15 @@
 .count text {
   font-size: 14px;
 }
-
+.daka_img{
+  width:100%;
+  height:300rpx;
+  padding:20rpx 0;
+}
+.daka_img image{
+  width:100%;
+  height:100%;
+}
 .comment-like {
   /* margin-left: 395rpx; */
   display: flex;
@@ -110,22 +118,25 @@ checkbox .wx-checkbox-input {
 checkbox .wx-checkbox-input:before {
   display: none;
 }
-
+textarea{width:auto;}
 .daka-area {
   position: relative;
+  margin:0 60rpx;
+   border: 2rpx solid #e7e7e7;
+  border-radius: 5rpx;
 }
 
 .text-count {
   position: absolute;
   right: 20rpx;
-  bottom: 10rpx;
+  top: 50rpx;
   color: #999;
   font-size: 14px;
 }
 .classify-box {
   /* display: flex; */
   font-size: 14px;
-  margin: 20rpx 0;
+  margin: 20rpx 60rpx;
   color: #666;
   width: 100%;
 }
@@ -180,3 +191,42 @@ radio .wx-radio-input {
  .tag {
    color: #ff6e37;
  }
+  .upload__bd{
+   position:relative;
+   display:flex;
+ }
+  .upload_files{
+   width:100%;
+   display: flex;
+   flex-wrap:wrap;
+   margin:10rpx;
+ }
+  .uploader_file{
+    width:20%;
+    height:100rpx;
+    padding-right:6rpx; 
+    position:relative;
+ }
+ .uploader_img{
+      width:100%;
+     height:100%;
+  }
+  .del_img{
+    width:30rpx;
+    height:30rpx;
+    position:absolute;
+    right:0rpx;
+    top:-10rpx;
+  }
+
+ .upload_input{
+   width:20%;
+   height:100rpx;
+ }
+ .upload_input image{
+   width:100%;
+   height:100%;
+   /* height:100%; */
+ }
+
+

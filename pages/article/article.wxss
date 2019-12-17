@@ -64,10 +64,13 @@
 }
 
 .content {
-  margin: 80rpx 40rpx;
+  margin: 80rpx 40rpx 20rpx;
   color: #333;
 }
-
+.cont_img{
+  margin-top:20rpx;
+  width:100%;
+}
 .comments {
   margin: 40rpx auto;
   color: #666;
