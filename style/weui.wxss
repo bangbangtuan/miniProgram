@@ -396,7 +396,6 @@ icon {
   margin-bottom: -4px;
   margin-right: -9px;
   overflow: hidden;
-  position:relative;
 }
 .weui-uploader__file {
   float: left;
@@ -405,8 +404,8 @@ icon {
 }
 .weui-uploader__img {
   display: block;
-  width: 40px;
-  height: 40px;
+  width: 79px;
+  height: 79px;
 }
 .weui-uploader__file_status {
   position: relative;
@@ -428,16 +427,14 @@ icon {
           transform: translate(-50%, -50%);
   color: #FFFFFF;
 }
-.weui-uploader{
-  margin:0 20rpx;
-}
+
 .weui-uploader__input-box {
   float: left;
   position: relative;
   margin-right: 9px;
   margin-bottom: 9px;
-  width: 40px;
-  height: 40px;
+  width: 77px;
+  height: 77px;
   border: 1px solid #D9D9D9;
 }
 .weui-uploader__input-box:before,

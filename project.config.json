@@ -23,7 +23,7 @@
 	"compileType": "miniprogram",
 	"libVersion": "2.6.6",
 	"appid": "wx07715499b1dda6f3",
-	"projectname": "bangbangtuan",
+	"projectname": "miniProgram",
 	"debugOptions": {
 		"hidedInDevtools": []
 	},

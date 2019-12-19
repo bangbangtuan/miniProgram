@@ -54,7 +54,6 @@ Page({
     } else {
       num = parseInt(that.data.postList[index].praiseNumber) - 1
     }
-    console.log(that.data.postList[index].liked)
     var like_str = 'postList[' + index + '].liked'
     console.log(likeCollected)
     console.log(that.data.postList[index].liked)
@@ -174,8 +173,6 @@ Page({
             },
             success: function (res) {
               if (res.data.status == 200) {
-                // console.log(res.data.data);
-                // that.data.myFavor = res.data.data;
                 var likeCollection = {};
                 res.data.data.forEach(item => {
                   likeCollection[item.punchTheClockId] = true;
@@ -198,7 +195,6 @@ Page({
     })    
   },
   handleTap: function (e) {
-    console.log('999')
     console.log(e.currentTarget.dataset);
     var postItem = e.currentTarget.dataset.type;
     postItem.headPortrait = encodeURIComponent(postItem.headPortrait);
@@ -584,7 +580,6 @@ Page({
         var totalPosts = [];
         console.log(that.data.isEmpty)
         if (!that.data.isEmpty) {
-          console.log('1111')
           totalPosts = that.data.postList.concat(res.data.data.records);
         } else {
           totalPosts = res.data.data.records;
@@ -592,8 +587,6 @@ Page({
         }
         var likeCollection = wx.getStorageSync('like_collection1');
         if (likeCollection) {
-          console.log(totalPosts.length - 1)
-          console.log(totalPosts.slice(totalPosts.length - 20, totalPosts.length))
           let list = totalPosts.slice(totalPosts.length - 20, totalPosts.length);
           list.forEach(item => {
             item.liked = "";
@@ -612,7 +605,6 @@ Page({
               success: function (res) {
                 console.log(res.data);
                 if (res.data.data[0]) {
-                  console.log('存在')
                   console.log(res.data.data)
                   item.comm_name = res.data.data[0].name + ": ";
                   item.comment = res.data.data[0].content;
@@ -633,7 +625,6 @@ Page({
             })
           })
         }
-        console.log('totalpost-----')
         console.log(totalPosts)
         that.setData({
           pageNum: that.data.pageNum + 1,
@@ -657,7 +648,6 @@ Page({
           "Authorization": "Bearer " + wx.getStorageSync('token')
         },
         success: function (res) {
-          // console.log(res.data.data[0]);
           resolve(res.data.data)
           if (res.data.status == 401) {
             wx.showToast({
@@ -687,15 +677,14 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.setData({
-      isEmpty: true
-    })
+    // this.setData({
+    //   isEmpty: true
+    // })
     this.getTags();
     var that = this;
     var token = wx.getStorageSync('token');
     if(token){
       if (this.data.isDetail) {
-        console.log('从详情返回');
         this.data.isDetail = false;
         wx.request({
           url: 'https://api.bangneedu.com/punchTheClock/' + that.data.saveId.id,
@@ -734,8 +723,11 @@ Page({
         icon: 'none',
         duration: 1000
       });
-      var url = 'https://api.bangneedu.com/punchTheClock?current=1&size=20';
-      this.getDakaList(url);
+      if (that.data.isEmpty){
+        var url = 'https://api.bangneedu.com/punchTheClock?current=1&size=20';
+        this.getDakaList(url);
+      }
+      
     }
    
   },
