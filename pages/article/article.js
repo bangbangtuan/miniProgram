@@ -222,6 +222,10 @@ Page({
   onLoad: function(options) {
     var postItem = JSON.parse(options.cat);
     postItem.headPortrait = decodeURIComponent(postItem.headPortrait);
+    if (postItem.image){
+      postItem.image = decodeURIComponent(postItem.image);
+    }
+    
     console.log(postItem);
 
     this.setData({
@@ -245,7 +249,13 @@ Page({
       wx.setStorageSync('like_collection', likeCollection)
     }
   },
-
+  previewImage: function (e) {
+    console.log(e)
+    wx.previewImage({
+      current: e.currentTarget.id, // 当前显示图片的http链接
+      urls: [this.data.postItem.image]// 需要预览的图片http链接列表
+    })
+  },
   getComments: function() {
     var that = this;
     wx.request({

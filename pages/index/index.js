@@ -7,6 +7,7 @@ Page({
   data: {
     postList: [],
     postItem: {},
+    image: [],
     daka: '',
     pageNum: 1,
     myFavor: [],
@@ -53,7 +54,6 @@ Page({
     } else {
       num = parseInt(that.data.postList[index].praiseNumber) - 1
     }
-    console.log(that.data.postList[index].liked)
     var like_str = 'postList[' + index + '].liked'
     console.log(likeCollected)
     console.log(that.data.postList[index].liked)
@@ -88,6 +88,62 @@ Page({
       },
     })
   },
+  chooseImage: function (e) {
+    var that = this;
+    wx.chooseImage({
+      count:1,
+      sizeType: ['original', 'compressed'], 
+      sourceType: ['album', 'camera'],
+      success: function (res) {
+        // that.setData({
+        //   image: res.tempFilePaths
+        // });
+        let tempFilePath = res.tempFilePaths;
+      
+          wx.uploadFile({
+            url: 'https://api.bangneedu.com/upload', 
+            header: {
+              "content-type": "multipart/form-data",
+              "Authorization": "Bearer " + wx.getStorageSync('token')
+            },
+            filePath: tempFilePath[0],
+            name: 'file',
+            success(res) {
+             let data=JSON.parse(res.data)
+              if(data.status == 401){
+                  wx.showToast({
+                    title: '请登陆后上传图片',
+                    icon:'none',
+                    duration:1000
+                  })
+              }
+              if(data.status == 200){
+                let img = data.data;
+                let arr = [];
+                arr.push(img);
+                that.setData({
+                  image: arr
+                });
+              }
+            }
+          })
+       
+       
+      }
+    })
+  },
+  previewImage: function (e) {
+    console.log(e)
+    wx.previewImage({
+      current: e.currentTarget.id, // 当前显示图片的http链接
+      urls: this.data.image // 需要预览的图片http链接列表
+    })
+  },
+  deleteImg(){
+    this.setData({
+      image:''
+    })
+  },
   getAllLike() {
     var that = this;
     wx.request({
@@ -117,8 +173,6 @@ Page({
             },
             success: function (res) {
               if (res.data.status == 200) {
-                // console.log(res.data.data);
-                // that.data.myFavor = res.data.data;
                 var likeCollection = {};
                 res.data.data.forEach(item => {
                   likeCollection[item.punchTheClockId] = true;
@@ -141,13 +195,16 @@ Page({
     })    
   },
   handleTap: function (e) {
-    console.log('999')
     console.log(e.currentTarget.dataset);
     var postItem = e.currentTarget.dataset.type;
     postItem.headPortrait = encodeURIComponent(postItem.headPortrait);
+    if (postItem.image){
+      postItem.image = encodeURIComponent(postItem.image);
+    }
     this.data.isDetail = true;
     this.data.saveId.id = postItem.id;
     this.data.saveId.index = e.currentTarget.dataset.index;
+    console.log(postItem)
     wx.navigateTo({
       url: '/pages/article/article?cat=' + JSON.stringify(postItem),
     })
@@ -184,6 +241,7 @@ Page({
   bindFormSubmit: function (e) {
     var that = this;
     console.log(e.detail.value);
+    let image=that.data.image[0];
     that.setData({
       daka: e.detail.value.textarea,
       type: e.detail.value.type
@@ -200,6 +258,7 @@ Page({
         that.setData({
           daka: '',
           type: '',
+          image:[],
           isClickable: false
         });
         wx.cloud.init()
@@ -227,7 +286,8 @@ Page({
               method: 'POST',
               data: {
                 "content": e.detail.value.textarea,
-                "type": e.detail.value.type
+                "type": e.detail.value.type,
+                "image": image
               },
               header: {
                 "content-type": "application/json",
@@ -520,7 +580,6 @@ Page({
         var totalPosts = [];
         console.log(that.data.isEmpty)
         if (!that.data.isEmpty) {
-          console.log('1111')
           totalPosts = that.data.postList.concat(res.data.data.records);
         } else {
           totalPosts = res.data.data.records;
@@ -528,8 +587,6 @@ Page({
         }
         var likeCollection = wx.getStorageSync('like_collection1');
         if (likeCollection) {
-          console.log(totalPosts.length - 1)
-          console.log(totalPosts.slice(totalPosts.length - 20, totalPosts.length))
           let list = totalPosts.slice(totalPosts.length - 20, totalPosts.length);
           list.forEach(item => {
             item.liked = "";
@@ -548,7 +605,6 @@ Page({
               success: function (res) {
                 console.log(res.data);
                 if (res.data.data[0]) {
-                  console.log('存在')
                   console.log(res.data.data)
                   item.comm_name = res.data.data[0].name + ": ";
                   item.comment = res.data.data[0].content;
@@ -592,7 +648,6 @@ Page({
           "Authorization": "Bearer " + wx.getStorageSync('token')
         },
         success: function (res) {
-          // console.log(res.data.data[0]);
           resolve(res.data.data)
           if (res.data.status == 401) {
             wx.showToast({
@@ -622,15 +677,14 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.setData({
-      isEmpty: true
-    })
+    // this.setData({
+    //   isEmpty: true
+    // })
     this.getTags();
     var that = this;
     var token = wx.getStorageSync('token');
     if(token){
       if (this.data.isDetail) {
-        console.log('从详情返回');
         this.data.isDetail = false;
         wx.request({
           url: 'https://api.bangneedu.com/punchTheClock/' + that.data.saveId.id,
@@ -669,8 +723,11 @@ Page({
         icon: 'none',
         duration: 1000
       });
-      var url = 'https://api.bangneedu.com/punchTheClock?current=1&size=20';
-      this.getDakaList(url);
+      if (that.data.isEmpty){
+        var url = 'https://api.bangneedu.com/punchTheClock?current=1&size=20';
+        this.getDakaList(url);
+      }
+      
     }
    
   },
