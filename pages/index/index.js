@@ -303,6 +303,7 @@ Page({
                     postItem: testObj,
                     t_length: 0
                   })
+                
                   var url = 'https://api.bangneedu.com/punchTheClock?current=1&size=20';
                   that.setData({
                     pageNum: 1
