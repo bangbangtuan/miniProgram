@@ -70,9 +70,9 @@
 					"scene": null
 				},
 				{
-					"id": -1,
-					"name": "pages/index/index",
-					"pathName": "pages/index/index",
+					"id": 2,
+					"name": "pages/project/project",
+					"pathName": "pages/project/project",
 					"query": "",
 					"scene": null
 				}

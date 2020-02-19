@@ -40,6 +40,7 @@
     <view class='divider'></view>
     <view class='content'>
       <text>{{postItem.content}}</text>
+       <image wx:if="{{postItem.image}}" src="{{postItem.image}}" mode="aspectFill" class="cont_img" bindtap="previewImage" id="{{postItem.image}}"></image> 
     </view>
     <view class='comments' id="chat">
       <view class='head'>评论列表</view>

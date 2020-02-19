@@ -33,7 +33,6 @@ Page({
                 projects: res.data.data.records,
                 pages: parseInt(res.data.data.pages)
               })
-              
             },
             fail: function (err) {
               console.log(err);
