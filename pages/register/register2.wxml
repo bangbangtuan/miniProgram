@@ -1,0 +1,36 @@
+<view class='box'>
+  <view class='header'>注册</view>
+  <view class='form'>
+    <form bindsubmit="bindFormSubmit">
+      <input class='input' name="username" placeholder='请输入用户名（不能是汉字）' onkeyup="value=value.replace(/[\u4E00-\u9FA5]/g,'')" value=""></input>
+      <view class='pass'>
+        <input name="password" placeholder='输入6-20位密码'></input>
+        <image src='/images/icon/lock.png'></image>
+      </view>
+      <view class='pass'>
+        <input name="password2" placeholder='再次输入密码'></input>
+        <image src='/images/icon/lock.png'></image>
+      </view>
+      <input class='input' name="weixin" placeholder='请输入微信号'></input>
+      <view class='radio-container'>
+        <view>性别</view>
+        <radio-group class="radio-group" bindchange="radioChange" name="sex">
+          <label class="radio" >
+            <radio value="male" checked=""/>
+            <image src='/images/icon/male.png'></image>
+          </label>
+          <label class="radio" >
+            <radio value="female" checked=""/>
+            <image src='/images/icon/female.png'></image>
+          </label>
+        </radio-group>
+      </view>
+      <input class='input' name="phone" placeholder='请输入手机号' bindblur="savePhoneNumber" bindconfirm="savePhoneNumber"></input>
+      <view class='yanzhengma'>
+        <input name="captcha" placeholder="请输入验证码" />
+        <view class='code' bindtap="getValidCode">{{count!=60?count+' s':'获取验证码'}}</view>
+      </view>
+      <button form-type="submit"> 注册 </button>
+    </form>
+  </view>
+</view>
