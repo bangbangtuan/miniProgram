@@ -1,0 +1,38 @@
+<view class="container">
+  <view class='info'>
+    <view class='header'>我</view>
+    <view wx:if="{{userInfo}}">
+      <view class='user'>
+        <view class="{{userInfo.headPortrait ? '' : 'upload'}}" bindtap='navigate'>
+          <image src='{{userInfo.headPortrait}}'></image>
+        </view>
+        <text>{{userInfo.username}}</text>
+      </view>
+      <view class='self'>
+        <view>微信号 </view>
+        <text>{{userInfo.weixin}}</text>
+      </view>
+      <view class='self'>
+        <view>个人描述</view>
+        <text class='intro'>{{userInfo.description}}</text>
+      </view>
+    </view>
+    <view wx:else class="no-user">
+      <view class="upload">
+        <image src='/images/icon/no-author.png'></image>
+      </view>
+      <view bindtap="login" class="tap-login">登录/注册</view>
+    </view>
+  </view>
+  <view class='divider'></view>
+  <view class='buttons'>
+    <navigator url="/pages/message/message">
+      <image src="/images/icon/message.png"></image>
+      <text>消息</text>
+    </navigator>
+    <navigator url="/pages/user_daka/user_daka">
+      <image src="/images/icon/daka.png"></image>
+      <text>打卡</text>
+    </navigator>
+  </view>
+</view>

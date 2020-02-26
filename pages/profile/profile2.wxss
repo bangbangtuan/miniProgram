@@ -1,0 +1,92 @@
+.container {
+  display: flex;
+  flex-direction: column;
+}
+.info {
+  margin: 50rpx 40rpx 30rpx;
+  font-size: 16px;
+}
+.header {
+  font-size: 28px;
+  color: #333;
+  margin: 10rpx;
+}
+.user {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.user image {
+  width: 180rpx;
+  height: 180rpx;
+  border-radius: 50%;
+}
+.upload image {
+  width: 180rpx;
+  height: 180rpx;
+  border-radius: 50%;
+}
+.user text {
+  margin: 10rpx;
+  font-weight: 600;
+}
+.self {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 20rpx auto;
+}
+.self view {
+  width: 25%;
+  vertical-align: middle;
+  display: flex;
+  align-items: center;
+}
+.self text {
+  display: inline-block;
+  width: 73%;
+  font-size: 13px;
+  color: #666;
+}
+.self .intro {
+  border: 1rpx dashed #666;
+  padding: 15rpx;
+}
+.no-user {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.no-user .tap-login {
+  margin: 20rpx 10rpx;
+  color: #666;
+  font-weight: 500;
+  cursor: pointer;
+  border: 1px dashed #666;
+  padding: 10rpx 30rpx;
+}
+.divider {
+  height: 2rpx;
+  width: 100%;
+  border-bottom: 2rpx solid #dadada;
+}
+.buttons {
+  display: flex;
+  flex-direction: row;
+  margin: 50rpx;
+}
+.buttons navigator {
+  height: 300rpx;
+  width: 200rpx;
+  margin: auto 60rpx;
+  box-shadow: 0rpx 6rpx 10rpx 5rpx #dbdada;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.buttons image {
+  width: 80rpx;
+  height: 80rpx;
+  margin: 20rpx;
+}
