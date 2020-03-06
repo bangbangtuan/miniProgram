@@ -1,0 +1,11 @@
+<view class="tips">
+  <view class="title">
+    组队须知:
+  </view>
+  <view class="tips1">
+    1.CP组队是概率事件，总能碰到自己合适的.
+  </view>
+  <view class="tips2">
+    2.组队之后请移交系统分配进行监督分享学习.
+  </view>
+</view>

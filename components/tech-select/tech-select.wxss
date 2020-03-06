@@ -1,0 +1,90 @@
+.technologic-wrapper {
+	width: 710rpx;
+	margin-bottom: 47rpx;
+}
+
+.techno-title {
+	width: 150rpx;
+	height: 31rpx;
+	font-family: MicrosoftYaHei-Bold;
+	font-size: 30rpx;
+	font-weight: normal;
+	font-stretch: normal;
+	line-height: 31rpx;
+	letter-spacing: 0rpx;
+	color: #20222e;
+	margin-bottom: 39rpx;
+	margin-top: 48rpx;
+}
+
+.font-content, .backend-content{
+	display: flex;
+}
+
+.font-wrapper, .backend-wrapper {
+	display: flex;
+	justify-content: center;
+	width: 100rpx;
+	margin-right: 30rpx;
+	flex-wrap: wrap;
+	align-items: center;
+}
+
+.font-sign, .backend-sign {
+	width: 100rpx;
+	height: 100rpx;
+	border: solid 1rpx #dee1e6;
+	border-radius: 50rpx;
+}
+
+.sign {
+	width: 40rpx;
+	font-family: MicrosoftYaHei;
+	font-size: 20rpx;
+	font-weight: normal;
+	font-stretch: normal;
+	letter-spacing: 0rpx;
+	color: #000000;
+}
+
+.selection-wrapper {
+	flex: 1;
+}
+
+.font-selection, .backend-seletion {
+	display: inline-block;
+	width: 180rpx;
+	height: 60rpx;
+	border-radius: 30rpx;
+	border: solid 1rpx #dddde0;
+	font-family: ArialMT;
+	font-size: 24rpx;
+	font-weight: normal;
+	font-stretch: normal;
+	line-height: 60rpx;
+	letter-spacing: 0rpx;
+	color: #444444;
+	margin-right: 5rpx;
+	margin-bottom: 20rpx;
+	text-align: center;
+}
+
+.selected {
+	display: inline-block;
+	width: 180rpx;
+	height: 60rpx;
+	border-radius: 30rpx;
+	border: solid 1rpx #dddde0;
+	font-family: ArialMT;
+	font-size: 24rpx;
+	font-weight: normal;
+	font-stretch: normal;
+	line-height: 60rpx;
+	letter-spacing: 0rpx;
+	color: #ffffff;
+	margin-right: 5rpx;
+	margin-bottom: 20rpx;
+	text-align: center;
+	width: 180rpx;
+	background-color: #4f4fe0;
+}

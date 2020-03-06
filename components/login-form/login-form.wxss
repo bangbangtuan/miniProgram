@@ -1,0 +1,173 @@
+.login-wrapper {
+  width: 710rpx;
+	height: 987rpx;
+	background-color: #ffffff;
+	box-shadow: 0rpx 25rpx 60rpx 0rpx		rgba(4, 5, 9, 0.1);
+	border-radius: 20rpx;
+  margin-top: 96rpx;
+}
+
+
+
+.title  {
+  padding-top: 46rpx;
+  margin-left: 38rpx;
+  margin-bottom: 59rpx;
+  height: 47rpx;
+  font-family: MicrosoftYaHei;
+  font-size: 48rpx;
+  font-weight: bold;
+  font-stretch: normal;
+  line-height: 47rpx;
+  letter-spacing: 0rpx;
+  color: #000000;
+}
+
+.type{
+  font-size: 16px;
+  margin-bottom: 49rpx;
+}
+
+
+.login-form-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.username-wrapper, .password-wrapper, .verfication-code-wrapper{
+  width: 630rpx;
+  font-family: MicrosoftYaHei;
+  font-size: 24rpx;
+  font-weight: normal;
+  font-stretch: normal;
+  line-height: 24rpx;
+  letter-spacing: 0rpx;
+  color: #9d9d9d;
+  margin-bottom: 49rpx;
+}
+
+.verfication-code-wrapper {
+  margin-bottom: 42rpx;
+}
+
+.username, .password, .verfication {
+  height: 24rpx;
+  font-family: MicrosoftYaHei;
+  font-size: 24rpx;
+  font-weight: normal;
+  font-stretch: normal;
+  line-height: 24rpx;
+  letter-spacing: 0rpx;
+  color: #9d9d9d;
+  margin-bottom: 29rpx;
+}
+
+radio{
+  margin-right: 20rpx;
+  font-family: MicrosoftYaHei;
+  font-size: 24rpx;
+  font-weight: normal;
+  font-stretch: normal;
+  line-height: 22rpx;
+  letter-spacing: 0rpx;
+  color: #999999;
+}
+
+
+radio .wx-radio-input {
+  transform:scale(0.8);
+}
+
+radio .wx-radio-input.wx-radio-input-checked {
+  /* border: none; */
+  border-color: #2792ff!important;
+  /* background-color: #fff!important; */
+  /* background-color: transparent!important; */
+  /* 居中 */
+/*
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  */
+
+}
+
+radio .wx-radio-input.wx-radio-input-checked::before {
+   content: '';
+   width: 20rpx;
+   height: 20rpx;
+   border-radius: 50%;
+   background-color: #2792ff;
+}
+
+.input {
+  padding-left: 31rpx;
+  height: 70rpx;
+  background-color: #f6f6f6;
+  border-radius: 10rpx;
+  font-family: MicrosoftYaHei;
+  font-size: 24rpx;
+  font-weight: normal;
+  font-stretch: normal;
+  line-height: 70rpx;
+  letter-spacing: 0rpx;
+  color: #000000;
+}
+
+.verfication-code-input-wrapper {
+  display: flex;
+  height: 70rpx;
+}
+
+.code-input {
+  display: inline-block;
+  flex: 1;
+  height: 100%;
+  padding-left: 31rpx;
+  background-color: #f6f6f6;
+	border-radius: 10rpx;
+}
+
+.code {
+  width: 180rpx;
+  height: 100%;
+  font-family: MicrosoftYaHei;
+  font-size: 24rpx;
+  font-weight: normal;
+  font-stretch: normal;
+  line-height: 70rpx;
+  letter-spacing: 0rpx;
+  color: #ffffff;
+  text-align: center;
+  background-color: #4f4fe0;
+  border-radius: 10rpx;
+}
+
+.forget-pwd {
+  margin-bottom: 69rpx;
+  font-family: MicrosoftYaHei;
+  height: 24rpx;
+  font-size: 24rpx;
+  font-weight: normal;
+  font-stretch: normal;
+  line-height: 24rpx;
+  letter-spacing: 0rpx;
+  color: #373737;
+  text-align: right;
+}
+
+button {
+  height: 80rpx;
+  background-image: linear-gradient(90deg,
+    #1e41a9 0%,
+    #4e4fdf 100%);
+  border-radius: 10rpx;
+  line-height: 80rpx;
+  text-align: center;
+  font-family: MicrosoftYaHei;
+  font-size: 36rpx;
+  font-weight: normal;
+  font-stretch: normal;
+  letter-spacing: 0rpx;
+  color: #ffffff;
+}

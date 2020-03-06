@@ -2,7 +2,8 @@
   display: flex;
   flex-wrap: wrap;
   background-color: #4e4edf;
-  height: 100%
+  height: 100%;
+  justify-content: center
 }
 
 .header {
@@ -12,7 +13,6 @@
   align-items: center;
   margin-left: 20rpx;
   margin-right: 20rpx;
-
 }
 
 .personal-data {
@@ -20,13 +20,13 @@
 }
 
 .personal-data .name {
-  display: block
+    display: block;
     height: 30rpx;
     font-family: MicrosoftYaHei-Bold;
     font-size: 30rpx;
     font-weight: normal;
     font-stretch: normal;
-    line-height: 70rpx;
+    line-height: 30rpx;
     letter-spacing: 0rpx;
     color: #ffffff;
     margin-bottom: 25rpx;
@@ -39,9 +39,10 @@
   font-size: 24rpx;
   font-weight: normal;
   font-stretch: normal;
-  line-height: 70rpx;
+  line-height: 24rpx;
   letter-spacing: 0rpx;
   color: #ffffff;
+  margin-bottom: 11rpx;
 }
 
 .personal-data .description {
@@ -51,7 +52,7 @@
   font-size: 24rpx;
   font-weight: normal;
   font-stretch: normal;
-  line-height: 70rpx;
+  line-height: 24rpx;
   letter-spacing: 0rpx;
   color: #ffffff;
 }
@@ -69,8 +70,6 @@
   width: 750rpx;
   height: 100%;
   background-color: #ffffff;
-  box-shadow: 0rpx -6rpx 10rpx 0rpx
-    rgba(0, 0, 0, 0.1);
   border-radius: 30rpx;
 }
 
@@ -81,6 +80,16 @@
   background-color: #ffffff;
   border-radius: 10rpx;
   margin-top: 51rpx;
+  box-shadow: 5rpx 5rpx 5rpx 5rpx
+  rgba(0, 0, 0, 0.1);
+}
+
+.message {
+  margin-right: 20rpx;
+}
+
+.clock {
+  margin-left: 20rpx;
 }
 
 .message-title, .clock-title {
@@ -98,14 +107,40 @@
 }
 
 .message .message-pic {
+  width: 134rpx;
+  height: 150rpx;
   top: 134rpx;
   left: 50%;
+  position: absolute;
   transform: translate(-50%, 0);
 }
 
 
 .clock .daka-pic {
+  width: 134rpx;
+  height: 150rpx;
   top: 134rpx;
   left: 50%;
+  position: absolute;
   transform: translate(-50%, 0);
+}
+.no-user {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.upload image {
+  width: 180rpx;
+  height: 180rpx;
+  border-radius: 50%;
+}
+
+.no-user .tap-login {
+  margin: 20rpx 10rpx;
+  color: black;
+  font-weight: 500;
+  cursor: pointer;
+  border: 1px dashed black;
+  padding: 10rpx 30rpx;
 }

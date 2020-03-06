@@ -6,27 +6,23 @@
         <text class="wx">微信号: {{userInfo.username}}</text>
         <text class="description">{{userInfo.description}}</text>
       </view>
-      <image class="head-protrait" bindtap='navigate' src="{{userInfo.headPortrait}}">
+      <image class="head-protrait" bindtap='toUserInfo' src="{{userInfo.headPortrait}}">
       </image>
     </view>
     <view wx:else class="no-user">
       <view class="upload">
         <image src='/images/icon/no-author.png'></image>
       </view>
-      <view bindtap="login" class="tap-login">登录/注册</view>
+      <view bindtap="toLogin" class="tap-login">登录/注册</view>
     </view>
   <view class="content">
-    <navigator url="/pages/message/message">
-      <view class="message">
+    <view  bindtap="toMessage" class="message">
         <text class="message-title">消息</text>
         <image class="message-pic" src="/images/icon/xiaoxi.png"></image>
-      </view>
-    </navigator>
-    <navigator url="/pages/user_daka/user_daka">
-      <view class="clock">
+    </view>
+    <view class="clock" bindtap="toUserDaka" >
         <text class="clock-title">打卡</text>
         <image class="daka-pic" src="/images/icon/daka.png"></image>
-      </view>
-    </navigator>
+    </view>
   </view>
 </view>

@@ -1,3 +1,6 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+    "head-info": "/components/head-info/head-info",
+    "personal-info": "/components/personal-info/personal-info"
+  }
 }

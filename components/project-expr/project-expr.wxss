@@ -1,0 +1,31 @@
+.project-wrapper {
+	width: 710rpx;
+	margin-bottom: 48rpx;
+}
+
+.project-title {
+	width: 121rpx;
+	height: 30rpx;
+	font-family: MicrosoftYaHei-Bold;
+	font-size: 30rpx;
+	font-weight: normal;
+	font-stretch: normal;
+	line-height: 30rpx;
+	letter-spacing: 0rpx;
+	color: #20222e;
+	margin-bottom: 40rpx;
+}
+
+.project-content {
+	height: 200rpx;
+	background-color: #f7f8fa;
+	border-radius: 20rpx;
+	font-family: MicrosoftYaHei;
+	font-size: 24rpx;
+	font-weight: normal;
+	font-stretch: normal;
+	letter-spacing: 0rpx;
+	color: #000000;
+  width: 660rpx;
+	padding: 25rpx 25rpx;
+}

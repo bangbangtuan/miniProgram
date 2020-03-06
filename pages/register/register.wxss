@@ -4,14 +4,14 @@
 
 .box {
     display: flex;
-	justify-content: center; 
+	justify-content: center;
 }
 .header {
     position: relative;
     width: 710rpx;
 	height: 1600rpx;
 	background-color: #ffffff;
-	box-shadow: 0rpx 25rpx 60rpx 0rpx 
+	box-shadow: 0rpx 25rpx 60rpx 0rpx
 		rgba(4, 5, 9, 0.1);
 	border-radius: 20rpx;
 	margin-top: 100rpx;
@@ -48,7 +48,7 @@
 	font-size: 24rpx;
 	font-weight: normal;
 	font-stretch: normal;
-	line-height: 70rpx;
+	line-height: 24rpx;
 	letter-spacing: 0rpx;
     color: #9d9d9d;
     margin-bottom: 29rpx;
@@ -70,17 +70,17 @@
 
 
 .select-wrapper {
-    display: flex;
+  display: flex;
 	position: relative;
 	align-items: center;
-    width: 370rpx;
+  width: 370rpx;
 	height: 71rpx;
 	background-color: #f6f6f6;
 	border-radius: 10rpx;
+	justify-content: space-around;
 }
 
 .select-boy, .select-girl {
-    position: absolute;
 	font-family: MicrosoftYaHei;
 	font-size: 24rpx;
 	font-weight: normal;
@@ -88,15 +88,25 @@
 	line-height: 70rpx;
 	letter-spacing: 0rpx;
 	color: #000000;
+	text-align: center;
+	width: 180rpx;
 }
 
-.select-boy {
-    left: 47rpx;
+.selected {
+	font-family: MicrosoftYaHei;
+	font-size: 24rpx;
+	font-weight: normal;
+	font-stretch: normal;
+	line-height: 70rpx;
+	letter-spacing: 0rpx;
+	color: #000000;
+	text-align: center;
+	width: 180rpx;
+	background-color: #4f4fe0;
+	border-radius: 10rpx;
+	color: #ffffff;
 }
 
-.select-girl {
-    right: 47rpx;
-}
 .captcha-input-wrapper {
 	display: flex;
 }
@@ -115,38 +125,39 @@
 	font-size: 24rpx;
 	font-weight: normal;
 	font-stretch: normal;
-	line-height: 70rpx;
+	line-height: 60rpx;
 	letter-spacing: 0rpx;
 	color: #ffffff;
 	margin: 0 auto;
+	text-align: center;
 }
 
 .forget-password-wrapper {
-	width: 114rpx;
 	height: 24rpx;
 	font-family: MicrosoftYaHei;
 	font-size: 24rpx;
 	font-weight: normal;
 	font-stretch: normal;
-	line-height: 70rpx;
+	line-height: 24rpx;
 	letter-spacing: 0rpx;
 	color: #373737;
+	text-align: right;
 }
 
-#button {
+button {
     position: absolute;
     bottom: 71rpx;
     width: 630rpx;
 	height: 80rpx;
-	background-image: linear-gradient(90deg, 
-		#1e41a9 0%, 
+	background-image: linear-gradient(90deg,
+		#1e41a9 0%,
 		#4e4fdf 100%);
 	border-radius: 10rpx;
 	font-family: MicrosoftYaHei;
 	font-size: 36rpx;
 	font-weight: normal;
 	font-stretch: normal;
-	line-height: 70rpx;
+	line-height: 80rpx;
 	letter-spacing: 0rpx;
 	color: #ffffff;
 }
@@ -186,4 +197,7 @@
 	font-weight: bold;
 	letter-spacing: 0rpx;
 	color: #272a29;
+	padding-right: 20rpx;
+	padding-bottom: 20rpx;
+	padding-top: 20rpx;
 }

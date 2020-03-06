@@ -1,11 +1,19 @@
 // pages/register/register.js
+
+import {
+  RegisterModel
+} from '../../models/register.js'
+
+let registerModel = new RegisterModel ()
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    count: 60
+    count: 60,
+    sexual: '1'
   },
 
   /**
@@ -13,6 +21,12 @@ Page({
    */
   onLoad: function (options) {
 
+  },
+
+  changeSexual: function (e) {
+    this.setData({
+      sexual: e.target.dataset.sexual
+    })
   },
 
   savePhoneNumber: function (e) {
@@ -25,31 +39,36 @@ Page({
   getValidCode: function () {
     if (this.data.phoneNumber && this.data.count == 60) {
       this.tick();
-      wx.request({
-        url: 'https://api.bangneedu.com/captcha/' + this.data.phoneNumber,
-        method: 'GET',
-        header: {
-          "Content-Type": "application/text"
-        },
-        success: function (res) {
-          console.log(res.data);
-          // this.setData({
-          //   captcha: res.data.result.data["BizId"]
-          // })
-        },
-        fail: function (err) {
-          console.log(err);
+      let getCaptchaCallback = function (res) {
+        if (res.status === 200) {
+          wx.showToast({
+            title: '验证码已发送',
+            icon: 'success',
+            duration: 1500
+          })
+        } else {
+          wx.showToast({
+            title: '验证码发送失败',
+            icon: 'none',
+            duration: 1500
+          })
         }
-      })
+      }
+
+      registerModel.getCaptcha(
+        this.data.phoneNumber,
+        getCaptchaCallback
+      )
+
     } else if (!this.data.phoneNumber) {
       wx.showToast({
         title: '请填写电话号码',
-        icon: 'loading',
+        icon: 'none',
         duration: 1000
       })
     }
   },
-  
+
   tick: function () {
     var vm = this
     if (vm.data.count > 0) {
@@ -66,73 +85,47 @@ Page({
     }
   },
 
-  radioChange: function (e) {
-    console.log('radio发生change事件，携带value值为：', e.detail.value)
-  },
-
   bindFormSubmit: function (e) {
     var form = e.detail.value;
-    if (form.username && form.password && form.password2 && form.weixin && form.phone ) {
+    if (form.username && form.password && form.password2 && form.weixin && form.phone && form.captcha ) {
       if(form.password !== form.password2) {
         wx.showToast({
           title: '两次密码不一致',
           icon: 'loading',
-          duration: 1000
+          duration: 1500
         })
       } else {
-        console.log(e.detail.value);
-        wx.request({
-          url: 'https://api.bangneedu.com/register',
-          data: {
-            "username": e.detail.value.username,
-            "password": e.detail.value.password,
-            "phone": e.detail.value.phone,
-            "weixin": e.detail.value.weixin,
-            "captcha": e.detail.value.captcha,
-          },
-          method: 'POST',
-          header: {
-            "content-type": "application/json"
-          },
-          success: function (res) {
-            console.log(res);
-            if(res.data.status == 200) {
-              wx.navigateTo({
-                url: '/pages/login/login',
-              })
-            } else if (res.data.status == 500) {
-              wx.showModal({
-                title: '注册失败',
-                content: res.data.msg,
-                success(res) {
-                  if (res.confirm) {
-                    console.log('用户点击确定')
-                    wx.navigateTo({
-                      url: '/pages/register/register',
-                    })
-                  } else if (res.cancel) {
-                    console.log('用户点击取消')
-                  }
-                }
-              })
-
-            }
-            
-          },
-          fail: function (err) {
-            console.log(err);
+        let registerCallback = function (res) {
+          if(res.status == 200) {
             wx.showToast({
-              title: '注册失败',
-              duration: 1000
-            });
+              title: '注册成功',
+              icon: 'success',
+              duration: 1500
+            })
+            wx.navigateTo({
+              url: '/pages/login/login',
+            })
+          } else if (res.status == 500) {
+            wx.showToast({
+              title: res.data.msg,
+              duration: 1500
+            })
           }
-        })
+        }
+        registerModel.register(
+          e.detail.value.username,
+          e.detail.value.password,
+          e.detail.value.phone,
+          e.detail.value.weixin,
+          e.detail.value.captcha,
+          registerCallback
+        )
       }
     } else {
       wx.showToast({
         title: '请填写必填项',
-        icon: 'loading',
-        duration: 1000
+        icon: 'none',
+        duration: 1500
       })
     }
   },

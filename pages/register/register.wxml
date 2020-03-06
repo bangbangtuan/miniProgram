@@ -28,8 +28,8 @@
             <view class="sexual-wrapper">
                 <view class="sexual-title">性别</view>
                 <view class="select-wrapper">
-                    <view class="select-boy">我是男生</view>
-                    <view class="select-girl">我是女生</view>
+                    <view bindtap="changeSexual" data-sexual="1" class="{{sexual === '1'? 'selected': 'select-boy'}}">我是男生</view>
+                    <view bindtap="changeSexual" data-sexual="2" class="{{sexual === '2'? 'selected': 'select-girl'}}">我是女生</view>
                 </view>
             </view>
             <view class="captcha-wrapper">
@@ -49,7 +49,11 @@
     <view class="footer-wrapper">
     <view class="footer">
         <view class="tips">已有账号?</view>
-        <view class="login-router">登录</view>
+        <view class="login-router">
+          <navigator class="clock" url="/pages/login/login">
+            登录
+          </navigator>
+        </view>
     </view>
     </view>
 </view>

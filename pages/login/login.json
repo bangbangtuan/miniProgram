@@ -1,3 +1,6 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+    "login-form": "/components/login-form/login-form",
+    "login-footer": "/components/login-footer/login-footer"
+  }
 }

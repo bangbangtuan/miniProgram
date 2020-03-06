@@ -1,3 +1,9 @@
+import {
+  MessageModel
+} from '../../models/message.js'
+
+let messageModel = new MessageModel()
+
 Page({
 
   /**
@@ -12,62 +18,52 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-    wx.request({
-      url: 'https://api.bangneedu.com/messagePush',
-      method: 'GET',
-      header: {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer " + wx.getStorageSync('token')
-      },
-      success: function (res) {
-        console.log(res.data);
+    messageModel.getMessage()
+    .then((res) => {
+      if (res.status === 200) {
         that.setData({
-          messages: res.data.data.reverse()
+          messages: res.data.reverse()
         })
-        if (res.data.status == 401) {
+      } else if (res.status === 401) {
+        wx.showToast({
+          title: '登陆过期',
+          icon: 'none',
+          duration: 1500
+        });
+        wx.navigateTo({
+          url: '/pages/login/login',
+        })
+      } else {
           wx.showToast({
-            title: '登陆过期',
-            duration: 1000
+            title: '出现点小意外',
+            icon: 'none',
+            duration: 1500
           });
+        }
+      }
+    )
+
+    messageModel.getCpDetail ()
+    .then ((res) => {
+      if (res.status == 401) {
+        wx.showToast({
+          title: '登陆过期，请重新登陆',
+          icon: 'none',
+          duration: 1000
+        });
+        setTimeout(function () {
           wx.navigateTo({
             url: '/pages/login/login',
           })
-        }
-      },
-      fail: function (err) {
-        console.log(err);
-      }
-    });
-    wx.request({
-      url: 'https://api.bangneedu.com/cpDetails',
-      method: 'GET',
-      header: {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer " + wx.getStorageSync('token')
-      },
-      success: function (res) {
-        console.log(res.data);
-        that.setData({
-          cpDetail: res.data.data
-        })
-        if (res.data.status == 401) {
-          wx.showToast({
-            title: '登陆过期，请重新登陆',
-            icon: 'none',
-            duration: 1000
-          });
-          setTimeout(function () {
-            wx.navigateTo({
-              url: '/pages/login/login',
-            })
-          }, 1000)
+        }, 1000)
 
-        }
-      },
-      fail: function (err) {
-        console.log(err);
+      } else {
+        that.setData({
+          cpDetail: res
+        })
       }
-    });
+    })
+
   },
 
   /**

@@ -1,72 +1,34 @@
 <view class="study-wrapper">
     <view class="header-wrapper">
-        <view class="partner-tab" bindchange="bindChange">学习伙伴</view>
-        <view class="self-study-tab" bindchange="bindChange">自学团</view>
+        <view class="{{tag === '0'? 'partner-tab':'partner-tab2'}}"  bindtap="bindChange" data-tag='0'>
+          学习伙伴
+        </view>
+        <view class="{{tag === '1'? 'self-study-tab2':'self-study-tab'}}" bindtap="bindChange" data-tag='1'>自学团</view>
     </view>
-    <swiper current="{{tag}}" class="swiper">
+    <swiper current="{{tag}}" class="swiper" duration="300" bindchange="handleSlide">
         <swiper-item>
           <scroll-view class='scroll' scroll-y='true'>
             <form bindsubmit="bindFormSubmit"  class="detail-wrapper">
-                <view class="technologic-wrapper">
-                    <view class="techno-title">
-                        技术选择点
-                    </view>
-                    <view class="font-content">
-                      <view class="font-wrapper">
-                        <view class="font-sign">
-                        </view>
-                        <view class="sign">前端</view>
-                      </view>
-                      <view class="selection-wrapper">
-                        <view class="font-selection" wx:for="{{frontend}}" wx:key="{{item.id}}">
-                            {{item.name}}
-                        </view>
-                      </view>
-                    </view>
-                    <view class="backend-content">
-                      <view class="backend-wrapper">
-                        <view class="backend-sign">
-                        </view>
-                        <view class="sign">后端</view>
-                      </view>
-                      <view class="selection-wrapper">
-                        <view class="backend-seletion" wx:for="{{backend}}" wx:key="{{item.id}}">
-                          {{item.name}}
-                        </view>
-                      </view>
-                    </view>
-                </view>
-                <view class="project-wrapper">
-                    <view class="project-title">项目经验</view>
-                    <textarea class="project-content" placeholder="描述一下自己的经验吧"></textarea>
-                </view>
-                <view class="wx-confirm-wrapper">
-                    <view class="wx-title">微信号确认</view>
-                    <input class="wx-content" placeholder=""></input>
-                </view>
-                <view class="tips">
-                  <view class="title">
-                    组队须知:
-                  </view>
-                  <view class="tips1">
-                    1.CP组队是概率事件，总能碰到自己合适的.
-                  </view>
-                  <view class="tips2">
-                    2.组队之后请移交系统分配进行监督分享学习.
-                  </view>
-                </view>
-                <button form-type="submit" class="submit"> 提交 </button>
+                <tech-select fontend="{{frontend}}" backend="{{backend}}" bind:selectTechno="selectTechno"></tech-select>
+                <project-expr></project-expr>
+                <weixin-info></weixin-info>
+                <team-tips></team-tips>
+                <button form-type="submit" class="submit"> 开始组队 </button>
             </form>
           </scroll-view>
         </swiper-item>
         <swiper-item class="content-wrapper">
-            <view class="plan" wx:for="{{study}}" wx:key="{{item.id}}">
-                <view class="left"></view>
-                <view class="title-wrapper">
+              <view class="plan" wx:for="{{study}}" wx:key="id">
+                  <view class="left"></view>
+                  <view class="title-wrapper">
                     <view class="title">{{item.title}}</view>
-                </view>
-                <button size="mini" class="join" data-index="{{item.id}}" bindtap="clickIn">点击加入</button>
-            </view>
+                  </view>
+                  <view size="mini" class="join" data-index="{{item.id}}" bindtap="clickIn">
+                    <view class='button-text' bindtap="clickIn">
+                      点击加入
+                    </view>
+                  </view>
+              </view>
         </swiper-item>
     </swiper>
 </view>

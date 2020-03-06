@@ -1,0 +1,32 @@
+<view class="login-wrapper">
+    <view class="title">登录</view>
+    <form  bindsubmit="bindFormSubmit" class="login-form-wrapper">
+      <view class="username-wrapper">
+        <view class="username">
+          用户名
+        </view>
+        <input class='input' name="username" placeholder='请输入用户名' value='{{username}}'></input>
+      </view>
+      <radio-group class="type" bindchange="radioChange" name="type">
+        <radio value="1">账号登陆</radio>
+        <radio value="2">手机号登陆</radio>
+      </radio-group>
+      <view class="password-wrapper">
+        <view class="password">
+          密码
+        </view>
+        <input class='input' type='password' name="password" placeholder='请输入密码' value='{{password}}'></input>
+      </view>
+      <view class="verfication-code-wrapper">
+        <view class="verfication">验证码</view>
+        <view class="verfication-code-input-wrapper">
+          <input class="code-input" name="code" placeholder='请输入验证码' value='{{user_code}}'></input>
+          <view class='code' bindtap='changeAnother'>{{code}}</view>
+        </view>
+      </view>
+      <view class="forget-pwd">
+        <navigator url="/pages/resetPassword/resetPassword">忘记密码?</navigator>
+      </view>
+      <button form-type="submit">登录</button>
+    </form>
+</view>
