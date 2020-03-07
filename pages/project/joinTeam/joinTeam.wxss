@@ -1,58 +1,26 @@
-.page {
-  border: 1px solid #ff6e37;
-  border-radius: 10rpx;
-  margin: 80rpx 20rpx;
-}
-.header {
-  margin: 60rpx 40rpx 0;
-}
-.input-form {
-  margin: 20rpx;
-  padding: 20rpx;
-}
-.input-form textarea {
-  border: 1px solid #999;
-  border-radius: 10rpx;
-  padding: 20rpx;
-}
-.box {
-  display: flex;
-  flex-direction: column;
-  padding: 20rpx;
-}
-.stack-container {
-  display: flex;
-  flex-direction: row;
-  font-size: 16px;
-  color: #666;
+.detail-wrapper {
+	display: flex;
+	justify-content: center;
+	height: 100%;
+	background-color: #ffffff;
+	box-shadow: 0rpx -6rpx 10rpx 0rpx
+		rgba(0, 0, 0, 0.1);
+	border-radius: 30rpx;
+  margin-top: 40rpx;
 }
 
-.head {
-  font-size: 18px;
-  font-weight: 700;
-  color: #ff6e37;
-  margin-right: 20rpx;
-  width: 100rpx;
-  text-align: center;
-}
-
-radio .wx-radio-input {
-  display: none;
-}
-
-.radio-group .radioActive {
-  border: 1rpx solid #ff6e37;
-  background-color: rgb(218, 214, 214);
-  border-radius: 10rpx;
-}
-
-.radio-group .radio {
-  padding: 0 10rpx;
-}
 .submit {
-  width: 20%;
-  background-color: #ff6e37;
-  border: none;
-  color: #fff;
-  margin-bottom: 20rpx;
+	width: 710rpx;
+	height: 80rpx;
+	background-color: #4c4fde;
+	border-radius: 20rpx;
+	font-family: MicrosoftYaHei;
+	font-size: 30rpx;
+	font-weight: normal;
+	font-stretch: normal;
+	line-height: 70rpx;
+	letter-spacing: 0rpx;
+	color: #ffffff;
+	text-align: center;
+	line-height: 80rpx;
 }
