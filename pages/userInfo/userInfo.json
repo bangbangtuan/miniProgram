@@ -2,5 +2,8 @@
   "usingComponents": {
     "head-info": "/components/head-info/head-info",
     "personal-info": "/components/personal-info/personal-info"
-  }
+  },
+  "navigationBarTitleText": "个人信息",
+  "navigationBarTextStyle": "black",
+  "navigationBarBackgroundColor": "#ffffff"
 }

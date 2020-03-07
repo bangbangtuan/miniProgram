@@ -2,5 +2,8 @@
   "usingComponents": {
     "login-form": "/components/login-form/login-form",
     "login-footer": "/components/login-footer/login-footer"
-  }
+  },
+  "navigationBarTitleText": "IT练习生",
+  "navigationBarTextStyle": "white",
+  "navigationBarBackgroundColor": "#4f4fe0"
 }

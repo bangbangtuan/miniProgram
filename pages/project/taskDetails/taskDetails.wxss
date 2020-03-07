@@ -1,26 +1,64 @@
-.container {
+.task-detail-wrapper {
+  display: flex;
+  justify-content: center;
+
+}
+
+.task-detail {
+  width: 710rpx;
+  background-color: #ffffff;
+  border-radius: 20rpx;
+  box-shadow: 0rpx -6rpx 10rpx 10rpx rgba(0, 0, 0, 0.1);
+  padding-bottom: 56rpx;
+  position: relative;
+  margin-top: 20rpx;
   display: flex;
   flex-direction: column;
-  margin: 20rpx;
 }
-.con-header {
-  margin: 20rpx 0 30rpx;
-  font-size: 16px;
-  border-left: 5rpx solid #ff6e37;
-  padding-left: 10rpx;
+
+
+.title {
+  margin-left: 41rpx;
+  margin-top: 51rpx;
+  font-family: MicrosoftYaHei;
+  font-size: 30rpx;
+  font-weight: bold;
+  font-stretch: normal;
+  line-height: 31rpx;
+  letter-spacing: 0rpx;
+  color: #000000;
+  margin-bottom: 29rpx;
+  margin-top: 51rpx;
 }
-.task-pannel {
-  box-shadow: 0px 6px 5px #e9e8e8;
-  padding: 30rpx;
-  font-size: 15px;
+
+.content {
+  font-family: MicrosoftYaHei;
+  font-size: 28rpx;
+  font-weight: normal;
+  font-stretch: normal;
+  line-height: 28rpx;
+  letter-spacing: 0rpx;
+  color: #666666;
+  margin-left: 41rpx;
+  margin-right: 41rpx;
+  margin-bottom: 59rpx;
 }
-.task-pannel view {
-  margin-top: 20rpx;
-}
-.task-pannel button {
-  width: 60%;
-  background-color: rgba(0, 140, 255, 0.774);
-  color: #fff;
-  border-radius: 40rpx;
-  font-size: 14px;
+
+.task-btn {
+  width: 500rpx;
+  height: 80rpx;
+  background-image: linear-gradient(90deg,
+    #1f41ab 0%,
+    #4c4fde 100%);
+  border-radius: 20rpx;
+  font-family: MicrosoftYaHei;
+  font-size: 28rpx;
+  font-weight: normal;
+  font-stretch: normal;
+  line-height: 80rpx;
+  letter-spacing: 0rpx;
+  color: #ffffff;
+  text-align: center;
+  align-self: center;
+
 }

@@ -2,6 +2,6 @@
   display: flex;
   justify-content: center;
   height: 100%;
-  background-color: #1c41a6;
+  background-color: #4f4fe0;
   flex-wrap: wrap;
 }

@@ -1,25 +1,32 @@
-<view class="container">
-  <view class="con-header">实战演练</view>
-  <view class="page__bd">
-    <view class="weui-panel weui-panel_access">
-      <view class="weui-panel__bd">
-        <view class="weui-media-box weui-media-box_appmsg relative-box" hover-class="weui-cell_active">
-          <view wx:for="{{projects}}" wx:key="id" class="project-cont-box">
-            <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
-              <image class="weui-media-box__thumb" src="{{item.image}}" />
+<view class="project-background">
+  <view class="project-wrapper">
+    <view class="project-item" wx:for="{{projects}}">
+      <image class="project-pic" src="{{item.image}}">
+      </image>
+      <view class="project-content">
+
+        <view class="project-title">
+          {{item.name}}
+        </view>
+        <view class="project-technology">
+          技术栈：{{item.technology}}
+        </view>
+        <view class="project-profile">
+          技术介绍: {{item.details}}
+        </view>
+        <view class="team-members">
+          <view class="team-wrapper">
+            <image wx:for="{{item.teamMembers}}" wx:key="{{index}}" wx:for-item="members" src="{{members.headPortrait}}" alt="{{members.name}}" />
+            <image src="../../images/icon/plus.png" bindtap="joinTeam" data-id='{{item.id}}' ></image>
+            <view wx:if="{{item.teamMembers.length !== 0}}" class="total">
+              共{{item.totalMembers.length}}人
             </view>
-            <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
-              <view class="weui-media-box__title">{{item.name}}</view>
-              <view class="weui-media-box__desc">技术栈：{{item.technology}}</view>
-              <view class="weui-media-box__desc">项目介绍：{{item.details}}</view>
-              <view class='team-members'>
-                <image wx:for="{{item.teamMembers}}" wx:key="{{index}}" wx:for-item="members" src="{{members.headPortrait}}" alt="{{members.name}}" />
-                <image src="../../images/icon/plus.png" bindtap="joinTeam" data-id='{{item.id}}' ></image>
-              </view>
-            </view>
-            <view class="btn-detail" bindtap="navigateToDetails" data-id='{{item.id}}'>查看详情</view>
+          </view>
+          <view class="btn-detail" bindtap="navigateToDetails" data-id='{{item.id}}'>
+            +加入
           </view>
         </view>
+
       </view>
     </view>
   </view>

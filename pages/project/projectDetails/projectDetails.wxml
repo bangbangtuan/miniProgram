@@ -1,15 +1,40 @@
-<view class="container">
-  <view class="con-header">实战演练 / 项目详情</view>
-  <view class="project-pannel">
-    <view>{{project.name}}</view>
-    <view class="project-detail">技术栈：{{project.technology}}</view>
-    <view class="project-detail">项目介绍：{{project.details}}</view>
-  </view>
-  <view>
-    <view class="tasks-pannel" wx:for="{{tasks}}" wx:key="id">
-      <div className='task-card'>任务
-        <span>{{item.title}}</span>： {{item.name}}</div>
-      <view class="btn-detail" bindtap="navigateToDetails" data-id='{{item.id}}'>查看详情</view>
+<view class="project-detail-wrapper">
+  <view class="content">
+    <image class="pic" src="{{project.image}}">
+    </image>
+    <view class="project-detail">
+      <view class="title">
+        {{project.name}}
+      </view>
+      <view class="technology">
+        {{project.technology}}
+      </view>
+      <view class="project-profile">
+        {{project.details}}
+      </view>
     </view>
   </view>
+  <view class="task">
+     <view class="task-pannel" wx:for="{{tasks}}" wx:key="id">
+       <view class="schedule">
+         <view class="schedule-dot">
+         </view>
+         <view class="schedule-line">
+         </view>
+       </view>
+       <view class="task-content">
+         <view class="task-header">
+           <view class="task-title">
+             任务{{item.title}}
+           </view>
+           <view class="detail-router"  bindtap="navigateToDetails" data-id='{{item.id}}'>
+             查看详情
+           </view>
+         </view>
+         <view class="task-content">
+           {{item.name}}
+         </view>
+       </view>
+       </view>
+     </view>
 </view>

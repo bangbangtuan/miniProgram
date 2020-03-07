@@ -4,5 +4,8 @@
     "project-expr": "/components/project-expr/project-expr",
     "weixin-info": "/components/weixin-info/weixin-info",
     "team-tips": "/components/team-tips/team-tips"
-  }
+  },
+  "navigationBarTitleText": "学习",
+  "navigationBarTextStyle": "white",
+  "navigationBarBackgroundColor": "#4e4edf"
 }

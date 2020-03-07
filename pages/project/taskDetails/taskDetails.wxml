@@ -1,11 +1,13 @@
-<view class="container">
-  <view class="con-header">实战演练 / 项目详情 / 任务详情</view>
-  <view class="task-pannel">
-    <view className='task-card'>任务
-      <span>{{task.title}}</span>： {{task.name}}</view>
-    <view>
-      任务详情： {{task.details}}
+<view class="task-detail-wrapper">
+  <view class="task-detail">
+    <view class="title">
+      任务一: {{task.name}}
     </view>
-    <!-- <button class="weui-btn" bindtap="receiveTask">领取任务</button> -->
+    <view class="content">
+      {{task.details }}
+    </view>
+    <view class="task-btn" bindtap="receiveTask">
+      领取任务
+    </view>
   </view>
 </view>
