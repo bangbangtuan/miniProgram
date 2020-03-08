@@ -567,37 +567,37 @@ Page({
     });
   },
 
-  clipImage : (index, content, cb) => {  
-    var filePath = wx.env.USER_DATA_PATH;
-    console.log(filePath)
-    var shareImg = "../../images/shareImg.jpeg";
-    // ‘canvas’为前面创建的canvas标签的canvas-id属性值
-    let ctx = wx.createCanvasContext('canvas' + index);  
-    let canvasW = 640, canvasH = 512;
+  // clipImage : (index, content, cb) => {  
+  //   var filePath = wx.env.USER_DATA_PATH;
+  //   console.log(filePath)
+  //   var shareImg = "../../images/shareImg.jpeg";
+  //   // ‘canvas’为前面创建的canvas标签的canvas-id属性值
+  //   let ctx = wx.createCanvasContext('canvas' + index);  
+  //   let canvasW = 640, canvasH = 512;
   
-    // 将图片绘制到画布
-    ctx.drawImage(shareImg, 0, 0, canvasW, canvasH, 0, 0, canvasW, canvasH) 
-    // draw()必须要用到，并且需要在绘制成功后导出图片
-    var that = this;
-    ctx.draw(false, () => {
-      setTimeout(() => {
-        //  导出图片
-        wx.canvasToTempFilePath({
-          width: canvasW,
-          height: canvasH,
-          destWidth: canvasW,
-          destHeight: canvasH,
-          canvasId: 'canvas' + index,
-          fileType: 'jpg',
-          success: (res) => {
-            // res.tempFilePath为导出的图片路径
-            typeof cb == 'function' && cb(res.tempFilePath);
-            content.shareImg = res.tempFilePath
-          }
-        }, that)
-      }, 300);
-    })
-  },
+  //   // 将图片绘制到画布
+  //   ctx.drawImage(shareImg, 0, 0, canvasW, canvasH, 0, 0, canvasW, canvasH) 
+  //   // draw()必须要用到，并且需要在绘制成功后导出图片
+  //   var that = this;
+  //   ctx.draw(false, () => {
+  //     setTimeout(() => {
+  //       //  导出图片
+  //       wx.canvasToTempFilePath({
+  //         width: canvasW,
+  //         height: canvasH,
+  //         destWidth: canvasW,
+  //         destHeight: canvasH,
+  //         canvasId: 'canvas' + index,
+  //         fileType: 'jpg',
+  //         success: (res) => {
+  //           // res.tempFilePath为导出的图片路径
+  //           typeof cb == 'function' && cb(res.tempFilePath);
+  //           content.shareImg = res.tempFilePath
+  //         }
+  //       }, that)
+  //     }, 300);
+  //   })
+  // },
 
   getDakaList: function (url) {
     var that = this;
@@ -610,15 +610,15 @@ Page({
       success: function (res) {
         var totalPosts = [];
         console.log(res.data.data.records);
-        for(var i = 0; i < res.data.data.records.length; i++) {
-          that.clipImage(i, res.data.data.records[i], (img) => {
-            // console.log(img);  // img为最终裁剪后生成的图片路径，我们可以用来做为转发封面图
-            // res.data.data.records[i].shareImg = img
-            that.setData({
-              totalPosts: res.data.data.records
-            })
-          }); 
-        }
+        // for(var i = 0; i < res.data.data.records.length; i++) {
+        //   that.clipImage(i, res.data.data.records[i], (img) => {
+        //     // console.log(img);  // img为最终裁剪后生成的图片路径，我们可以用来做为转发封面图
+        //     // res.data.data.records[i].shareImg = img
+        //     that.setData({
+        //       totalPosts: res.data.data.records
+        //     })
+        //   }); 
+        // }
         console.log(res.data.data.records)
         console.log(that.data.isEmpty)
         if (!that.data.isEmpty) {

@@ -64,7 +64,7 @@
           <image src='/images/icon/chat.png'></image>
           <text>{{item.commentNumber}}</text>
         </view>
-        <canvas style="position: absolute; top: -1000px; left: -1000px; width: 640px; height: 640px; background: #000" canvas-id='{{"canvas" + index}}'></canvas>
+        <!-- <canvas style="position: absolute; top: -1000px; left: -1000px; width: 640px; height: 640px; background: #000" canvas-id='{{"canvas" + index}}'></canvas> -->
         <button class="share" open-type="share" data-value="{{item}}">
           <image src='/images/icon/share1.png'></image>
         </button>
