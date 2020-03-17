@@ -1,5 +1,6 @@
 {
   "pages": [
+    
     "pages/index/index",
     "pages/team/team",
     "pages/project/project",
@@ -14,43 +15,39 @@
     "pages/message/message",
     "pages/user_daka/user_daka",
     "pages/userInfo/userInfo",
-    "pages/msg/msg_success"
+    "pages/msg/msg_success",
+    "pages/post/post"
   ],
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#feefe8",
-    "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle": "black",
-    "enablePullDownRefresh" : true
+    "navigationBarBackgroundColor": "#4e4edf",
+    "navigationBarTextStyle": "white",
+    "enablePullDownRefresh": true
   },
   "tabBar": {
     "color": "#999",
     "selectedColor": "#666",
-    "backgroundColor": "#feefe8",
+    "backgroundColor": "#fff",
     "list": [
       {
         "pagePath": "pages/index/index",
-        "text": "打卡",
-        "iconPath": "images/tab/daka.png",
-        "selectedIconPath": "images/tab/daka-act.png"
+        "iconPath": "images/tab/shouye-weixuanzhong.png",
+        "selectedIconPath": "images/tab/shouye-xuanzhong.png"
       },
       {
         "pagePath": "pages/team/team",
-        "text": "学习",
-        "iconPath": "images/tab/team.png",
-        "selectedIconPath": "images/tab/team-act.png"
+        "iconPath": "images/tab/xuexi-weixuanzhong.png",
+        "selectedIconPath": "images/tab/xuexi-xuanzhong.png"
       },
       {
         "pagePath": "pages/project/project",
-        "text": "项目",
-        "iconPath": "images/tab/project.png",
-        "selectedIconPath": "images/tab/project-act.png"
+        "iconPath": "images/tab/xiangmu-weixuanzhong.png",
+        "selectedIconPath": "images/tab/xiangmu-xuanzhong.png"
       },
       {
         "pagePath": "pages/profile/profile",
-        "text": "我",
-        "iconPath": "images/tab/me.png",
-        "selectedIconPath": "images/tab/me-act.png"
+        "iconPath": "images/tab/wode-weixuanzhong.png",
+        "selectedIconPath": "images/tab/wode-xuanzhong.png"
       }
     ]
   },

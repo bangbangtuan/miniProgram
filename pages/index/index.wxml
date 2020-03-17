@@ -1,80 +1,65 @@
-<view class='container'>
-  <view class='daka'>
-    <view class='head'>打卡</view>
-    <form bindsubmit="bindFormSubmit">
-      <view class="daka-area">
-        <textarea name="textarea" value="{{daka}}" maxlength='255' bindinput="bindText" />
-        <view class="uploader">
-          <view class="upload__bd">
-            <text class="text-count">{{t_length}}/255</text>
-            <view class="upload_files" id="uploaderFiles">
-                <view class="uploader_file" bindtap="previewImage" id="{{image[0]}}" wx:if="{{image[0]}}">
-                  <image class="uploader_img" src="{{image[0]}}" mode="aspectFill" />
-                    <image src="/images/icon/del_orange.png" mode="aspectFill"  class="del_img" catchtap="deleteImg"></image>
-                </view>
-                <view class="upload_input" bindtap="chooseImage" wx:else>
-                  <image src="/images/icon/uploader.png" mode="aspectFill"></image>
-                </view>
-            </view>
-            </view>
-          </view>
-        <!-- </view> -->
-      </view>
-      <view class="classify-box">
-        <view>点击选择打卡类别</view>
-        <radio-group class="classify" bindchange="radioChange" name="type">
-          <radio class="radio {{type==item.tag ? 'radioActive':''}}" value="{{item.tag}}" wx:for="{{tags}}" wx:key='id'>#{{item.tag}}#</radio>
-        </radio-group>
-      </view>
-      <poster id="poster" hide-loading="{{false}}" preload="{{false}}" config="{{posterConfig}}" bind:success="onPosterSuccess" bind:fail="onPosterFail" class="poster">
-      </poster>
-      <button form-type="submit" wx:if="{{isClickable}}"> 打卡 </button>
-      <button form-type="submit" wx:else> 正在处理中... </button>
-    </form>
-  </view>
-  <view class='posts' wx:if="{{postList}}">
-    <view class='post' wx:for="{{postList}}" wx:key="index">
-      <view class='head-container'>
-        <view class='author-date-container'>
-          <image src='{{item.headPortrait}}'></image>
-          <view class='auto-date'>
-            <text>{{item.name}}</text>
-            <text class='date'>{{item.createTime}}</text>
-            
-          </view>
+<view class="container">
+	<!-- <view class="title">
+    <text>首页</text> 
+  </view> -->
+	<view class="content">
+		<view class="dakawrap">
+			<view class="daka">
+				<image src="{{headPortrait}}" class="avatar"></image>
+				<input type="text" placeholder="打卡分享经验吧" cursor="30" placeholder-class="dakaplace" bindfocus="goPublish" />
+			</view>
+		</view>
+		<view class='posts' wx:if="{{postList}}">
+			<view class='post' wx:for="{{postList}}" wx:key="index">
+				<view class='head-container'>
+					<view class='author-date-container'>
+						<image src='{{item.headPortrait}}'></image>
+						<view class='auto-date'>
+							<text>{{item.name}}</text>
+							<text class='date'>{{item.createTime}}</text>
+						</view>
+					</view>
+					<view class='tag' wx:if='{{item.type}}'>
+						<text>{{item.type}}</text>
+					</view>
+
+				</view>
+				<view class='comment-content'>
+					<text> {{item.content}}</text>
+					<view wx:if='{{item.image}}' class="daka_img" bindtap='handleTap' data-index='{{index}}' data-type='{{item}}'>
+						<image src='{{item.image}}' mode="aspectFill"></image>
+					</view>
+				</view>
+				<view class='comment-like'>
+					<view class='count'>
+						<text>-坚持打卡<text class="day">{{item.day}}</text>天</text>
+					</view>
+					<view class="likes">
+						<view class="likeItem" catchtap="likeTap" data-id="{{item.id}}" data-index="{{index}}" data-liked="{{item.liked}}">
+							<view>
+								<image wx:if='{{item.liked}}' src='/images/icon/like-act.png'></image>
+								<image wx:else src='/images/icon/like.png'></image>
+							</view>
+							<text>{{item.praiseNumber}}</text>
+						</view>
+						<view class="likeItem" bindtap='handleTap' data-index='{{index}}' data-type='{{item}}'>
+							<view>
+								<image src='/images/icon/comment.png'></image>
+							</view>
+							<text>{{item.commentNumber}}</text>
+						</view>
+					</view>
+					<canvas style="position: absolute; top: -1000px; left: -1000px; width: 640px; height: 640px; background: #000" canvas-id='{{"canvas" + index}}'></canvas>
+				</view>
+				<block wx-if="{{item.commentNumber>0}}">
+					<view class="divider"></view>
+					<view class="comment-desc"><text class="commntname">{{item.comm_name}}</text><text>{{item.comment}}</text></view>
+				</block>
+        <view class="comment">
+        	<input type="text" placeholder="评论" placeholder-class="complaceholder" bindfocus="handleTap" data-index='{{index}}' data-type='{{item}}'/>
         </view>
-        <view class='count'>
-          <text>坚持 {{item.day}} 天</text>
-        </view>
-      </view>
-      <view class='comment-content'>
-        <text wx:if='{{item.type}}' class="tag">#{{item.type}}#</text>
-        <text>  {{item.content}}</text>
-        <view wx:if='{{item.image}}' class="daka_img" bindtap='handleTap' data-index='{{index}}' data-type='{{item}}'>
-         <image src='{{item.image}}' mode="aspectFill" ></image> 
-        </view>
-      </view>
-      <view class='comment-like'>
-        <view class="likeItem" catchtap="likeTap" data-id="{{item.id}}" data-index="{{index}}" data-liked="{{item.liked}}">
-          <image wx:if='{{item.liked}}' src='/images/icon/like-act.png'></image>
-          <image wx:else src='/images/icon/like.png'></image>
-          <text>{{item.praiseNumber}}</text>
-        </view>
-        <view class="likeItem" bindtap='handleTap' data-index='{{index}}' data-type='{{item}}'>
-          <image src='/images/icon/chat.png'></image>
-          <text>{{item.commentNumber}}</text>
-        </view>
-        <!-- <canvas style="position: absolute; top: -1000px; left: -1000px; width: 640px; height: 640px; background: #000" canvas-id='{{"canvas" + index}}'></canvas> -->
-        <button class="share" open-type="share" data-value="{{item}}">
-          <image src='/images/icon/share1.png'></image>
-        </button>
-      </view>
-      <block wx-if="{{item.commentNumber>0}}">
-        <view class="divider"></view>
-        <view class="comment-desc">{{item.comm_name}}{{item.comment}}</view>
-      </block>
-      <view class="more" bindtap='handleTap' data-index='{{index}}' data-type='{{item}}'>
-        <text class="more_txt">点击查看更多</text>>></view>
-    </view>
-  </view>
+			</view>
+		</view>
+	</view>
+
 </view>
