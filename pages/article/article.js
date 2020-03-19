@@ -1,5 +1,5 @@
 import Poster from '../../miniprogram_dist/poster/poster';
-const app=getApp();
+
 Page({
 
   /**
@@ -221,10 +221,6 @@ Page({
    */
   onLoad: function(options) {
     var postItem = JSON.parse(options.cat);
-    let title='评论 · '+postItem.commentNumber;
-    wx.setNavigationBarTitle({
-      title: title
-    })
     postItem.headPortrait = decodeURIComponent(postItem.headPortrait);
     if (postItem.image){
       postItem.image = decodeURIComponent(postItem.image);
@@ -236,9 +232,22 @@ Page({
       postItem: postItem,
       currentPostId: postItem.id,
     });
+
     this.getComments();
-  },
-  onShow:function(){
+
+    var likeCollection = wx.getStorageSync('like_collection');
+    if (likeCollection) {
+      var likeCollected = likeCollection[this.data.postItem.id];
+      if (likeCollected) {
+        this.setData({
+          liked: likeCollected
+        })
+      }
+    } else {
+      var likeCollection = {};
+      likeCollection[this.data.postItem.id] = false;
+      wx.setStorageSync('like_collection', likeCollection)
+    }
   },
   previewImage: function (e) {
     console.log(e)
@@ -250,7 +259,7 @@ Page({
   getComments: function() {
     var that = this;
     wx.request({
-      url: app.globalData.URL+'punchTheClockComment/' + that.data.currentPostId,
+      url: 'https://api.bangneedu.com/punchTheClockComment/' + that.data.currentPostId,
       method: 'GET',
       header: {
         "content-type": "application/json",
@@ -278,7 +287,7 @@ Page({
   getPostItem: function() {
     var that = this;
     wx.request({
-      url: app.globalData.URL+'punchTheClock/' + that.data.currentPostId,
+      url: 'https://api.bangneedu.com/punchTheClock/' + that.data.currentPostId,
       method: 'GET',
       header: {
         "content-type": "application/json",
@@ -289,11 +298,47 @@ Page({
         that.setData({
           postItem: res.data.data
         });
-        console.log('commentNumber',that.data.postItem.commentNumber);
-        let title='评论 · '+that.data.postItem.commentNumber;
-        wx.setNavigationBarTitle({
-          title: title
-        })
+      },
+      fail: function(err) {
+        console.log(err);
+      }
+    })
+  },
+
+  onLikeTap: function() {
+    var that = this;
+    var likeCollection = wx.getStorageSync('like_collection');
+    var likeCollected = likeCollection[this.data.currentPostId];
+    likeCollected = !likeCollected;
+    likeCollection[this.data.currentPostId] = likeCollected;
+
+    wx.setStorageSync('like_collection', likeCollection);
+    this.setData({
+      liked: likeCollected
+    })
+
+    var extention = this.data.liked ? 'like' : 'not_like';
+    var id = this.data.currentPostId;
+
+    wx.request({
+      url: 'https://api.bangneedu.com/punchTheClock/' + extention,
+      method: 'PUT',
+      data: {
+        "punchTheClockId": id
+      },
+      header: {
+        "content-type": "application/json",
+        "Authorization": "Bearer " + wx.getStorageSync('token')
+      },
+      success: function(res) {
+        console.log(res.data);
+        if (res.data.status == 200) {
+          wx.showToast({
+            title: that.data.liked ? '点赞成功' : '取消点赞',
+            duration: 1000
+          });
+          that.getPostItem();
+        }
       },
       fail: function(err) {
         console.log(err);
@@ -326,7 +371,7 @@ Page({
       inputTxt: event.detail.value
     })
     wx.request({
-      url: app.globalData.URL+'punchTheClockComment',
+      url: 'https://api.bangneedu.com/punchTheClockComment',
       method: 'POST',
       data: {
         "content": event.detail.value,
@@ -371,7 +416,7 @@ Page({
     })
     if (event.detail.value != undefined && event.detail.value != '') {
       wx.request({
-        url: app.globalData.URL+'punchTheClockComment',
+        url: 'https://api.bangneedu.com/punchTheClockComment',
         method: 'POST',
         data: {
           "content": event.detail.value.comment,
@@ -392,8 +437,6 @@ Page({
             that.setData({
               inputTxt: ''
             })
-          
-            
             that.getComments();
             that.getPostItem();
           } else {
@@ -421,7 +464,9 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
- 
+  onShow: function() {
+
+  },
 
   /**
    * 生命周期函数--监听页面隐藏

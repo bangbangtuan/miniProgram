@@ -104,7 +104,6 @@ App({
     })
   },
   globalData: {
-    userInfo: null,
-    URL:"https://api.bangneedu.com/"
+    userInfo: null
   }
 })
