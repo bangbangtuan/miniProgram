@@ -174,12 +174,13 @@ Page({
                     postItem: testObj,
                     t_length: 0
                   })
-                  that.onCreatePoster();
-                  wx.showToast({
+                     wx.showToast({
                     title: '打卡成功',
                     icon: 'success',
                     duration: 1000
                   })
+                  that.onCreatePoster();
+               
                 } else if (res.data.status == 500 || (res.data.status == 200 && !res.data.data)) {
                   that.setData({
                     isClickable: true

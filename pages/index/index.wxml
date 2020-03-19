@@ -6,7 +6,7 @@
 		<view class="dakawrap">
 			<view class="daka">
 				<image src="{{headPortrait}}" class="avatar"></image>
-				<input type="text" placeholder="打卡分享经验吧" cursor="30" placeholder-class="dakaplace" bindfocus="goPublish" />
+				<input type="text" placeholder="打卡分享经验吧" cursor="30" placeholder-class="dakaplace" bindtap="goPublish" />
 			</view>
 		</view>
 		<view class='posts' wx:if="{{postList}}">
@@ -56,7 +56,7 @@
 					<view class="comment-desc"><text class="commntname">{{item.comm_name}}</text><text>{{item.comment}}</text></view>
 				</block>
         <view class="comment">
-        	<input type="text" placeholder="评论" placeholder-class="complaceholder" bindfocus="handleTap" data-index='{{index}}' data-type='{{item}}'/>
+        	<input type="text" placeholder="评论" placeholder-class="complaceholder" bindtap="handleTap" data-index='{{index}}' data-type='{{item}}'/>
         </view>
 			</view>
 		</view>

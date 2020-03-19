@@ -16,8 +16,8 @@
 			</view>
 			<view class='comment-content'>
 				<text> {{postItem.content}}</text>
-				<view wx:if='{{postItem.image}}' class="daka_img" bindtap='handleTap' data-index='{{index}}' data-type='{{postItem}}'>
-					<image src='{{postItem.image}}' mode="aspectFill"></image>
+				<view wx:if='{{postItem.image}}' class="daka_img" data-index='{{index}}' data-type='{{postItem}}'>
+					<image src='{{postItem.image}}' mode="aspectFill" bindtap="previewImage"></image>
 				</view>
 			</view>
 		</view>
