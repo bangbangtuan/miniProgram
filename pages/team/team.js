@@ -1,3 +1,9 @@
+import {
+  TeamModel
+} from '../../models/team.js'
+
+let teamModel = new TeamModel()
+
 var sliderWidth = 96; // 需要设置slider的宽度，用于计算中间位置
 Page({
 
@@ -23,22 +29,9 @@ Page({
     stack: [],
     radioCheckVal: '',
     tabs: ["学习伙伴", "自学团"],
-    tag: 0,
+    tag: '0'
   },
 
-  // 展开折叠选择  
-  changeToggle: function(e) {
-    var index = e.currentTarget.dataset.index;
-    if (this.data.selectedFlag[index]) {
-      this.data.selectedFlag[index] = false;
-    } else {
-      this.data.selectedFlag[index] = true;
-    }
-
-    this.setData({
-      selectedFlag: this.data.selectedFlag
-    })
-  },
   clickIn(e) {
     let teamId=e.currentTarget.dataset.index;
     if (wx.getStorageSync('token')) {
@@ -50,43 +43,34 @@ Page({
         alert: "既可加入自学团"
       }
       body.image = encodeURIComponent(body.image);
-      wx.navigateTo({
-        url: "/pages/msg/msg_success?body=" + JSON.stringify(body),
-      })
-      wx.request({
-        url: 'https://api.bangneedu.com/learningPathTeam/people',
-        method: 'POST',
-        header: {
-          "content-type": "application/json",
-          "Authorization": "Bearer " + wx.getStorageSync('token')
-        },
-        data: {
-          learningPathTeamId: teamId
-        },
-        success: function (res) {
-          console.log(res);
-          if (res.statusCode == 200) {
-            wx.showToast({
-              title: '加入自学团',
-              icon: 'success',
-              duration: 1000
-            })
-          } else if (res.statusCode == 500) {
-            wx.showModal({
-              title: '发生错误啦',
-              content: res.data.msg ? res.data.msg : '不知名错误，请联系阳叔',
-              success(res) {
-                if (res.confirm) {
-                  console.log('用户点击确定')
-                } else if (res.cancel) {
-                  console.log('用户点击取消')
-                }
-              }
-            })
-          }
-        },
-        fail: function (err) {
-          console.log(err);
+
+      let data = {
+        learningPathTeamId: teamId
+      }
+
+      teamModel.joinTeam(data)
+      .then((res) => {
+        if (res.status === 200) {
+          wx.showToast({
+            title: '加入自学团',
+            icon: 'success',
+            duration: 1500
+          })
+          wx.navigateTo({
+            url: "/pages/msg/msg_success?body=" + JSON.stringify(body),
+          })
+        } else if (res.status == 500) {
+          wx.showToast({
+            title: '请不要重复加入',
+            icon: 'none',
+            duration: 1500
+          })
+        } else {
+          wx.showToast({
+            title: '不知名错误，请联系阳叔',
+            icon: 'none',
+            duration: 1500
+          })
         }
       })
     } else {
@@ -102,79 +86,51 @@ Page({
       }, 1000)
     }
   },
+
+  selectTechno (e) {
+    console.log('eeeeeeee: ', e.detail.selected)
+    this.setData({
+      radioCheckVal: e.detail.selected
+    })
+  },
   bindFormSubmit: function(e) {
     console.log(this.data.radioCheckVal);
+    // 拿到那一个为true 的技术栈
+    // 如果没有那一个技术栈，就提示请选择技术栈
     var tech = this.data.radioCheckVal;
     if (wx.getStorageSync('token')) {
       if(!tech) {
         wx.showToast({
           title: '请选择技术栈',
-          icon: 'none'
+          icon: 'none',
+          duration: 1500
         })
       } else {
-        wx.request({
-          url: 'https://api.bangneedu.com/cpMatching/technology',
-          data: {
-            "technology": tech
-          },
-          method: 'PUT',
-          header: {
-            "content-type": "application/json",
-            "Authorization": "Bearer " + wx.getStorageSync('token')
-          },
-          success: function (res) {
-            console.log("更新技术栈: " + res);
-            wx.request({
-              url: 'https://api.bangneedu.com/cpMatching',
-              data: {
-                "technology": tech
-              },
-              method: 'POST',
-              header: {
-                "content-type": "application/json",
-                "Authorization": "Bearer " + wx.getStorageSync('token')
-              },
-              success: function (res) {
-                console.log(res);
-                if (res.statusCode == 200) {
-                  wx.showToast({
-                    title: '提交成功',
-                    icon: 'success',
-                    duration: 1000
-                  })
-                  var body = {
-                    path: "/pages/team/team",
-                    content: "分享给好友既可开始匹配",
-                    title: "点击免费匹配你的专属学习伙伴",
-                    image: "/images/Picture1.png",
-                    alert: "既可获得学习伙伴微信号"
-                  }
-                  body.image = encodeURIComponent(body.image);
-                  wx.navigateTo({
-                    url: "/pages/msg/msg_success?body=" + JSON.stringify(body),
-                  })
-                } else if (res.statusCode == 500) {
-                  wx.showModal({
-                    title: '发生错误啦',
-                    content: res.data.msg ? res.data.msg : '不知名错误，请联系阳叔',
-                    success(res) {
-                      if (res.confirm) {
-                        console.log('用户点击确定')
-                      } else if (res.cancel) {
-                        console.log('用户点击取消')
-                      }
-                    }
-                  })
-                }
-              },
-              fail: function (err) {
-                console.log(err);
-              }
-            })
-          },
-          fail: function (err) {
-            console.log(err);
+        let data = {
+          "technology": tech
+        }
+        teamModel.selectTechnology(data)
+        .then((res) => {
+          return teamModel.cpMatching(data)
+        }).then((res) => {
+          const body = {
+            path: "/pages/team/team",
+            content: "分享给好友既可开始匹配",
+            title: "点击免费匹配你的专属学习伙伴",
+            image: "/images/Picture1.png",
+            alert: "既可获得学习伙伴微信号"
           }
+
+          wx.showToast({
+            title: '提交成功',
+            icon: 'success',
+            duration: 1000
+          })
+
+          body.image = encodeURIComponent(body.image);
+          wx.navigateTo({
+            url: "/pages/msg/msg_success?body=" + JSON.stringify(body),
+          })
         })
       }
     } else {
@@ -191,12 +147,6 @@ Page({
     }
   },
 
-  radioChange: function(e) {
-    console.log('radio携带value值为：', e.detail.value);
-    this.setData({
-      radioCheckVal: e.detail.value
-    });
-  },
 
   /**
    * 生命周期函数--监听页面加载
@@ -204,53 +154,25 @@ Page({
   onLoad: function(options) {
     var that = this;
     var token = wx.getStorageSync('token');
+
+    let p1 = teamModel.getClassify()
+    let p2 = teamModel.getLearnPathTeam()
+
+    Promise.all([p1, p2]).then((res) => {
+
+      that.setData({
+        study:res[1].data.records,
+        frontend: res[0].data[0].childList[1].childList,
+        backend: res[0].data[0].childList[0].childList
+      })
+    }).catch((err) => {
+      console.log(err)
+    })
     if (token) {
       this.setData({
         logedin: token
       })
-      var that = this;
-      wx.request({
-        url: 'https://api.bangneedu.com/classify',
-        method: 'GET',
-        header: {
-          "content-type": "application/json",
-          "Authorization": "Bearer " + wx.getStorageSync('token')
-        },
-        success: function (res) {
-          console.log(res.data);
-          if (res.data.status == 401) {
-            wx.showToast({
-              title: '登陆过期，请重新登陆',
-              icon: 'none',
-              duration: 1000
-            });
-          }
-          console.log(res.data.data[0].childList);
-          that.setData({
-            frontend: res.data.data[0].childList[1].childList,
-            backend: res.data.data[0].childList[0].childList
-          })
-        },
-        fail: function (err) {
-          console.log(err);
-        }
-      }),
-      wx.request({
-        url: 'https://api.bangneedu.com/learningPathTeam',
-        method: 'GET',
-        header: {
-          "content-type": "application/json",
-          "Authorization": "Bearer " + wx.getStorageSync('token')
-        },
-        success: function (res) {
-          that.setData({
-            study:res.data.data.records
-          })
-        },
-        fail: function (err) {
-          console.log(err);
-        }
-      })
+
     } else {
       var logedin = false;
       wx.setStorageSync('token', logedin);
@@ -276,12 +198,19 @@ Page({
       tag: tag,
     })
   },
+  handleSlide: function (e) {
+    let that = this;
+    console.log(e, "滑动")
+    that.setData({
+      tag: e.detail.current.toString()
+    });
+  },
 
   bindChange: function (e) {
-    // console.log(e, "滑动")
     var that = this;
+    console.log('e.detail: ', e.target.dataset.tag)
     that.setData({
-      tag: e.detail.current
+      tag: e.target.dataset.tag
     });
   },
 
@@ -296,7 +225,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-    
+
   },
 
   /**
@@ -331,6 +260,6 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function() {
-    
+
   }
 })

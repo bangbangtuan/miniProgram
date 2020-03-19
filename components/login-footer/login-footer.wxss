@@ -1,0 +1,31 @@
+.footer-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 103rpx;
+  width: 680rpx;
+  background-color: #ffffff;
+  border-radius: 0 0 20rpx 20rpx;
+}
+
+.tips {
+  display: inline-block;
+  height: 24rpx;
+  font-family: MicrosoftYaHei;
+  font-size: 24rpx;
+  font-weight: normal;
+  font-stretch: normal;
+  line-height: 24rpx;
+  letter-spacing: 0rpx;
+  color: #a6a8aa;
+}
+
+.register {
+  font-family: MicrosoftYaHei;
+  font-size: 24rpx;
+  font-weight: bold;
+  letter-spacing: 0rpx;
+  color: #272a29;
+  line-height: 24rpx;
+  height: 24rpx;
+}

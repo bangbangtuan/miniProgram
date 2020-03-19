@@ -1,0 +1,29 @@
+<view class="technologic-wrapper">
+  <view class="techno-title">
+      技术选择点
+  </view>
+  <view class="font-content">
+    <view class="font-wrapper">
+      <image src="{{fontImg}}" class="font-sign">
+      </image>
+      <view class="sign">前端</view>
+    </view>
+    <view class="selection-wrapper">
+      <view bindtap="handleSelect" class="{{item.selected? 'selected':'font-selection'}}" wx:for="{{fontend}}" wx:key="id" data-item="{{item.name}}">
+          {{item.name}}
+      </view>
+    </view>
+  </view>
+  <view class="backend-content">
+    <view class="backend-wrapper">
+      <image class="backend-sign" src="{{backImg}}">
+      </image>
+      <view class="sign">后端</view>
+    </view>
+    <view class="selection-wrapper">
+      <view  bindtap="handleSelect"  class="{{item.selected? 'selected':'backend-seletion'}}" wx:for="{{backend}}" wx:key="id"  data-item="{{item.name}}">
+        {{item.name}}
+      </view>
+    </view>
+  </view>
+</view>

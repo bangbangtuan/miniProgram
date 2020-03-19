@@ -1,0 +1,37 @@
+<view class="page">
+  <view class="page__hd header">
+    <view class="page__title">组队信息</view>
+  </view>
+  <form bindsubmit="bindFormSubmit">
+    <view class="page__bd input-form">
+      <view class="weui-cells__title">技术点</view>
+      <view class="weui-cells weui-cells_after-title">
+        <view class="box">
+          <view class='stack-container'>
+            <radio-group class="radio-group" bindchange="radioChange">
+              <radio class="head {{radioCheckVal=='frontend' ? 'radioActive':''}}" value="frontend">前端</radio>
+              <label class="radio {{radioCheckVal==item.name ? 'radioActive':''}}" wx:for="{{frontend}}" wx:key='id'>
+                <radio value="{{item.name}}" checked="{{item.checked}}" />{{item.name}}
+              </label>
+            </radio-group>
+          </view>
+          <view class='stack-container'>
+            <radio-group class="radio-group" bindchange="radioChange">
+              <radio class="head {{radioCheckVal=='backend' ? 'radioActive':''}}" value="backend">后端</radio>
+              <label class="radio {{radioCheckVal==item.name ? 'radioActive':''}}" wx:for="{{backend}}" wx:key='id'>
+                <radio value="{{item.name}}" />{{item.name}}
+              </label>
+            </radio-group>
+          </view>
+        </view>
+      </view>
+      <view class="weui-cells__title">项目经验</view>
+      <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell">
+          <textarea name="textarea" bindinput="bindText" />
+        </view>
+      </view>
+    </view>
+    <button form-type="submit" class="submit"> 提交 </button>
+  </form>
+</view>

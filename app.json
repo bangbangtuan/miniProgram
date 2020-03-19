@@ -26,29 +26,25 @@
   "tabBar": {
     "color": "#999",
     "selectedColor": "#666",
-    "backgroundColor": "#feefe8",
+    "backgroundColor": "#fefefe",
     "list": [
       {
         "pagePath": "pages/index/index",
-        "text": "打卡",
         "iconPath": "images/tab/daka.png",
         "selectedIconPath": "images/tab/daka-act.png"
       },
       {
         "pagePath": "pages/team/team",
-        "text": "学习",
         "iconPath": "images/tab/team.png",
         "selectedIconPath": "images/tab/team-act.png"
       },
       {
         "pagePath": "pages/project/project",
-        "text": "项目",
         "iconPath": "images/tab/project.png",
         "selectedIconPath": "images/tab/project-act.png"
       },
       {
         "pagePath": "pages/profile/profile",
-        "text": "我",
         "iconPath": "images/tab/me.png",
         "selectedIconPath": "images/tab/me-act.png"
       }

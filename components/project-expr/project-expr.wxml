@@ -1,0 +1,4 @@
+<view class="project-wrapper">
+    <view class="project-title">项目经验</view>
+    <textarea class="project-content" placeholder="描述一下自己的经验吧"></textarea>
+</view>

@@ -1,0 +1,41 @@
+.tips {
+	width: 710rpx;
+	font-family: MicrosoftYaHei;
+	font-size: 24rpx;
+	font-weight: normal;
+	font-stretch: normal;
+	line-height: 70rpx;
+	letter-spacing: 0rpx;
+	color: #666666;
+	margin-bottom: 40rpx;
+}
+
+.tips .title {
+	font-family: MicrosoftYaHei;
+	font-size: 24rpx;
+	font-weight: normal;
+	font-stretch: normal;
+	line-height: 70rpx;
+	letter-spacing: 0rpx;
+	color: #666666;
+}
+
+.tips .tips1 {
+	font-family: MicrosoftYaHei;
+	font-size: 24rpx;
+	font-weight: normal;
+	font-stretch: normal;
+	line-height: 36rpx;
+	letter-spacing: 0rpx;
+	color: #666666;
+}
+
+.tips .tips2 {
+	font-family: MicrosoftYaHei;
+	font-size: 24rpx;
+	font-weight: normal;
+	font-stretch: normal;
+	line-height: 36rpx;
+	letter-spacing: 0rpx;
+	color: #666666;
+}

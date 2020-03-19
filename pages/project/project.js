@@ -1,3 +1,9 @@
+import {
+  ProjectItem
+} from '../../models/project.js'
+
+let projectItem = new ProjectItem ()
+
 Page({
 
   /**
@@ -8,42 +14,34 @@ Page({
     flag: false
   },
 
+  addTeamMembers: function(project, teams) {
+    project.teamMembers = teams.slice(0, 4)
+    project.totalMembers = teams
+  },
+
   getProjects: function () {
     var that = this;
-    wx.request({
-      url: 'https://api.bangneedu.com/project?current' + this.data.current + '&size=10',
-      method: 'GET',
-      header: {
-        "content-type": "application/json"
-      },
-      success: function (res) {
-        console.log(res.data.data);
-        for (let i = 0; i < res.data.data.records.length; i++) {
-          wx.request({
-            url: 'https://api.bangneedu.com/projectTeam/' + res.data.data.records[i].id,
-            method: 'GET',
-            header: {
-              "content-type": "application/json"
-            },
-            success: function (result) {
-              console.log(result.data.data);
-              res.data.data.records[i].teamMembers = result.data.data.slice(0,3)
-              that.setData({
-                flag: true,
-                projects: res.data.data.records,
-                pages: parseInt(res.data.data.pages)
-              })
-            },
-            fail: function (err) {
-              console.log(err);
-            }
-          })
-        }
-        console.log(that.data.projects)
-      },
-      fail: function (err) {
-        console.log(err);
+    let item = []
+    projectItem.getProjectItem()
+    .then ((res) => {
+      that.setData({
+        projects: res.data.records
+      })
+      for (let i = 0; i < that.data.projects.length; i++) {
+         item.push(projectItem.getProjectTeam(that.data.projects[i].id))
       }
+      return Promise.all(item)
+    }).then((res) => {
+      for (let i = 0; i < that.data.projects.length; i++) {
+        let project = that.data.projects[i]
+        let teams = res[i].data
+        console.log('team: ', teams)
+        this.addTeamMembers(project, teams)
+      }
+      that.setData({
+        projects: that.data.projects
+      })
+      console.log('projects: ', that.data.projects)
     })
   },
 
@@ -59,12 +57,12 @@ Page({
       url: '/pages/project/joinTeam/joinTeam?id=' + e.currentTarget.dataset['id'],
     })
   },
-  
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+
   },
 
   /**

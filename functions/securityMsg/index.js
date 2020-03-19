@@ -14,5 +14,4 @@ exports.main = async (event, context) => {
   } catch (err) {
     return err
   }
-
 }

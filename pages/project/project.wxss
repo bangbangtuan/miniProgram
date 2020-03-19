@@ -1,51 +1,161 @@
-.container {
+.project-background {
+  height: 100%;
+  background-color: #4e4edf;
+}
+
+.project-wrapper {
+  padding-top: 50rpx;
+  margin-top: 40rpx;
+  height: 100%;
+  background-color: #ffffff;
+  border-top-left-radius: 30rpx;
+  border-top-right-radius: 30rpx;
   display: flex;
-  flex-direction: column;
-  margin: 20rpx;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-content: flex-start;
 }
 
-.con-header {
-  margin: 20rpx 0 30rpx;
-  font-size: 16px;
-  border-left: 5rpx solid #ff6e37;
-  padding-left: 10rpx;
+.project-item {
+  display: flex;
+  width: 710rpx;
+  height: 240rpx;
+  background-color: #ffffff;
+  border-radius: 10rpx;
+  box-shadow: 4rpx 4rpx 4rpx #bbb;
+  box-shadow: 0rpx -6rpx 10rpx 10rpx rgba(0, 0, 0, 0.1);
+  margin-bottom: 20rpx;
 }
 
-.relative-box {
+.project-pic {
+  width: 180rpx;
+  height: 180rpx;
+  background-image: linear-gradient(25deg,
+    #4f4fe0 100%);
+  border-radius: 10rpx;
+  margin: 30rpx;
+  flex-shrink: 0;
+}
+
+.project-content {
   position: relative;
+  flex: 1;
+  margin: 30rpx 30rpx 30rpx 0rpx;
+  font-size: 0rpx;
 }
 
-.relative-box .weui-media-box__hd_in-appmsg {
-  width: 150rpx;
-  height: 200rpx;
+.project-title {
+  height: 28rpx;
+  font-family: MicrosoftYaHei;
+  font-size: 28rpx;
+  font-weight: normal;
+  font-stretch: normal;
+  line-height: 28rpx;
+  letter-spacing: 0rpx;
+  color: #000000;
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 440rpx;
 }
 
-.relative-box .weui-media-box__bd_in-appmsg {
-  margin-bottom: 40rpx;
+.project-technology {
+  margin-top: 15rpx;
+  height: 25rpx;
+  font-family: MicrosoftYaHei;
+  font-size: 24rpx;
+  font-weight: normal;
+  font-stretch: normal;
+  line-height: 25rpx;
+  letter-spacing: 0rpx;
+  color: #666666;
 }
 
-.btn-detail {
-  background-color: #48ce24;
-  color: #fff;
-  border: none;
-  padding: 5rpx 25rpx;
-  border-top-left-radius: 20rpx;
-  border-bottom-left-radius: 20rpx;
-  font-size: 14px;
-  position: absolute;
-  right: 0;
-  bottom: 15rpx;
+.project-profile {
+  padding-top: 10rpx;
+  height: 25rpx;
+  font-family: MicrosoftYaHei;
+  font-size: 24rpx;
+  font-weight: normal;
+  font-stretch: normal;
+  line-height: 25rpx;
+  letter-spacing: 0rpx;
+  color: #666666;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 440rpx;
 }
+
 .team-members {
   display: flex;
-  margin-top: 10rpx;
+  align-items: center;
+  margin-top: 23rpx;
+  justify-content: space-between;
 }
-.team-members image {
+
+.team-wrapper {
+  flex: 1;
+  align-items: center;
+  display: flex;
+
+}
+
+.team-wrapper :nth-child(2) {
+  position: relative;
+  left: -15rpx;
+}
+
+.team-wrapper :nth-child(3) {
+  position: relative;
+  left: -30rpx;
+}
+
+.team-wrapper :nth-child(4) {
+  position: relative;
+  left: -45rpx;
+}
+
+.team-wrapper :nth-child(5) {
+  position: relative;
+  left: -45rpx;
+}
+
+image {
   width: 50rpx;
   height: 50rpx;
-  margin-right: 10rpx;
   border-radius: 50%;
+  display: inline-block;
 }
-.project-cont-box {
+
+.total {
+  height: 20rpx;
+  font-family: MicrosoftYaHei;
+  font-size: 20rpx;
+  font-weight: normal;
+  font-stretch: normal;
+  line-height: 20rpx;
+  letter-spacing: 0rpx;
+  color: #666666;
   display: flex;
+  margin-left: 7rpx;
+}
+
+
+.btn-detail {
+  margin-top: 19rpx;
+
+  text-align: center;
+  height: 50rpx;
+  font-family: MicrosoftYaHei;
+  font-size: 24rpx;
+  font-weight: normal;
+  font-stretch: normal;
+  line-height: 50rpx;
+  letter-spacing: 0rpx;
+  color: #ffffff;
+  width: 110rpx;
+  background-color: #4f4fe0;
+  border-radius: 25rpx;
 }
