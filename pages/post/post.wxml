@@ -1,0 +1,31 @@
+<!--pages/post/post.wxml-->
+<view class='daka'>
+	<form bindsubmit="bindFormSubmit">
+		<view class="daka-area">
+			<textarea name="textarea" value="{{daka}}" placeholder="发布打卡吧，把自己的感想写下来吧" placeholder-style="font-size:14px;color:#bebcd2;"/>
+			<view class="uploader">
+          <view class="upload__bd">
+            <view class="upload_files" id="uploaderFiles">
+                <view class="uploader_file" bindtap="previewImage" id="{{image[0]}}" wx:if="{{image[0]}}">
+                  <image class="uploader_img" src="{{image[0]}}" mode="aspectFill" />
+                </view>
+                <view class="upload_input" bindtap="chooseImage" wx:else>
+                  <image src="/images/icon/camera.png" mode="aspectFill"></image>
+                  <text>照片</text>
+                </view>
+            </view>
+            </view>
+          </view> 
+    </view> 
+    <view class="classify-box">
+        <view>点击选择打卡类别</view>
+        <radio-group class="classify" bindchange="radioChange" name="type">
+          <radio class="radio {{type==item.tag ? 'radioActive':''}}" value="{{item.tag}}" wx:for="{{tags}}" wx:key='id'>{{item.tag}}</radio>
+        </radio-group>
+      </view>
+      <poster id="poster" hide-loading="{{false}}" preload="{{false}}" config="{{posterConfig}}" bind:success="onPosterSuccess" bind:fail="onPosterFail" class="poster">
+      </poster>
+      <button form-type="submit" wx:if="{{isClickable}}"> 发布 </button>
+      <button form-type="submit" wx:else> 正在处理中... </button>
+    </form>
+  </view>

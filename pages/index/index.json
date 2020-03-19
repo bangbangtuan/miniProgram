@@ -2,5 +2,7 @@
   "usingComponents": {
     "poster": "/miniprogram_dist/poster/index"
   },
+
+  "navigationBarTitleText": "首页",
   "enablePullDownRefresh": true
 }

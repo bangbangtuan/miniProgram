@@ -3,5 +3,6 @@
     "poster": "/miniprogram_dist/poster/index"
   },
   "navigationBarBackgroundColor": "#FFFFFF",
-  "navigationBarTextStyle": "black"
+  "navigationBarTextStyle": "black",
+  "navigationBarTitleText": "IT练习生"
 }
