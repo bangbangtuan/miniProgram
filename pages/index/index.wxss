@@ -1,41 +1,103 @@
-.daka {
-  margin: 50rpx 60rpx 0;
+.container {
+  position: relative;
+  height: 100%;
+}
+
+.title {
+  position: fixed;
+  top: 0;
+  z-index: 100;
+  background-color: #4e4edf;
+  width: 100%;
+  height: 100rpx;
+  text-align: center;
+  padding-top: 60rpx;
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
   align-items: center;
- 
-}
-
-.head {
-  margin-bottom: 10rpx;
-  font-size: 22px;
-  font-weight: 700;
-  color: #6c6c6c;
-}
-
-.daka textarea {
-  
-  padding: 20rpx;
-  font-size: 16px;
-}
-
-.daka button {
-  margin: 20rpx auto;
-  width: 50%;
-  background-color: #ff6e37;
   color: #fff;
+  font-size: 20px;
+
 }
+
+.content {
+  position: relative;
+}
+
+.content .dakawrap {
+  width: 100%;
+  height: 160rpx;
+  background-color: #4e4edf;
+}
+
+.content .avatar {
+  width: 70rpx;
+  height: 70rpx;
+  border-radius: 50%;
+}
+
+.content .daka {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 0 20rpx;
+  box-sizing: border-box;
+  /* margin-top:20rpx; */
+}
+
+.daka input {
+  flex: 1;
+  font-size: 14px;
+  background: #6969e4;
+  border-radius: 40rpx;
+  color: #fff;
+  padding-left: 40rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+  margin-left: 24rpx;
+}
+
+.daka .dakaplace {
+  color: #fff;
+  font-size: 14px;
+  text-align: left;
+  /* padding-left:20rpx; */
+}
+
+.dakaList {
+  position: absolute;
+  top: 266rpx;
+  width: 100%;
+  background-color: #fff;
+  border-radius: 40rpx 40rpx 0 0;
+  height: 500rpx;
+}
+
 
 .posts {
-  margin: 50rpx 60rpx 0;
+  position: absolute;
+  /* top:276rpx; */
+  top: 120rpx;
+  width: 100%;
+  /* height: 500px; */
+  background-color: #fff;
+  border-radius: 40rpx 40rpx 0 0;
+  padding: 40rpx 20rpx 0;
   color: #666;
   font-size: 16px;
+  z-index: 9;
+  box-sizing: border-box;
 }
 
 .post {
-  box-shadow: 0rpx 6rpx 10rpx 5rpx #e9e8e8;
-  padding: 20rpx 30rpx;
-  margin-bottom: 10rpx;
+  width: 100%;
+  box-shadow: 0rpx 3rpx 10rpx 5rpx #e9e8e8;
+  padding: 40rpx 40rpx 34rpx;
+  margin-bottom: 20rpx;
+  border-radius: 20rpx;
+  box-sizing: border-box;
 }
 
 .head-container {
@@ -52,9 +114,9 @@
 .author-date-container image {
   width: 100rpx;
   height: 100rpx;
-  border-radius: 50%;
+  border-radius: 20rpx;
   vertical-align: middle;
-  border: 1rpx solid #e1e1e1;
+  /* border: 1rpx solid #e1e1e1; */
 }
 
 .auto-date {
@@ -73,41 +135,91 @@
   margin: 10rpx;
 }
 
-.count text {
-  font-size: 14px;
+.tag text {
+  padding: 10rpx 30rpx;
+  font-size: 10px;
+  color: #2d2d39;
+  background-color: #fff8ea;
+  border-radius: 30rpx;
+  border: 1rpx solid #facd7c;
 }
-.daka_img{
-  width:100%;
-  height:300rpx;
-  padding:20rpx 0;
+
+.daka_img {
+  width: 100%;
+  height: 300rpx;
+  padding: 20rpx 0;
 }
-.daka_img image{
-  width:100%;
-  height:100%;
+
+.daka_img image {
+  width: 100%;
+  height: 100%;
+  border-radius: 10rpx;
 }
+
 .comment-like {
-  /* margin-left: 395rpx; */
+  display: flex;
+  justify-content: space-between;
+}
+
+.comment-like .count {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: #ced0d6;
+  font-size: 10px;
+}
+
+.comment-like .count .day {
+  color: #f76239;
+  margin: 0 10rpx;
+}
+
+.comment-like .likes {
   display: flex;
 }
-.comment-like .likeItem{
-  flex:1;
+
+.comment-like .likeItem {
+  display: flex;
+  align-items: center;
 }
+
+.comment-like .likeItem:first-child {
+  margin-right: 50rpx;
+}
+
+.comment-like .likeItem view {
+  width: 60rpx;
+  height: 60rpx;
+  background-color: #f5f6fc;
+  border-radius: 50%;
+  text-align: center;
+  margin-right: 15rpx;
+}
+
+.comment-like .likeItem text {
+  color: #48d491;
+  font-size: 10px;
+}
+
 .comment-like image {
-  width: 45rpx;
-  height: 45rpx;
-  margin-right: 8px;
+  width: 30rpx;
+  height: 30rpx;
   vertical-align: middle;
 }
 
-.comment-like text {
-  font-size: 14px;
-  vertical-align: middle;
-  margin-right: 20rpx;
-  margin-top: 20rpx;
+.comment {
+  padding: 10rpx 20rpx;
+  margin-top: 26rpx;
+  border-radius: 16rpx;
+  background-color: #f7f8fa;
 }
-.comment-like .share{
-  width:100rpx;
+.comment .complaceholder{
+  font-size: 12px;
 }
+.comment-like .share {
+  width: 100rpx;
+}
+
 checkbox .wx-checkbox-input {
   width: 18px;
   height: 16px;
@@ -118,11 +230,15 @@ checkbox .wx-checkbox-input {
 checkbox .wx-checkbox-input:before {
   display: none;
 }
-textarea{width:auto;}
+
+textarea {
+  width: auto;
+}
+
 .daka-area {
   position: relative;
-  margin:0 60rpx;
-   border: 2rpx solid #e7e7e7;
+  margin: 0 60rpx;
+  border: 2rpx solid #e7e7e7;
   border-radius: 5rpx;
 }
 
@@ -133,100 +249,54 @@ textarea{width:auto;}
   color: #999;
   font-size: 14px;
 }
+
 .classify-box {
   /* display: flex; */
+
   font-size: 14px;
   margin: 20rpx 60rpx;
   color: #666;
   width: 100%;
 }
-.classify{
+
+.classify {
   width: 600rpx;
   display: flex;
   flex-wrap: wrap;
   margin-left: 20rpx;
   margin-bottom: 20rpx;
 }
-radio{
+
+radio {
   margin-right: 15rpx;
 }
+
 radio .wx-radio-input {
   display: none;
 }
 
-.classify .radioActive {
-  border: 1rpx solid #ff6e37;
-  background-color: rgb(218, 214, 214);
-  border-radius: 10rpx;
-}
 
-.radio-group .radio {
-  padding: 0 10rpx;
-  display:block;
-}
- .divider{
+
+.divider {
   height: 1rpx;
   width: 96%;
-  border-top: 4rpx solid #999;
+  border-top: 1rpx solid #999;
   margin: 20rpx 0;
- }
- .comment-desc{
-   font-size:14px;
- }
- .more{
-   font-size:13px;
-  margin-top:10rpx;
- }
- .more_txt{
-   color:#eabc48;
- }
- .share{
-   line-height:1;
-   background:#fff;
-   margin-top:8rpx;
- }
- .share::after{
-   border:none;
- }
- .tag {
-   color: #ff6e37;
- }
-  .upload__bd{
-   position:relative;
-   display:flex;
- }
-  .upload_files{
-   width:100%;
-   display: flex;
-   flex-wrap:wrap;
-   margin:10rpx;
- }
-  .uploader_file{
-    width:20%;
-    height:100rpx;
-    padding-right:6rpx; 
-    position:relative;
- }
- .uploader_img{
-      width:100%;
-     height:100%;
-  }
-  .del_img{
-    width:30rpx;
-    height:30rpx;
-    position:absolute;
-    right:0rpx;
-    top:-10rpx;
-  }
+}
 
- .upload_input{
-   width:20%;
-   height:100rpx;
- }
- .upload_input image{
-   width:100%;
-   height:100%;
-   /* height:100%; */
- }
+.comment-desc {
+  font-size: 14px;
+}
+.comment-desc .commntname{
+  color:  #4f4fe0;
+}
+.comment-desc .colon{
+  margin:0 10rpx 0 6rpx;
+}
+.more {
+  font-size: 13px;
+  margin-top: 10rpx;
+}
+
 
 
