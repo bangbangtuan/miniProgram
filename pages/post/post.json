@@ -1,8 +1,0 @@
-{
-  "usingComponents": {
-    "poster": "/miniprogram_dist/poster/index"
-  },
-  "navigationBarBackgroundColor": "#FFFFFF",
-  "navigationBarTextStyle": "black",
-  "navigationBarTitleText": "IT练习生"
-}
