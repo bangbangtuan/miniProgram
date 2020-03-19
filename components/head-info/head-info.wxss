@@ -1,0 +1,47 @@
+.headPortrait-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 710rpx;
+  height: 140rpx;
+  background-color: #ffffff;
+  border-radius: 20rpx;
+  margin-top: 30rpx;
+  box-shadow: 2rpx 2rpx 8rpx #bbb;
+}
+
+.head-text {
+  height: 24rpx;
+	font-family: MicrosoftYaHei;
+	font-size: 24rpx;
+	font-weight: normal;
+	font-stretch: normal;
+	line-height: 24rpx;
+	letter-spacing: 0rpx;
+	color: #000000;
+  margin-left: 40rpx;
+}
+
+.pic-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 145rpx;
+  height: 100rpx;
+  margin-right: 40rpx;
+}
+
+.head-pic {
+  width: 100rpx;
+  height: 100rpx;
+  background-image: linear-gradient(0deg,
+    #0e6cfa 0%,
+    #5f9efb 100%);
+  border-radius: 50%;
+}
+
+.head-sign {
+  width: 11rpx;
+  height: 20rpx;
+  line-height: 20rpx;
+}

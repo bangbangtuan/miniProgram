@@ -1,115 +1,34 @@
-<view class='tab'>
-  <view class='{{tag == index?"true":"false"}}' wx:for='{{tabs}}' wx:key='key' data-index='{{index}}' catchtap='btn'>{{item}}</view>
-</view>
-<swiper current="{{tag}}" class="swiper-box" duration="300" style="height:{{winHeight - 31}}px" bindchange="bindChange">
-  <swiper-item>
-    <scroll-view class='scroll' scroll-y='true'>
-      <view class="box">
-        <view class='header'>组队</view>
-        <form bindsubmit="bindFormSubmit">
-          <view class="li {{selectedFlag[0] ? 'active' : ''}}" data-index="0" bindtap='changeToggle'>技术选择点</view>
-          <view hidden="{{!selectedFlag[0]}}">
-            <view class='stack-container'>
-              <radio-group class="radio-group" bindchange="radioChange">
-                <radio class="head {{radioCheckVal=='frontend' ? 'radioActive':''}}" value="frontend">前端</radio>
-                <label class="radio {{radioCheckVal==item.name ? 'radioActive':''}}" wx:for="{{frontend}}" wx:key='id'>
-                  <radio value="{{item.name}}" checked="{{item.checked}}" />{{item.name}}
-                </label>
-              </radio-group>
-            </view>
-            <view class='stack-container'>
-              <radio-group class="radio-group" bindchange="radioChange">
-                <radio class="head {{radioCheckVal=='backend' ? 'radioActive':''}}" value="backend">后端</radio>
-                <label class="radio {{radioCheckVal==item.name ? 'radioActive':''}}" wx:for="{{backend}}" wx:key='id'>
-                  <radio value="{{item.name}}" />{{item.name}}
-                </label>
-              </radio-group>
-            </view>
-          </view>
-          <view class="li {{selectedFlag[1] ? 'active' : ''}}" data-index="1" bindtap='changeToggle'>项目经验</view>
-          <view hidden="{{!selectedFlag[1]}}">
-            <view class='info'>
-              <view>个人描述</view>
-              <textarea name='experience'></textarea>
-            </view>
-          </view>
-          <view class="li {{selectedFlag[2] ? 'active' : ''}}" data-index="2" bindtap='changeToggle'>微信号确认</view>
-          <view hidden="{{!selectedFlag[2]}}">
-            <view class='info'>
-              <input name='weixin'></input>
-            </view>
-          </view>
-          <view class="li {{selectedFlag[3] ? 'active' : ''}}" data-index="3" bindtap='changeToggle'>组队须知</view>
-          <view hidden="{{!selectedFlag[3]}}">
-            <view class='note'>
-              <view class='note-item' wx:for='{{notes}}' wx:key='{{item.id}}'>
-                <view class='number'>{{item.id}}</view>
-                <view>{{item.note}}</view>
-              </view>
-            </view>
-          </view>
-          <button form-type="submit" class="submit"> 提交 </button>
-        </form>
-      </view>
-    </scroll-view>
-  </swiper-item>
-  <!-- 页面二 -->
-  <swiper-item>
-    <scroll-view style='height:100%;' scroll-y='true'>
-      <view class="study" wx:for="{{study}}" wx:key="{{item.id}}" >
-       <image src="{{item.image}}" class="img" ></image>
-       <text  class="title">{{item.title}}</text>
-       <button size="mini" class="btn" data-index="{{item.id}}" bindtap="clickIn">点击加入</button>
-      </view>
-    </scroll-view>
-  </swiper-item>
-</swiper>
-
-
-<!-- <view class="box">
-  <view class='header'>组队</view>
-  <form bindsubmit="bindFormSubmit">
-    <view class="li {{selectedFlag[0] ? 'active' : ''}}" data-index="0" bindtap='changeToggle'>技术选择点</view>
-    <view hidden="{{!selectedFlag[0]}}">
-      <view class='stack-container'>
-        <radio-group class="radio-group" bindchange="radioChange">
-          <radio class="head {{radioCheckVal=='frontend' ? 'radioActive':''}}" value="frontend">前端</radio>
-          <label class="radio {{radioCheckVal==item.name ? 'radioActive':''}}" wx:for="{{frontend}}" wx:key='id'>
-            <radio value="{{item.name}}" checked="{{item.checked}}" />{{item.name}}
-          </label>
-        </radio-group>
-      </view>
-      <view class='stack-container'>
-        <radio-group class="radio-group" bindchange="radioChange">
-          <radio class="head {{radioCheckVal=='backend' ? 'radioActive':''}}" value="backend">后端</radio>
-          <label class="radio {{radioCheckVal==item.name ? 'radioActive':''}}" wx:for="{{backend}}" wx:key='id'>
-            <radio value="{{item.name}}" />{{item.name}}
-          </label>
-        </radio-group>
-      </view>
-    </view>
-    <view class="li {{selectedFlag[1] ? 'active' : ''}}" data-index="1" bindtap='changeToggle'>项目经验</view>
-    <view hidden="{{!selectedFlag[1]}}">
-      <view class='info'>
-        <view>个人描述</view>
-        <textarea name='experience'></textarea>
-      </view>
-    </view>
-    <view class="li {{selectedFlag[2] ? 'active' : ''}}" data-index="2" bindtap='changeToggle'>微信号确认</view>
-    <view hidden="{{!selectedFlag[2]}}">
-      <view class='info'>
-        <input name='weixin'></input>
-      </view>
-    </view>
-    <view class="li {{selectedFlag[3] ? 'active' : ''}}" data-index="3" bindtap='changeToggle'>组队须知</view>
-    <view hidden="{{!selectedFlag[3]}}">
-      <view class='note'>
-        <view class='note-item' wx:for='{{notes}}' wx:key='{{item.id}}'>
-          <view class='number'>{{item.id}}</view>
-          <view>{{item.note}}</view>
+<view class="study-wrapper">
+    <view class="header-wrapper">
+        <view class="{{tag === '0'? 'partner-tab':'partner-tab2'}}"  bindtap="bindChange" data-tag='0'>
+          学习伙伴
         </view>
-      </view>
+        <view class="{{tag === '1'? 'self-study-tab2':'self-study-tab'}}" bindtap="bindChange" data-tag='1'>自学团</view>
     </view>
-    <button form-type="submit"> 提交 </button>
-  </form>
-</view> -->
+    <swiper current="{{tag}}" class="swiper" duration="300" bindchange="handleSlide">
+        <swiper-item>
+          <scroll-view class='scroll' scroll-y='true'>
+            <form bindsubmit="bindFormSubmit"  class="detail-wrapper">
+                <tech-select fontend="{{frontend}}" backend="{{backend}}" bind:selectTechno="selectTechno"></tech-select>
+                <project-expr></project-expr>
+                <weixin-info></weixin-info>
+                <team-tips></team-tips>
+                <button form-type="submit" class="submit"> 开始组队 </button>
+            </form>
+          </scroll-view>
+        </swiper-item>
+        <swiper-item class="content-wrapper">
+              <view class="plan" wx:for="{{study}}" wx:key="id">
+                  <view class="left"></view>
+                  <view class="title-wrapper">
+                    <view class="title">{{item.title}}</view>
+                  </view>
+                  <view size="mini" class="join" data-index="{{item.id}}" bindtap="clickIn">
+                    <view class='button-text' bindtap="clickIn">
+                      点击加入
+                    </view>
+                  </view>
+              </view>
+        </swiper-item>
+    </swiper>
+</view>

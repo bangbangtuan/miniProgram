@@ -1,4 +1,10 @@
 // pages/project/projectDetails/projectDetails.js
+import {
+  ProjectDetail
+} from '../../../models/projectDetail'
+
+let projectDetail = new ProjectDetail()
+
 Page({
 
   /**
@@ -22,42 +28,54 @@ Page({
 
   getProject: function () {
     var that = this;
-    wx.request({
-      url: 'https://api.bangneedu.com/project/' + this.data.id,
-      method: 'GET',
-      header: {
-        "content-type": "application/json"
-      },
-      success: function (res) {
-        console.log(res.data.data);
-        that.setData({
-          project: res.data.data
-        })
-      },
-      fail: function (err) {
-        console.log(err);
-      }
+    projectDetail.getProject(this.data.id)
+    .then((res) => {
+      that.setData({
+        project: res.data
+      })
     })
+    // wx.request({
+    //   url: 'https://api.bangneedu.com/project/' + this.data.id,
+    //   method: 'GET',
+    //   header: {
+    //     "content-type": "application/json"
+    //   },
+    //   success: function (res) {
+    //     console.log(res.data.data);
+    //     that.setData({
+    //       project: res.data.data
+    //     })
+    //   },
+    //   fail: function (err) {
+    //     console.log(err);
+    //   }
+    // })
   },
 
   getProjectTask: function() {
     var that = this;
-    wx.request({
-      url: 'https://api.bangneedu.com/projectTask/' + this.data.id,
-      method: 'GET',
-      header: {
-        "content-type": "application/json"
-      },
-      success: function (res) {
-        console.log(res.data.data);
-        that.setData({
-          tasks: res.data.data,
-        })
-      },
-      fail: function (err) {
-        console.log(err);
-      }
+    projectDetail.getProjectTask(this.data.id)
+    .then ((res) => {
+      that.setData({
+        tasks: res.data,
+      })
     })
+    // wx.request({
+    //   url: 'https://api.bangneedu.com/projectTask/' + this.data.id,
+    //   method: 'GET',
+    //   header: {
+    //     "content-type": "application/json"
+    //   },
+    //   success: function (res) {
+    //     console.log(res.data.data);
+    //     that.setData({
+    //       tasks: res.data.data,
+    //     })
+    //   },
+    //   fail: function (err) {
+    //     console.log(err);
+    //   }
+    // })
   },
 
   navigateToDetails: function (e) {

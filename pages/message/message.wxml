@@ -1,18 +1,21 @@
-<view class='container'>
-  <view class='cp'>
-    <view class='head'>组cp通知</view>
-    <view class='detail' wx:if='{{cpDetail}}'>
+<view class="message-wrapper">
+  <view class="cp-message-wrapper">
+    <view class="header">
+      <image class="pic" src="./images/zudui.png">
+      </image>
+      <view class="title">
+        组CP通知
+      </view>
+    </view>
+    <view class="cp-detail">
       <view>昵称：{{cpDetail.name}}</view>
       <view>微信：{{cpDetail.weixin}}</view>
       <view>电话：{{cpDetail.phone}}</view>
-    </view> 
-    <view class='detail' wx:else>还没有匹配到cp，记得提交申请。如果已经提交，请继续等待。</view>
   </view>
-  <view class='message'>
-    <view class='head'>其他消息</view>
+  </view>
+  <view class="noraml-message-wrapper">
     <view class='message-item' wx:for="{{messages}}" wx:key="id">
-      <image src='/images/icon/pinglun.png'></image>
-      <text>{{item.message}}</text>
+      <view>{{item.message}}</view>
     </view>
   </view>
 </view>

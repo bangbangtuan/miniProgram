@@ -1,4 +1,12 @@
 // pages/userInfo/userInfo.js
+import {
+  UserInfoModel
+} from '../../models/userinfo.js'
+
+import {config} from '../../config.js'
+
+let userInfoModel = new UserInfoModel ()
+
 Page({
 
   /**
@@ -30,8 +38,9 @@ Page({
       success: function (res) {
         console.log(res.tempFilePaths);
         const tempFilePaths = res.tempFilePaths
+
         wx.uploadFile({
-          url: 'https://api.bangneedu.com/upload',
+          url: `${config.api_blink_url}upload`,
           header: {
             "content-type": "application/json",
             "Authorization": "Bearer " + wx.getStorageSync('token')
@@ -40,25 +49,19 @@ Page({
           name: 'file',
           success(res) {
             var img = JSON.parse(res.data).data;
-            console.log(img);
-            wx.request({
-              url: 'https://api.bangneedu.com/user',
-              method: 'PUT',
-              header: {
-                "content-type": "application/json",
-                "Authorization": "Bearer " + wx.getStorageSync('token')
-              },
-              data: {
-                "id": that.data.userInfo.id,
-                "headPortrait": img
-              },
-              success: function (res) {
-                console.log(res.data);
-                that.refreshUserInfo();
-              },
-              fail: function (err) {
-                console.log(err);
-              }
+            let data = {
+              "id": that.data.userInfo.id,
+              "headPortrait": img
+            }
+
+            userInfoModel.uploadHeaderProtrait(data)
+            .then((res) => {
+              wx.showToast({
+                title: '上传头像成功',
+                icon: 'none',
+                duration: 1500
+              })
+              that.refreshUserInfo();
             })
           }
         })
@@ -68,21 +71,28 @@ Page({
 
   refreshUserInfo: function() {
     var that = this;
-    wx.request({
-      url: 'https://api.bangneedu.com/user',
-      method: 'GET',
-      header: {
-        "content-type": "application/json",
-        "Authorization": "Bearer " + wx.getStorageSync('token')
-      },
-      success: function (res) {
-        console.log(res.data.data);
-        that.setData({
-          userInfo: res.data.data
+    userInfoModel.getUserInfo()
+    .then((res) => {
+      console.log('refresh: ',  res)
+      that.setData({
+        userInfo: res.data
+      })
+    })
+  },
+
+  logout: function () {
+    let that = this
+    wx.removeStorage({
+      key: 'token',
+      success: function(res) {
+        wx.showToast({
+          title: '退出成功',
+          icon: 'success',
+          duration: 1500
         })
-      },
-      fail: function (err) {
-        console.log(err);
+        wx.navigateTo({
+          url: '/pages/login/login'
+        })
       }
     })
   },
@@ -90,34 +100,23 @@ Page({
   bindFormSubmit: function (e) {
     var that = this;
     var form = e.detail.value;
-    console.log(e.detail.value);
-    console.log()
-    wx.request({
-      url: 'https://api.bangneedu.com/user',
-      method: 'PUT',
-      header: {
-        "content-type": "application/json",
-        "Authorization": "Bearer " + wx.getStorageSync('token')
-      },
-      data: {
-        "id": that.data.userInfo.id,
-        "name": form.name,
-        "sex": form.sex,
-        "phone": form.phone,
-        "weixin": form.weixin,
-        "description": form.description
-      },
-      success: function (res) {
-        console.log(res.data);
-        that.refreshUserInfo();
-        wx.showToast({
-          title: '修改成功',
-          duration: 1000
-        });
-      },
-      fail: function (err) {
-        console.log(err);
-      }
+    let data = {
+      id: that.data.userInfo.id,
+      name: form.name,
+      sex: form.sex,
+      phone: form.phone,
+      weixin: form.weixin,
+      description: form.description
+    }
+
+    userInfoModel.changeUserInfo(data)
+    .then((res) => {
+      that.refreshUserInfo();
+      wx.showToast({
+        title: '修改成功',
+        icon: 'sucess',
+        duration: 1500
+      });
     })
   },
 

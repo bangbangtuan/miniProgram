@@ -1,3 +1,9 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+    "tech-select": "/components/tech-select/tech-select",
+    "project-expr": "/components/project-expr/project-expr"
+  },
+  "navigationBarTitleText": "组队",
+  "navigationBarTextStyle": "black",
+  "navigationBarBackgroundColor": "#ffffff"
 }

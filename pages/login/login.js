@@ -1,3 +1,9 @@
+import {
+  LoginModel
+} from '../../models/login.js'
+
+let loginModel = new LoginModel()
+
 Page({
 
   /**
@@ -78,54 +84,77 @@ Page({
 
   bindFormSubmit: function (e) {
     var that = this;
-    console.log(e.detail.value);
-    console.log(this.data.code);
-    if (e.detail.value.username && e.detail.value.password && e.detail.value.code && e.detail.value.type) {
-      if (e.detail.value.code.toUpperCase() == this.data.code) {
-        wx.request({
-          url: 'https://api.bangneedu.com/login',
-          data: {
-            "username": e.detail.value.username,
-            "password": e.detail.value.password,
-            "type": e.detail.value.type
-          },
-          method: 'POST',
-          header: {
-            "content-type": "application/json"
-          },
-          success: function (res) {
-            console.log(res.data);
-            that.setData({
-              token: res.data.data
-            })
-            if (res.data.status === 200 && that.data.token ) {
-              wx.showToast({
-                title: '登陆成功',
-                icon: 'success',
-                duration: 1000,
-                success: function () {
-                  if (that.data.token) {
-                    wx.setStorageSync('token', that.data.token);
-                    wx.switchTab({
-                      url: '/pages/profile/profile',
-                    })
-                  }
+    // let loginCallback= function (res) {
+    //   console.log(res);
+    //   that.setData({
+    //     token: res.data
+    //   })
+    //
+    //   if (res.status === 200 && that.data.token ) {
+    //     wx.showToast({
+    //       title: '登陆成功',
+    //       icon: 'success',
+    //       duration: 1500,
+    //       success: function () {
+    //         if (that.data.token) {
+    //           wx.setStorageSync('token', that.data.token);
+    //           wx.switchTab({
+    //             url: '/pages/profile/profile',
+    //           })
+    //         }
+    //       }
+    //     })
+    //   } else {
+    //     that.setData({
+    //       user_code: ''
+    //     })
+    //     that.changeAnother();
+    //     wx.showToast({
+    //       title: "登录失败，请输入正确的账号密码，或选择正确的登录方式",
+    //       icon: 'none',
+    //       duration: 1500
+    //     })
+    //   }
+    // }
+    if (e.detail.username && e.detail.password && e.detail.code && e.detail.type) {
+      if (e.detail.code.toUpperCase() === this.data.code) {
+        // loginModel.login(e.detail.username, e.detail.password, e.detail.type, loginCallback)
+        let data = {
+          username: e.detail.username,
+          password:  e.detail.password,
+          type:  e.detail.type,
+        }
+        loginModel.login(data)
+        .then((res) => {
+          console.log(res);
+          that.setData({
+            token: res.data
+          })
+
+          if (res.status === 200 && that.data.token ) {
+            wx.showToast({
+              title: '登陆成功',
+              icon: 'success',
+              duration: 1500,
+              success: function () {
+                if (that.data.token) {
+                  wx.setStorageSync('token', that.data.token);
+                  wx.switchTab({
+                    url: '/pages/profile/profile',
+                  })
                 }
-              })
-            } else {
-              that.setData({
-                user_code: ''
-              })
-              that.changeAnother();
-              wx.showToast({
-                title: "登录失败，请输入正确的账号密码，或选择正确的登录方式",
-                icon: 'none',
-                duration: 1000
-              })
-            }
-          },
-          fail: function (err) {
-            console.log(err);
+              }
+            })
+          } else {
+            that.setData({
+              user_code: ''
+            })
+            that.changeAnother();
+            wx.showToast({
+              title: "登录失败，请输入正确的账号密码，或选择正确的登录方式",
+              icon: 'none',
+              duration: 1500
+            })
           }
         })
       } else {

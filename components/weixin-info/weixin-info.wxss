@@ -1,0 +1,34 @@
+.wx-confirm-wrapper {
+	width: 710rpx;
+	margin-bottom: 29rpx;
+}
+
+.wx-title {
+	width: 150rpx;
+	height: 30rpx;
+	font-family: MicrosoftYaHei-Bold;
+	font-size: 30rpx;
+	font-weight: normal;
+	font-stretch: normal;
+	line-height: 30rpx;
+	letter-spacing: 0rpx;
+	color: #20222e;
+	margin-bottom: 40rpx;
+}
+
+
+.wx-content {
+	height: 80rpx;
+	background-color: #f7f8fa;
+	border-radius: 20rpx;
+	border: solid 1rpx #4e4edf;
+	font-family: MicrosoftYaHei;
+	font-size: 24rpx;
+	font-weight: normal;
+	font-stretch: normal;
+	line-height: 80rpx;
+	letter-spacing: 0rpx;
+	color: #000000;
+	height: 24rpx;
+	padding-left: 20rpx;
+}

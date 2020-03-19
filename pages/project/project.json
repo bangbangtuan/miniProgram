@@ -1,5 +1,8 @@
 {
   "usingComponents": {
-   
-  }
+
+  },
+  "navigationBarTitleText": "项目",
+  "navigationBarTextStyle": "white",
+  "navigationBarBackgroundColor": "#4e4edf"
 }
