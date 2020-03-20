@@ -1,0 +1,8 @@
+<view class="footer-wrapper">
+  <view class="tips">
+    没有账号?
+  </view>
+  <view class="register">
+    <navigator url='/pages/register/register'>注册</navigator>
+  </view>
+</view>

@@ -1,0 +1,12 @@
+<view class="headPortrait-wrapper">
+  <view class="head-text">
+    头像
+  </view>
+  <view class="pic-wrapper" bindtap='uploadImg'>
+    <image class="head-pic" wx:if="{{headPortrait}}"  src="{{headPortrait}}"></image>
+    <image wx:else src="{{defaultHeadPortrait}}" class="head-pic"></image>
+    <view class="head-sign">
+      >
+    </view>
+  </view>
+</view>

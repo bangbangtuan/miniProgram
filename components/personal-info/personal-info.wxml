@@ -1,0 +1,39 @@
+<form bindsubmit="bindFormSubmit" class="form-wrapper">
+  <view class="content">
+    <view class="name-wrapper">
+      <view class="name">昵称</view>
+      <input class="name-input" value="{{userInfo.name ? userInfo.name : ''}}" name='name' />
+    </view>
+    <view class="sex-wrapper">
+      <view class="name">性别</view>
+      <view class="mutil-radio">
+        <view class="radio-group">
+
+          <view class="signle-radio" bindtap="handleSelect" data-sexual="1">
+            <view  class="{{sexual === '1'? 'radio-selected': ''}}"></view>
+          </view>
+          <view class="man">男</view>
+        </view>
+        <view class="radio-group">
+          <view class="signle-radio" bindtap="handleSelect" data-sexual="2">
+              <view class="{{sexual === '2'? 'radio-selected': ''}}"></view>
+          </view>
+          <view class="female">女</view>
+        </view>
+      </view>
+  </view>
+    <view class="phone-wrapper">
+      <view class="phone-name">手机号</view>
+      <input class="phone-input" placeholder="请输入手机号" value="{{userInfo.phone ? userInfo.phone : ''}}" name='phone' />
+    </view>
+    <view class="wx-wrapper">
+      <view class="wx-name">微信号</view>
+      <input class="wx-input" placeholder="请输入微信号" value="{{userInfo.weixin ? userInfo.weixin : ''}}" name='weixin'></input>
+    </view>
+    <view class="personal-wrapper">
+    <view class="personal-name">个人介绍</view>
+      <textarea class="personal-input" placeholder="请输入个人介绍" value="{{userInfo.description ? userInfo.description : ''}}" name='description'></textarea>
+    </view>
+  </view>
+  <button class="save" form-type="submit">保存</button>
+</form>

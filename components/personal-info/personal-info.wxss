@@ -1,0 +1,190 @@
+.form-wrapper {
+  width: 710rpx;
+  background-color: #ffffff;
+  margin-top: 20rpx;
+}
+
+.form-wrapper .content {
+  height: 500rpx;
+  background-color: #ffffff;
+  border-radius: 20rpx;
+  box-shadow: 1rpx 1rpx 8rpx #bbb;
+  margin-top: 20rpx;
+  margin-bottom: 50rpx;
+}
+
+.name-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 13rpx 42rpx 0rpx 42rpx;
+  border-radius: 1rpx solid #eeeeee;
+  border-bottom: 1rpx solid #eeeeee;
+  height: 84rpx
+}
+
+.name-wrapper .name, .sex-wrapper .name, .phone-wrapper .phone-name  {
+  height: 24rpx;
+  font-family: bold;
+  font-size: 24rpx;
+  font-weight: normal;
+  font-stretch: normal;
+  line-height: 24rpx;
+  letter-spacing: 0rpx;
+  color: #000000;
+}
+
+.name-wrapper .name-input, .phone-input, .wx-input {
+  height: 24rpx;
+  font-family: MicrosoftYaHei;
+  font-size: 24rpx;
+  font-weight: normal;
+  font-stretch: normal;
+  line-height: 70rpx;
+  letter-spacing: 0rpx;
+  color: #999999;
+  flex: 1;
+  text-align: right;
+  margin-left: 81rpx;
+}
+
+.sex-wrapper, .phone-wrapper, .wx-wrapper, .personal-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 1rpx solid #eeeeee;
+  margin: 0rpx 41rpx 0rpx 41rpx;
+  height: 84rpx;
+  width: 640rpx;
+  border-bottom: 1rpx solid #eeeeee;
+}
+
+.sex-wrapper .name,  .phone-wrapper .name, .wx-wrapper .wx-name, .personal-name{
+  height: 24rpx;
+  font-family: MicrosoftYaHei;
+  font-size: 24rpx;
+  font-weight: normal;
+  font-stretch: normal;
+  line-height: 24rpx;
+  letter-spacing: 0rpx;
+  color: #000000;
+}
+
+.personal-input {
+  height: 70rpx;
+  font-family: MicrosoftYaHei;
+  font-size: 24rpx;
+  font-weight: normal;
+  font-stretch: normal;
+  line-height: 70rpx;
+  letter-spacing: 0rpx;
+  color: #999999;
+  margin-left: 81rpx
+}
+
+.personal-name {
+  width: 150rpx;
+}
+
+.personal-wrapper {
+  border-bottom: 0rpx;
+}
+
+.mutil-radio {
+  display: flex;
+  justify-content: space-between;
+  width: 180rpx;
+  height: 40rpx;
+}
+
+.radio-group {
+  height: 30rpx;
+}
+
+.signle-radio {
+  display: inline-block;
+  width: 40rpx;
+  height: 40rpx;
+  border: solid 1rpx #999999;
+  border-radius: 50%;
+  position: relative;
+}
+
+.radio-selected {
+  position: absolute;
+  width: 25rpx;
+  height: 25rpx;
+  background-color: #4f4fe0;
+  border-radius: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  left: 50%;
+}
+
+.man, .female {
+  margin-left: 10rpx;
+  height: 22rpx;
+  font-family: MicrosoftYaHei;
+  font-size: 24rpx;
+  font-weight: normal;
+  font-stretch: normal;
+  line-height: 22rpx;
+  letter-spacing: 0rpx;
+  color: #999999;
+}
+
+.female {
+  height: 22rpx;
+  font-family: MicrosoftYaHei;
+  font-size: 24rpx;
+  font-weight: normal;
+  font-stretch: normal;
+  line-height: 22rpx;
+  letter-spacing: 0rpx;
+  color: #999999;
+}
+
+.radio-group {
+  display: flex;
+  width: 180rpx;
+  height: 40rpx;
+  align-items: center;
+}
+.radio {
+  height: 100%;
+}
+
+radio {
+  width: 30rpx;
+  height: 30rpx;
+  border: solid 1rpx #999999;
+  margin-right: 14rpx;
+}
+
+
+.wx-input {
+
+}
+
+
+
+button {
+  width: 710rpx;
+  height: 80rpx;
+  background-image: linear-gradient(90deg,
+    #1f41ab 0%,
+    #4c4fde 100%);
+  border-radius: 20rpx;
+  line-height:  80rpx;
+  text-align: center;
+}
+
+.save {
+  font-family: MicrosoftYaHei;
+  font-size: 28rpx;
+  font-weight: normal;
+  font-stretch: normal;
+  line-height: 80rpx;
+  letter-spacing: 0rpx;
+  color: #ffffff;
+}

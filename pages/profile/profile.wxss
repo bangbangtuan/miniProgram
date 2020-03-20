@@ -1,92 +1,146 @@
-.container {
+.profile-wrapper {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+  background-color: #4e4edf;
+  height: 100%;
+  justify-content: center
 }
-.info {
-  margin: 50rpx 40rpx 30rpx;
-  font-size: 16px;
-}
+
 .header {
-  font-size: 28px;
-  color: #333;
-  margin: 10rpx;
-}
-.user {
   display: flex;
-  flex-direction: column;
+  flex: 1;
+  height: 260rpx;
   align-items: center;
+  margin-left: 20rpx;
+  margin-right: 20rpx;
 }
-.user image {
-  width: 180rpx;
-  height: 180rpx;
-  border-radius: 50%;
+
+.personal-data {
+  flex: 1;
 }
-.upload image {
-  width: 180rpx;
-  height: 180rpx;
-  border-radius: 50%;
+
+.personal-data .name {
+    display: block;
+    height: 30rpx;
+    font-family: MicrosoftYaHei-Bold;
+    font-size: 30rpx;
+    font-weight: normal;
+    font-stretch: normal;
+    line-height: 30rpx;
+    letter-spacing: 0rpx;
+    color: #ffffff;
+    margin-bottom: 25rpx;
 }
-.user text {
-  margin: 10rpx;
-  font-weight: 600;
+
+.personal-data .wx {
+  display: block;
+  height: 24rpx;
+  font-family: MicrosoftYaHei;
+  font-size: 24rpx;
+  font-weight: normal;
+  font-stretch: normal;
+  line-height: 24rpx;
+  letter-spacing: 0rpx;
+  color: #ffffff;
+  margin-bottom: 11rpx;
 }
-.self {
+
+.personal-data .description {
+  display: block;
+  height: 24rpx;
+  font-family: MicrosoftYaHei;
+  font-size: 24rpx;
+  font-weight: normal;
+  font-stretch: normal;
+  line-height: 24rpx;
+  letter-spacing: 0rpx;
+  color: #ffffff;
+}
+
+.head-protrait {
+  width: 140rpx;
+  height: 140rpx;
+  background-color: #ffffff;
+  border-radius: 70rpx 70rpx;
+}
+
+.content {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  margin: 20rpx auto;
+  justify-content: center;
+  width: 750rpx;
+  height: 100%;
+  background-color: #ffffff;
+  border-radius: 30rpx;
 }
-.self view {
-  width: 25%;
-  vertical-align: middle;
-  display: flex;
-  align-items: center;
+
+.message, .clock {
+  position: relative;
+  width: 315rpx;
+  height: 360rpx;
+  background-color: #ffffff;
+  border-radius: 10rpx;
+  margin-top: 51rpx;
+  box-shadow: 5rpx 5rpx 5rpx 5rpx
+  rgba(0, 0, 0, 0.1);
 }
-.self text {
-  display: inline-block;
-  width: 73%;
-  font-size: 13px;
-  color: #666;
+
+.message {
+  margin-right: 20rpx;
 }
-.self .intro {
-  border: 1rpx dashed #666;
-  padding: 15rpx;
+
+.clock {
+  margin-left: 20rpx;
+}
+
+.message-title, .clock-title {
+  position: absolute;
+  left: 31rpx;
+  right: 43rpx;
+  height: 28rpx;
+  font-family: MicrosoftYaHei;
+  font-size: 28rpx;
+  font-weight: normal;
+  font-stretch: normal;
+  line-height: 70rpx;
+  letter-spacing: 0rpx;
+  color: #000000;
+}
+
+.message .message-pic {
+  width: 134rpx;
+  height: 150rpx;
+  top: 134rpx;
+  left: 50%;
+  position: absolute;
+  transform: translate(-50%, 0);
+}
+
+
+.clock .daka-pic {
+  width: 134rpx;
+  height: 150rpx;
+  top: 134rpx;
+  left: 50%;
+  position: absolute;
+  transform: translate(-50%, 0);
 }
 .no-user {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
+
+.upload image {
+  width: 180rpx;
+  height: 180rpx;
+  border-radius: 50%;
+}
+
 .no-user .tap-login {
   margin: 20rpx 10rpx;
-  color: #666;
+  color: black;
   font-weight: 500;
   cursor: pointer;
-  border: 1px dashed #666;
+  border: 1px dashed black;
   padding: 10rpx 30rpx;
-}
-.divider {
-  height: 2rpx;
-  width: 100%;
-  border-bottom: 2rpx solid #dadada;
-}
-.buttons {
-  display: flex;
-  flex-direction: row;
-  margin: 50rpx;
-}
-.buttons navigator {
-  height: 300rpx;
-  width: 200rpx;
-  margin: auto 60rpx;
-  box-shadow: 0rpx 6rpx 10rpx 5rpx #dbdada;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-.buttons image {
-  width: 80rpx;
-  height: 80rpx;
-  margin: 20rpx;
 }
