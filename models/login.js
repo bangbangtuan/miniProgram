@@ -18,7 +18,7 @@ class LoginModel extends HTTP_P {
     // success 是表示成功的回调函数
 
     return this.request({
-      url: 'login',
+      url: 'member/login',
       data: data,
       method: 'POST'
     })

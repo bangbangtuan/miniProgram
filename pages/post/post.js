@@ -27,12 +27,52 @@ Page({
   },
   getTags: function () {
     var that = this;
-    var url =  app.globalData.URL+'tag';
+    // var url =  app.globalData.URL+'tag';
+    var url='https://admin.api.bangneedu.com/tag'
     wx.request({
       url: url,
       method: 'GET',
       header: {
         "Content-Type": "application/json"
+      },
+      success: function (res) {
+        console.log(res.data.data);
+        that.setData({
+          tags: res.data.data.records
+        })
+      },
+      fail: function (err) {
+        console.log(err);
+      }
+    });
+  },
+  deleteTag(id){
+    console.log('ididi',id)
+    var url='https://admin.api.bangneedu.com/tag/'+id
+    wx.request({
+      url: url,
+      method: 'DELETE',
+      success: function (res) {
+        console.log(res.data.data);
+        // that.setData({
+        //   tags: res.data.data.records
+        // })
+      },
+      fail: function (err) {
+        console.log(err);
+      }
+    });
+  },
+  setTags(tag){
+    var url='https://admin.api.bangneedu.com/tag'
+    wx.request({
+      url: url,
+      method: 'POST',
+      header: {
+        "Content-Type": "application/json"
+      },
+      data:{
+        tag:tag
       },
       success: function (res) {
         console.log(res.data.data);
@@ -64,7 +104,7 @@ Page({
         let tempFilePath = res.tempFilePaths;
       
           wx.uploadFile({
-            url:  app.globalData.URL+'upload', 
+            url:  app.globalData.URL+'oss/aliyun', 
             header: {
               "content-type": "multipart/form-data",
               "Authorization": "Bearer " + wx.getStorageSync('token')
@@ -72,18 +112,20 @@ Page({
             filePath: tempFilePath[0],
             name: 'file',
             success(res) {
+              console.log('dakadaka',res)
              let data=JSON.parse(res.data)
-              if(data.status == 401){
+              if(res.statusCode == 401){
                   wx.showToast({
                     title: '请登陆后上传图片',
                     icon:'none',
                     duration:1000
                   })
               }
-              if(data.status == 200){
+              if(data.code == 0){
                 let img = data.data;
                 let arr = [];
                 arr.push(img);
+                console.log('arrarr',arr)
                 that.setData({
                   image: arr
                 });
@@ -153,7 +195,7 @@ Page({
           } else {
            
             wx.request({
-              url:  app.globalData.URL+'punchTheClock',
+              url:  app.globalData.URL+'punch_the_clock',
               method: 'POST',
               data: {
                 "content": e.detail.value.textarea,
@@ -165,8 +207,8 @@ Page({
                 "Authorization": "Bearer " + wx.getStorageSync('token')
               },
               success: function (res) {
-                console.log(res.data);
-                if (res.data.status == 200 && res.data.data) {
+                console.log('rerrreee',res)
+                if (res.data.code == 0 && res.data.data) {
                   var testObj = res.data.data;
                   that.setData({
                     isClickable: true,
@@ -181,7 +223,7 @@ Page({
                   })
                   that.onCreatePoster();
                
-                } else if (res.data.status == 500 || (res.data.status == 200 && !res.data.data)) {
+                } else if (res.statusCode == 500 || (res.statusCode == 200 && !res.data.data)) {
                   that.setData({
                     isClickable: true
                   })
@@ -196,7 +238,7 @@ Page({
                       }
                     }
                   })
-                } else if (res.data.status == 401) {
+                } else if (res.statusCode == 401) {
                   wx.showToast({
                     title: '登陆过期，请重新登陆',
                     icon: 'none',
@@ -282,7 +324,7 @@ Page({
         x: 190,
         y: 110,
         baseLine: 'middle',
-        text: this.data.postItem.name,
+        text: this.data.postItem.nickname|| '无名',
         fontSize: 36,
         color: '#333333',
       },
@@ -339,7 +381,7 @@ Page({
           color: '#000000',
         },
         {
-          text: this.data.postItem.day,
+          text: this.data.postItem.day || '0',
           marginLeft: 60,
           fontSize: 50,
           color: '#000000',
@@ -364,7 +406,7 @@ Page({
       {
         x: 100,
         y: 520,
-        text: this.data.postItem.content,
+        text: this.data.postItem.content||  "这人贼懒，啥都没发",
         fontSize: 36,
         color: '#000000',
         lineNum: 3,
@@ -387,7 +429,7 @@ Page({
         x: 60,
         y: 60,
         borderRadius: 100,
-        url: this.data.postItem.headPortrait == undefined ? "http://bbt-oss.oss-cn-beijing.aliyuncs.com/bbt-oss/2019-08-28/f3983927d1a34fb2a7056d4bd2142314-file?Expires=4720619017&OSSAccessKeyId=LTAICSpdWLfNbeYk&Signature=9UqtxjkI7wV%2B6x%2FisCOKR6btv%2FM%3D" : this.data.postItem.headPortrait,
+        url: this.data.postItem.icon == undefined ? "http://bbt-oss.oss-cn-beijing.aliyuncs.com/bbt-oss/2019-08-28/f3983927d1a34fb2a7056d4bd2142314-file?Expires=4720619017&OSSAccessKeyId=LTAICSpdWLfNbeYk&Signature=9UqtxjkI7wV%2B6x%2FisCOKR6btv%2FM%3D" : this.data.postItem.icon,
       },
       {
         width: 710,
@@ -435,6 +477,7 @@ Page({
    */
   onShow: function () {
     this.getTags();
+    // this.deleteTag('1261280860934508546')
   },
 
   /**

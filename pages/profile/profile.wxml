@@ -6,7 +6,7 @@
         <text class="wx">微信号: {{userInfo.username}}</text>
         <text class="description">{{userInfo.description}}</text>
       </view>
-      <image class="head-protrait" bindtap='toUserInfo' src="{{userInfo.headPortrait}}">
+      <image class="head-protrait" bindtap='toUserInfo' src="{{userInfo.icon}}">
       </image>
     </view>
     <view wx:else class="no-user">

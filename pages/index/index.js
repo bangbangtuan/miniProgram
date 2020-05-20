@@ -10,7 +10,7 @@ Page({
   data: {
     postList: [],
     postItem: {},
-    headPortrait:'/images/icon/touxiang.png',
+    icon:'/images/icon/touxiang.png',
     image: [],
     daka: '',
     pageNum: 1,
@@ -57,20 +57,18 @@ Page({
     var extention = likeCollected ? 'like' : 'not_like';
     console.log(e.currentTarget.dataset.id)
     wx.request({
-      url:  app.globalData.URL+'punchTheClock/' + extention,
-      method: 'PUT',
-      data: {
-        "punchTheClockId": id
-      },
+      // url:  app.globalData.URL+'punch_the_clock_like/' + extention,
+      url:  app.globalData.URL+'punch_the_clock_like/' +id,
+      method: likeCollected?'POST':'DELETE',
       header: {
         "content-type": "application/json",
         "Authorization": "Bearer " + wx.getStorageSync('token')
       },
       success: function (res) {
-        console.log(res.data);
-        if (res.data.status == 200) {
+        console.log(res);
+        if (res.data.code == 0) {
           wx.showToast({
-            title: res.data.msg,
+            title: likeCollected ? '点赞成功':'取消点赞',
             duration: 1000
           });
           // }
@@ -84,36 +82,37 @@ Page({
   getAllLike() {
     var that = this;
     wx.request({
-      url:  app.globalData.URL+'user',
+      url:  app.globalData.URL+'member',
       method: 'GET',
       header: {
         "content-type": "application/json",
         "Authorization": "Bearer " + wx.getStorageSync('token')
       },
       success: function (res) {
-        console.log(res.data.data);
-        if (res.data.status == 401) {
+        console.log('resresgetAllLike',res);
+        if (res.statusCode == 401) {
           wx.showToast({
             title: '请登陆后进行打卡',
             icon: 'none',
             duration: 1000
           });
          
-          var url =  app.globalData.URL+'punchTheClock?current=1&size=20';
+          var url =  app.globalData.URL+'punch_the_clock?current=1&size=20';
+         
           that.getDakaList(url);
-        } else if (res.data.status == 200 && res.data.data) {
+        } else if (res.data.code == 0 && res.data.data) {
           that.setData({
-            headPortrait: res.data.data.headPortrait
+            icon: res.data.data.icon
           })
           wx.request({
-            url:  app.globalData.URL+'punchTheClock/allLike',
+            url:  app.globalData.URL+'punch_the_clock_like',
             method: 'GET',
             header: {
               "Content-Type": "application/json",
               "Authorization": "Bearer " + wx.getStorageSync('token')
             },
             success: function (res) {
-              if (res.data.status == 200) {
+              if (res.data.code == 0) {
                 var likeCollection = {};
                 res.data.data.forEach(item => {
                   likeCollection[item.punchTheClockId] = true;
@@ -121,11 +120,10 @@ Page({
                 wx.setStorageSync('like_collection1', likeCollection);
                 console.log('getAlllike')
                 setTimeout(()=>{
-                console.log('getdaka')
-                  var url =  app.globalData.URL+'punchTheClock?current=1&size=20';
+                  var url =  app.globalData.URL+'punch_the_clock?current=1&size=20';
                   that.setData({
                     isEmpty:true,
-                       pageNum: 1
+                    pageNum: 1
                   })
                   that.getDakaList(url);
                 },1000);
@@ -150,9 +148,9 @@ Page({
     })
   },
   handleTap: function (e) {
-    console.log(e.currentTarget.dataset);
+    console.log('333333',e.currentTarget.dataset);
     var postItem = e.currentTarget.dataset.type;
-    postItem.headPortrait = encodeURIComponent(postItem.headPortrait);
+    postItem.icon = encodeURIComponent(postItem.icon);
     if (postItem.image){
       postItem.image = encodeURIComponent(postItem.image);
     }
@@ -211,6 +209,11 @@ Page({
         console.log(res.data.data.records);
         console.log(res.data.data.records)
         console.log(that.data.isEmpty)
+        res.data.data.records.forEach(item=>{
+            if(item.praiseNumber == null){
+                item.praiseNumber=0;
+            }
+        })
         if (!that.data.isEmpty) {
           totalPosts = that.data.postList.concat(res.data.data.records);
         } else {
@@ -231,18 +234,18 @@ Page({
             }
             //某条打卡的评论
             wx.request({
-              url:  app.globalData.URL+'punchTheClockComment/' + item.id,
+              url:  app.globalData.URL+'punch_the_clock_comment?id=' + item.id,
               method: 'GET',
               header: {
                 "content-type": "application/json",
-                // "Authorization": "Bearer " + wx.getStorageSync('token')
+                "Authorization": "Bearer " + wx.getStorageSync('token')
               },
               success: function (res) {
-                console.log(res.data);
-                if (res.data.data[0]) {
+                console.log('某条打卡的评论',res.data);
+                if (res.data.data.records[0]) {
                   console.log(res.data.data)
-                  item.comm_name = res.data.data[0].name+" : " ;
-                  item.comment = res.data.data[0].content;
+                  item.comm_name = res.data.data.records[0].nickname+" : " ;
+                  item.comment = res.data.data.records[0].content;
                 }
                 wx.hideNavigationBarLoading();
                 wx.stopPullDownRefresh();
@@ -260,11 +263,17 @@ Page({
             })
           })
         }
-        console.log(totalPosts)
-        that.setData({
-          pageNum: that.data.pageNum + 1,
-          postList: totalPosts,
-        })
+        console.log('totalPoststotalPosts',totalPosts)
+        setTimeout(() => {
+          that.setData({
+            pageNum: that.data.pageNum + 1,
+            postList: totalPosts,
+          })
+        }, 1000);
+        // that.setData({
+        //   pageNum: that.data.pageNum + 1,
+        //   postList: totalPosts,
+        // })
       },
       fail: function (err) {
         console.log(err);
@@ -276,15 +285,15 @@ Page({
   getcommentByid(id) {
     return new Promise((resolve, reject) => {
       wx.request({
-        url:  app.globalData.URL+'punchTheClockComment/' + id,
+        url:  app.globalData.URL+'punch_the_clock_comment?id=' + id,
         method: 'GET',
         header: {
           "content-type": "application/json",
-          "Authorization": "Bearer " + wx.getStorageSync('token')
+          // "Authorization": "Bearer " + wx.getStorageSync('token')
         },
         success: function (res) {
-          resolve(res.data.data)
-          if (res.data.status == 401) {
+          resolve(res.data.data.records)
+          if (res.statusCode == 401) {
             wx.showToast({
               title: '登陆过期，请重新登陆',
               icon: 'none',
@@ -321,7 +330,7 @@ Page({
       if (this.data.isDetail) {
         this.data.isDetail = false;
         wx.request({
-          url:  app.globalData.URL+'punchTheClock/' + that.data.saveId.id,
+          url:  app.globalData.URL+'punch_the_clock/' + that.data.saveId.id,
           method: 'GET',
           header: {
             "content-type": "application/json",
@@ -357,11 +366,11 @@ Page({
         duration: 1000
       });
       this.setData({
-        headPortrait:'/images/icon/touxiang.png'
+        icon:'/images/icon/touxiang.png'
       })
       if (that.data.isEmpty){
           console.log(app.globalData.URL);
-        var url = app.globalData.URL +'punchTheClock?current=1&size=20';
+        var url = app.globalData.URL +'punch_the_clock?current=1&size=20';
         this.getDakaList(url);
       }
       
@@ -387,7 +396,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    var url =  app.globalData.URL+'punchTheClock?current=1&size=20';
+    var url =  app.globalData.URL+'punch_the_clock?current=1&size=20';
     this.getDakaList(url);
     this.setData({
       daka: '',
@@ -427,7 +436,7 @@ Page({
       });
       
     }
-    postItem.headPortrait = encodeURIComponent(postItem.headPortrait);
+    postItem.icon = encodeURIComponent(postItem.icon);
     var shareObj = {
       title: postItem.content,
       imageUrl: that.data.picUrl,

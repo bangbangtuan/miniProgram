@@ -1,5 +1,5 @@
 <view class="userInfo-wrapper">
-  <head-info headPortrait="{{userInfo.headPortrait}}" bind:uploadImg='uploadImg'></head-info>
+  <head-info headPortrait="{{userInfo.icon}}" bind:uploadImg='uploadImg'></head-info>
   <personal-info userInfo="{{userInfo}}" bind:handleSubmit="bindFormSubmit"></personal-info>
   <view class="logout" bindtap="logout">
     退出登录

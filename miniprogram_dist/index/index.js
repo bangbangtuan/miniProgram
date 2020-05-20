@@ -69,6 +69,7 @@ const main = {
      */
     drawText(params) {
         const { x, y, fontSize, color, baseLine, textAlign, text, opacity = 1, width, lineNum, lineHeight } = params;
+        console.log('drawTextdrawTextdrawTextdrawText',params)
         if (Object.prototype.toString.call(text) === '[object Array]') {
             let preText = { x, y, baseLine };
             text.forEach(item => {
@@ -159,6 +160,7 @@ const handle = {
      */
     _getTextWidth(text) {
         let texts = [];
+        console.log('_getTextWidth')
         if (Object.prototype.toString.call(text) === '[object Object]') {
             texts.push(text);
         } else {
@@ -416,6 +418,9 @@ Component({
             });
             (config.texts  || []).forEach((item) => {
                 let height;
+                console.log('getHeightgetHeightgetHeight')
+                console.log('item.texitem.texitem.tex',item.text)
+                console.log('item',item)
                 if (Object.prototype.toString.call(item.text) === '[object Array]') {
                     item.text.forEach((i) => {
                         height = getTextHeight({...i, baseLine: item.baseLine});

@@ -45,7 +45,7 @@ Page({
             icon: 'none',
             duration: 1500
           });
-        } else if (res.status === 200) {
+        } else if (res.code === 0) {
           that.setData({
             userInfo: res.data
           })
@@ -104,7 +104,7 @@ Page({
   },
   toUserInfo: function () {
     var userInfo = this.data.userInfo;
-    userInfo.headPortrait = encodeURIComponent(userInfo.headPortrait);
+    userInfo.icon = encodeURIComponent(userInfo.icon);
     wx.navigateTo({
       url: '/pages/userInfo/userInfo?userInfo=' + JSON.stringify(userInfo),
     })
