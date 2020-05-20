@@ -83,6 +83,7 @@ Page({
   },
 
   bindFormSubmit: function (e) {
+    console.log(e)
     var that = this;
     // let loginCallback= function (res) {
     //   console.log(res);
@@ -122,16 +123,17 @@ Page({
         let data = {
           username: e.detail.username,
           password:  e.detail.password,
-          type:  e.detail.type,
+          // type:  e.detail.type,
+          // authCode:e.detail.code
         }
         loginModel.login(data)
         .then((res) => {
           console.log(res);
           that.setData({
-            token: res.data
+            token: res.data.token
           })
 
-          if (res.status === 200 && that.data.token ) {
+          if (res.isSuccess && that.data.token ) {
             wx.showToast({
               title: '登陆成功',
               icon: 'success',

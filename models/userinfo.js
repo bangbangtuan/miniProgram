@@ -14,7 +14,7 @@ class UserInfoModel extends HTTP_P {
 
   uploadHeaderProtrait (data) {
     return this.request({
-      url: 'user',
+      url: 'member',
       data: data,
       method: 'PUT'
     })
@@ -22,7 +22,7 @@ class UserInfoModel extends HTTP_P {
 
   getUserInfo () {
     return this.request({
-      url: 'user'
+      url: 'member'
     })
   }
 
@@ -30,7 +30,7 @@ class UserInfoModel extends HTTP_P {
   changeUserInfo (data) {
 
     return this.request({
-      url: 'user',
+      url: 'member',
       data: data,
       method: 'PUT'
     })

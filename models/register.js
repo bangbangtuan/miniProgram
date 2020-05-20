@@ -9,7 +9,7 @@ class RegisterModel extends HTTP {
 
   getCaptcha(phoneNumber, success) {
     var params = {
-      url: `captcha/${phoneNumber}`,
+      url: `member/auth_code/${phoneNumber}`,
       success: success
     }
     this.request(params)
@@ -19,15 +19,15 @@ class RegisterModel extends HTTP {
     // data 是表示传递的数据
     // success 是表示成功的回调函数
     let params = {
-      url: 'register',
+      url: 'member/register',
       success: success,
       method: 'POST',
       data: {
         username: username,
         password: password,
-        phone: phone,
-        weixin: weixin,
-        captcha: captcha
+        telephone: phone,
+        // weixin: weixin,
+        authCode: captcha
       },
       error: (err) => {
         wx.showToast({

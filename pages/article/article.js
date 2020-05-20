@@ -220,12 +220,14 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    console.log('optionsoptions',options.cat)
     var postItem = JSON.parse(options.cat);
+   
     let title='评论 · '+postItem.commentNumber;
     wx.setNavigationBarTitle({
       title: title
     })
-    postItem.headPortrait = decodeURIComponent(postItem.headPortrait);
+    postItem.icon = decodeURIComponent(postItem.icon);
     if (postItem.image){
       postItem.image = decodeURIComponent(postItem.image);
     }
@@ -250,18 +252,18 @@ Page({
   getComments: function() {
     var that = this;
     wx.request({
-      url: app.globalData.URL+'punchTheClockComment/' + that.data.currentPostId,
+      url: app.globalData.URL+'punch_the_clock_comment?id=' + that.data.currentPostId,
       method: 'GET',
       header: {
         "content-type": "application/json",
         "Authorization": "Bearer " + wx.getStorageSync('token')
       },
       success: function(res) {
-        console.log(res.data);
+        console.log('rescomments9999999999',res.data.data.records);
         that.setData({
-          comments: res.data.data ? res.data.data : ''
+          comments: res.data.data.records ? res.data.data.records : ''
         });
-        if (res.data.status == 401) {
+        if (res.statusCode == 401) {
           wx.showToast({
             title: '登陆过期，请重新登陆',
             icon: 'none',
@@ -278,7 +280,7 @@ Page({
   getPostItem: function() {
     var that = this;
     wx.request({
-      url: app.globalData.URL+'punchTheClock/' + that.data.currentPostId,
+      url: app.globalData.URL+'punch_the_clock/' + that.data.currentPostId,
       method: 'GET',
       header: {
         "content-type": "application/json",
@@ -326,7 +328,7 @@ Page({
       inputTxt: event.detail.value
     })
     wx.request({
-      url: app.globalData.URL+'punchTheClockComment',
+      url: app.globalData.URL+'punch_the_clock_comment',
       method: 'POST',
       data: {
         "content": event.detail.value,
@@ -369,46 +371,59 @@ Page({
     that.setData({
       inputTxt: event.detail.value.comment
     })
-    if (event.detail.value != undefined && event.detail.value != '') {
-      wx.request({
-        url: app.globalData.URL+'punchTheClockComment',
-        method: 'POST',
-        data: {
-          "content": event.detail.value.comment,
-          "punchTheClockId": this.data.postItem.id
-        },
-        header: {
-          "content-type": "application/json",
-          "Authorization": "Bearer " + wx.getStorageSync('token')
-        },
-        success: function(res) {
-          console.log(res.data);
-          if (res.data.status == 200) {
-            wx.showToast({
-              title: '评论成功',
-              icon: 'success',
-              duration: 1000
-            });
-            that.setData({
-              inputTxt: ''
-            })
-          
-            
-            that.getComments();
-            that.getPostItem();
-          } else {
-            wx.showToast({
-              title: '评论失败',
-              icon: 'waiting',
-              duration: 1000
-            });
+    var token = wx.getStorageSync('token');
+    if(token){
+      if (event.detail.value != undefined && event.detail.value != '') {
+        wx.request({
+          url: app.globalData.URL+'punch_the_clock_comment',
+          method: 'POST',
+          data: {
+            "content": event.detail.value.comment,
+            "punchTheClockId": this.data.postItem.id
+          },
+          header: {
+            "content-type": "application/json",
+            "Authorization": "Bearer " + wx.getStorageSync('token')
+          },
+          success: function(res) {
+            console.log('22222233333',res.data);
+            if (res.data.code == 0) {
+              wx.showToast({
+                title: '评论成功',
+                icon: 'success',
+                duration: 1000
+              });
+              that.setData({
+                inputTxt: ''
+              })
+              that.getComments();
+              that.getPostItem();
+            } else {
+              wx.showToast({
+                title: '评论失败',
+                icon: 'waiting',
+                duration: 1000
+              });
+            }
+          },
+          fail: function(err) {
+            console.log(err);
           }
-        },
-        fail: function(err) {
-          console.log(err);
-        }
-      })
+        })
+      }
+    }else{
+      wx.showToast({
+        title: '请登陆后进行评论',
+        icon:'none',
+        duration: 1000
+      });
+      setTimeout(function () {
+        wx.navigateTo({
+          url: '/pages/login/login',
+        })
+      }, 1000)
     }
+   
   },
 
   /**
@@ -456,7 +471,7 @@ Page({
    */
   onShareAppMessage: function(options) {
     var that = this;
-    that.data.postItem.headPortrait = encodeURIComponent(that.data.postItem.headPortrait);
+    that.data.postItem.icon = encodeURIComponent(that.data.postItem.icon);
     console.log(that.data.postItem);
     var shareObj = {
       // title: "棒棒团",

@@ -1,5 +1,5 @@
 const config = {
-  api_blink_url: 'https://api.bangneedu.com/',
+  api_blink_url: 'https://portal.api.bangneedu.com/',
   appkey: ''
 }
 

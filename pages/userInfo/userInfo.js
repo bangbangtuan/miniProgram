@@ -20,9 +20,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options.userInfo);
     var userInfo = JSON.parse(options.userInfo);
-    userInfo.headPortrait = decodeURIComponent(userInfo.headPortrait);
+    console.log('userInfouserInfo',userInfo);
+    userInfo.icon = decodeURIComponent(userInfo.icon);
     console.log(userInfo);
     this.setData({
       userInfo: userInfo
@@ -36,11 +36,11 @@ Page({
       sizeType: ['original', 'compressed'],
       sourceType: ['album', 'camera'],
       success: function (res) {
-        console.log(res.tempFilePaths);
+        console.log('res.tempFilePaths',res.tempFilePaths);
         const tempFilePaths = res.tempFilePaths
 
         wx.uploadFile({
-          url: `${config.api_blink_url}upload`,
+          url: `${config.api_blink_url}oss/aliyun`,
           header: {
             "content-type": "application/json",
             "Authorization": "Bearer " + wx.getStorageSync('token')
@@ -48,12 +48,13 @@ Page({
           filePath: tempFilePaths[0],
           name: 'file',
           success(res) {
+            console.log('resuploadimg',JSON.parse(res.data).data)
             var img = JSON.parse(res.data).data;
             let data = {
               "id": that.data.userInfo.id,
-              "headPortrait": img
+              "icon": img
             }
-
+            console.log('that.data.userInfo.id',that.data.userInfo.id)
             userInfoModel.uploadHeaderProtrait(data)
             .then((res) => {
               wx.showToast({
@@ -102,11 +103,11 @@ Page({
     var form = e.detail.value;
     let data = {
       id: that.data.userInfo.id,
-      name: form.name,
-      sex: form.sex,
+      nickname: form.name,
+      gender: form.sex,
       phone: form.phone,
       weixin: form.weixin,
-      description: form.description
+      personalizedSignature: form.description
     }
 
     userInfoModel.changeUserInfo(data)

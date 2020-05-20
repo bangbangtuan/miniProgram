@@ -10,7 +10,7 @@ class ProfileModel extends HTTP {
   getUserInfo(header, success) {
     console.log('header: ', header)
     var params = {
-      url: 'user',
+      url: 'member',
       header: {
         ...header
       },

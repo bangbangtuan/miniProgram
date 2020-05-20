@@ -5,7 +5,7 @@
 	<view class="content">
 		<view class="dakawrap">
 			<view class="daka">
-				<image src="{{headPortrait}}" class="avatar"></image>
+				<image src="{{icon}}" class="avatar"></image>
 				<input type="text" placeholder="打卡分享经验吧" cursor="30" placeholder-class="dakaplace" bindtap="goPublish" />
 			</view>
 		</view>
@@ -13,9 +13,9 @@
 			<view class='post' wx:for="{{postList}}" wx:key="index">
 				<view class='head-container'>
 					<view class='author-date-container'>
-						<image src='{{item.headPortrait}}'></image>
+						<image src='{{item.icon}}'></image>
 						<view class='auto-date'>
-							<text>{{item.name}}</text>
+							<text>{{item.nickname}}</text>
 							<text class='date'>{{item.createTime}}</text>
 						</view>
 					</view>
